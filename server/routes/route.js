@@ -2,7 +2,9 @@ import {Router} from 'express';
 const router = Router();
 
 import * as controller from '../controllers/usercontrollers.js';
+import { registerMail } from '../controllers/mailsender.js';
 import Auth, {local_variables} from '../middlewares/auth.js';
+
 
 //GET
 router.route('/user/:mail').get(controller.getUser);
@@ -16,8 +18,8 @@ router.route('/passwordreset').put(controller.userVerification,controller.resetp
 
 //POST
 router.route('/register').post(controller.register);
-//router.route('registermail').post();
-router.route('/auth').post((req,res) => res.end());
+router.route('/registermail').post(registerMail);
+router.route('/auth').post(controller.userVerification, (req,res) => res.end());
 router.route('/login').post(controller.userVerification,controller.login);
 
 //DELETE

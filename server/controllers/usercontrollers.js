@@ -99,7 +99,7 @@ export async function register(req,res){
           });
     
           const result = await user.save();
-          return res.status(201).send({ message: 'User registration successfully completed' });
+          return res.status(201).send({ msg: 'User registration successfully completed' });
         }
     } catch(error) {
         return res.status(500).send(error);
@@ -162,7 +162,6 @@ export async function getUser(req, res) {
     }
 }
 
-
 export async function updateUser(req, res) {
   try {
     const { userID } = req.user;
@@ -178,7 +177,6 @@ export async function updateUser(req, res) {
     return res.status(401).send({ error });
   }
 }
-
 
 export async function OTPgenerator(req,res){
     req.app.locals.OTP = await otpGenerator.generate(6,{lowerCaseAlphabets:false,upperCaseAlphabets:false, specialChars:false});
@@ -227,4 +225,4 @@ export async function resetpassword(req, res) {
     } catch (error) {
       return res.status(401).send({ error });
     }
-  }
+}
