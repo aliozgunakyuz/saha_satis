@@ -2,6 +2,7 @@ import user_model from '../models/user_model.js';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import ENV from '../config.js';
+import otpGenerator from 'otp-generator'
 
 export async function userVerification(req, res, next){
     try{
@@ -139,50 +140,91 @@ export async function login(req,res){
     }
 }
 
-export async function getUser(req,res){
-
+export async function getUser(req, res) {
     const { mail } = req.params;
-
+  
     try {
-        if (!mail) {
+      if (!mail) {
         return res.status(400).send({ error: "Invalid Mail" });
-        }
-
-        const user = await user_model.findOne({ mail });
-
-        if (!user) {
+      }
+  
+      const user = await user_model.findOne({ mail });
+  
+      if (!user) {
         return res.status(404).send({ error: "Couldn't find the user" });
-        }
-
-        const { password, ...rest } = user.toObject();
-
-        return res.status(200).send(rest);
+      }
+  
+      const { password, ...rest } = Object.assign({}, user.toJSON());
+  
+      return res.status(200).send(rest);
     } catch (error) {
-        return res.status(500).send({ error: "Failed to fetch user data" });
+      return res.status(500).send({ error: "Failed to fetch user data" });
     }
-
-
 }
 
 
+export async function updateUser(req, res) {
+  try {
+    const { userID } = req.user;
+    if (userID) {
+      const body = req.body;
 
-
-export async function updateUser(req,res){
-    res.json('updateUser route')
+      await user_model.updateOne({ _id: userID }, body);
+      return res.status(201).send({ message: "User updated" });
+    } else {
+      return res.status(401).send({ error: "ID does not exist in the database" });
+    }
+  } catch (error) {
+    return res.status(401).send({ error });
+  }
 }
+
 
 export async function OTPgenerator(req,res){
-    res.json('OTP generator route')
+    req.app.locals.OTP = await otpGenerator.generate(6,{lowerCaseAlphabets:false,upperCaseAlphabets:false, specialChars:false});
+    res.status(201).send({code: req.app.locals.OTP});
 }
 
 export async function OTPverify(req,res){
-    res.json('OTP verify route')
+    const {code} = req.query;
+    if(parseInt(req.app.locals.OTP) === parseInt(code)){
+        req.app.locals.OTP = null; //reset otp value
+        req.app.locals.resetSession = true; //starts sessions for rst pwd
+        return res.status(201).send({message: "verified" });
+    }
+    return res.status(400).send({error: "invalid otp"});
 }
 
 export async function resetSession(req,res){
-    res.json('reset session route')
+    if(req.app.locals.resetSession){
+        req.app.locals.resetSession = false;
+        return res.status(201).send({msg: "granted"})
+    }
+    return res.status(440).send({err: "expired session"})
 }
 
-export async function resetpassword(req,res){
-    res.json('password reset route')
-}
+export async function resetpassword(req, res) {
+    try {
+      if (!req.app.locals.resetSession) {
+        return res.status(440).send({ error: "Expired session" });
+      }
+  
+      const { mail, password } = req.body;
+  
+      try {
+        const user = await user_model.findOne({ mail });
+        if (!user) {
+          return res.status(404).send({ error: "Mail not found" });
+        }
+  
+        const hashedPassword = await bcrypt.hash(password, 10);
+        await user_model.updateOne({ mail: user.mail }, { password: hashedPassword });
+  
+        return res.status(201).send({ message: "Password updated" });
+      } catch (error) {
+        return res.status(500).send({ error: "Failed to update password" });
+      }
+    } catch (error) {
+      return res.status(401).send({ error });
+    }
+  }
