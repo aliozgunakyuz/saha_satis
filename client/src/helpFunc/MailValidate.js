@@ -13,6 +13,12 @@ export async function mailValidate(values){
     return errors;
 }
 
+export async function profileValidate(values){
+    const errors = mailVerify({}, values);
+    return errors;
+}
+
+
 function mailVerify(error = {}, values){
     if(!values.mail){
         error.mail = toast.error('Mail Required')
@@ -22,3 +28,4 @@ function mailVerify(error = {}, values){
 
     return error;
 }
+

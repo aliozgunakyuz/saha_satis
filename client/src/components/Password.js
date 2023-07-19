@@ -1,16 +1,17 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import avatar_default from '../assets/avatar.png';
 import styles from '../styles/Username.module.css';
-import {Toaster} from 'react-hot-toast';
+import toast,{Toaster} from 'react-hot-toast';
 import { useFormik } from 'formik';
 import { passwordValidate } from '../helpFunc/PasswordValidate.js';
 import useFetch from '../hoooks/hookk.js';
 import { useAuthStore } from '../store/store.js';
-
+import { verifyPwd } from '../helpFunc/helper.js';
 
 export default function Password() {
 
+  const navigate = useNavigate() 
   const {mail} = useAuthStore(state => state.auth)
   const [{isLoading, apiData, serverError}] = useFetch('/user/'+mail)
 
@@ -22,7 +23,17 @@ export default function Password() {
     validateOnBlur: false,
     validateOnChange: false,
     onSubmit: async values => {
-        console.log(values)
+        let loginPromise = verifyPwd({mail,password:values.password})
+        toast.promise(loginPromise,{
+            loading: 'Checking...',
+            success: <b>Logged in</b>,
+            error: <b>Password not match</b>
+        });
+        loginPromise.then(res =>{
+            let {token} = res.data;
+            localStorage.setItem('token',token);
+            navigate('/profile');
+        })
     }
   })
 

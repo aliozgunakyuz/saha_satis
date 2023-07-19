@@ -38,37 +38,23 @@ export default function Register() {
     }
   })
 
-  const onUpload = async e => {
-    const base64 = await img2base64(e.target.files[0]);
-    setFile(base64);
-  }
-
-
   return (
     <div className='container mx-auto'>
         <Toaster position='top-center' reverseOrder={false}></Toaster>
         <div className=' flex justify-center items-center h-screen'>
-            <div className={styles.glass} style={{ width: '50%'}} >
-                <div className='title flex flex-col items-center text-gray-50' >
-                    <h4 className='text-5xl font-bold'> Register </h4>
+            <div className={styles.glass} style={{ width: '60%'}} >
+                <div className='title flex flex-col items-center text-gray-50 gap-10' >
+                    <h4 className='text-5xl font-bold py-2 '> Register </h4>
+                    <h4></h4>
                 </div>
-
                 <form className='py-1' onSubmit={formik.handleSubmit}>
-                    <div className='profile flex justify-center py-4'>
-                        <label htmlFor='profile'>
-                          <img src={file || avatar_default} className={styles.profile_img} alt="avatar" />
-                        </label>
-                        <input onChange={onUpload} type='file' id='profile' name='profile' />
-                    </div>
                     <div className='textbox flex flex-col items-center gap-6'>
-                      <span className='text-gray-50 text-sm text-left'>You can add profile picture by clicking profile icon.</span>
                       <div className="name flex w-3/4 gap-10">
                         <input {...formik.getFieldProps('name')} type="text" className={styles.textbox} placeholder='Name' />
                         <input {...formik.getFieldProps('surname')} type="text" className={styles.textbox} placeholder='Surname' />
                       </div>
                         <input {...formik.getFieldProps('mail')} type="text" className={styles.textbox} placeholder='Mail' />
-                        <div className="input text-center"><span className='text-sm text-gray-100'>Please enter your phone as 5xxxxxxxxx</span></div>
-                        <input {...formik.getFieldProps('phone')} type="text" className={styles.textbox} placeholder='Phone' />
+                        <input {...formik.getFieldProps('phone')} type="text" className={styles.textbox} placeholder='Phone as 5xxxxxxxxx' />
                         <div className="name flex w-3/4 gap-10">
                           <input {...formik.getFieldProps('password')} type="password" className={styles.textbox} placeholder='Password' />
                           <input {...formik.getFieldProps('confirm_password')} type="password" className={styles.textbox} placeholder='Repeat Password' />
