@@ -1,10 +1,11 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Link, useNavigate} from 'react-router-dom';
 import avatar_default from '../assets/avatar.png';
 import styles from '../styles/Username.module.css';
 import {Toaster} from 'react-hot-toast';
 import { useFormik } from 'formik';
 import { mailValidate } from '../helpFunc/MailValidate';
+import {useAuthStore} from '../store/store.js';
 
 
 
@@ -12,6 +13,11 @@ export default function Username() {
 
   const navigate = useNavigate();
 
+  const setMail = useAuthStore(state => state.setMail);
+
+  useEffect(() => {
+    
+  })
   const formik = useFormik({
     initialValues: {
         mail: ''
@@ -20,7 +26,7 @@ export default function Username() {
     validateOnBlur: false,
     validateOnChange: false,
     onSubmit: async values => {
-        console.log(values)
+        setMail(values.mail);
         navigate('/password')
     }
   })

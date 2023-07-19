@@ -1,4 +1,4 @@
-import axios from 'axios;'
+import axios from 'axios';
 
 axios.defaults.baseURL = process.env.REACT_APP_SERVER_DOMAIN;
 
@@ -33,10 +33,10 @@ export async function registerUser(credentials){
 
         //send email to user
         if(status === 201 ){
-            await axios.post('/api/registermail',{ name,mail:mail, text:msg})
+            await axios.post('/api/registermail',{ name,surname,mail:mail, text:msg, phone})
         }
 
-        return Promise.result(msg)
+        return Promise.resolve(msg)
     } catch (error) {
         return Promise.reject({error})
     }
@@ -78,7 +78,7 @@ export async function OTPmaker(mail){
         }
         return Promise.resolve(code);
     } catch (error) {
-        return Promise.reject({err})
+        return Promise.reject({error})
     }
 }
 
@@ -97,6 +97,6 @@ export async function resetpassword({mail,password}){
         const {data,status} = await axios.put('/api/passwordreset');
         return Promise.resolve({data,status});
     } catch (error) {
-        return Promise.reject({err})
+        return Promise.reject({error})
     }
 }
