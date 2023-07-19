@@ -8,6 +8,11 @@ import Recovery from './components/Recovery';
 import Register from './components/Register';
 import Reset from './components/Reset';
 
+
+//auth middle
+import { AuthorizeUser,RouteProtection } from './midlleware/auth.js';
+
+
 const router = createBrowserRouter([
     {
         path:'/',
@@ -19,11 +24,11 @@ const router = createBrowserRouter([
     },
     {
         path:'/password',
-        element: <Password></Password>
+        element: <RouteProtection><Password /></RouteProtection>
     },
     {
         path:'/profile',
-        element: <Profile></Profile>
+        element: <AuthorizeUser><Profile /></AuthorizeUser>
     },
     {
         path:'/recovery',

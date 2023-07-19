@@ -1,31 +1,50 @@
 import React, {useState } from 'react';
-import {Link, useNavigate} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import avatar_default from '../assets/avatar.png';
+import useFetch from '../hoooks/hookk.js';
+import { useAuthStore } from '../store/store.js';
 import styles from '../styles/Username.module.css';
-import {Toaster} from 'react-hot-toast';
+import toast, {Toaster} from 'react-hot-toast';
 import { useFormik } from 'formik';
 import { profileValidate } from '../helpFunc/MailValidate.js';
+import { updateuser } from '../helpFunc/helper.js';
 
 
 export default function Profile() {
 
-  const [file, setFile] = useState()
+  const [{isLoading, apiData, serverError}] = useFetch();
+  const navigate = useNavigate();
+
 
   const formik = useFormik({
     initialValues: {
-      name: '',
-      surname: '',
-      mail: '',
-      phone: '',
+      name: apiData?.name || '',
+      surname: apiData?.surname || '',
+      mail: apiData?.mail || '',
+      phone: apiData?.phone || '',
     },
+    enableReinitialize: true,
     validate: profileValidate,
     validateOnBlur: false,
     validateOnChange: false,
     onSubmit: async values => {
+      let updatePromise = updateuser(values);
+      toast.promise(updatePromise , {
+        loading:"Loading...",
+        success : <b>Updated</b>,
+        error: <b>error occured</b>
+      })
     }
   })
 
+  //logout handler
+  function userLogout(){
+    localStorage.removeItem('token');
+    navigate('/');
+  }
 
+  if(isLoading) return <h1 className='text-2xl font-bold'>Loading...</h1>
+  if(serverError) return <h1 className='text-xl text-gray-50'>{serverError.message}</h1>
 
   return (
     <div className='container mx-auto'>
@@ -33,7 +52,7 @@ export default function Profile() {
         <div className=' flex justify-center items-center h-screen'>
             <div className={styles.glass} style={{ width: '50%'}} >
                 <div className='title flex flex-col items-center text-gray-50' >
-                    <h4 className='text-5xl font-bold'> Register </h4>
+                    <h4 className='text-5xl font-bold'> Update Profile </h4>
                 </div>
 
                 <form className='py-1' onSubmit={formik.handleSubmit}>
@@ -44,7 +63,6 @@ export default function Profile() {
                         <input {...formik.getFieldProps('surname')} type="text" className={styles.textbox} placeholder='Surname' />
                       </div>
                         <input {...formik.getFieldProps('mail')} type="text" className={styles.textbox} placeholder='Mail' />
-                        <div className="input text-center"><span className='text-sm text-gray-100'>Please enter your phone as 5xxxxxxxxx</span></div>
                         <input {...formik.getFieldProps('phone')} type="text" className={styles.textbox} placeholder='Phone' />
                         <div className="name flex w-3/4 gap-10">
                         <button className={styles.btn} type="back">Back</button>
@@ -52,6 +70,9 @@ export default function Profile() {
                       </div>
                     </div>
                 </form>
+                <div className="text-center py-4">
+                <button className={styles.btn} onClick={userLogout} type="submit">Logout</button>
+              </div>
             </div>
         </div>
     </div>

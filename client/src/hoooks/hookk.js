@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
+import {getMail} from '../helpFunc/helper.js'
 
 axios.defaults.baseURL = process.env.REACT_APP_SERVER_DOMAIN;
 
@@ -14,7 +15,8 @@ export default function useFetch(query){
             try {
                 setData(prev => ( {...prev,isLoading:true}));
 
-                const {data,status} = await axios.get('/api/'+query)
+                const {mail} = !query ? await getMail() : '';
+                const {data,status} = !query ? await axios.get('/api/user/'+mail) : await axios.get('/api/'+query)
 
                 if(status === 201){
                     setData(prev => ( {...prev,isLoading:false}));
