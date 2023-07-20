@@ -53,10 +53,10 @@ export default function Username() {
                     </div>
 
                     <div className='text-center py-4'>
-                        <span className='text-gray-500'>
+                        <span className='text-gray-300'>
                             Not a Member?
                             <a>  </a>
-                            <Link className="text-purple-500" to="/register">Register</Link>
+                            <Link className="text-gray-50" to="/register">Register</Link>
                         </span>
                     </div>
 

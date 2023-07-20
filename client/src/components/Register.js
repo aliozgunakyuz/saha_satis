@@ -63,10 +63,10 @@ export default function Register() {
                     </div>
 
                     <div className='text-center py-4'>
-                        <span className='text-gray-500'>
+                        <span className='text-gray-300'>
                             Already registered?
                             <a>  </a>
-                            <Link className="text-purple-500" to="/">Login</Link>
+                            <Link className="text-gray-50" to="/">Login</Link>
                         </span>
                     </div>
 

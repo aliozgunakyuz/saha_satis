@@ -27,12 +27,14 @@ export default function Password() {
         toast.promise(loginPromise,{
             loading: 'Checking...',
             success: <b>Logged in</b>,
-            error: <b>Password not match</b>
+            error: <a>Please check your password</a>
         });
         loginPromise.then(res =>{
             let {token} = res.data;
             localStorage.setItem('token',token);
             navigate('/profile');
+        }).catch(error => {
+            toast.error('Password not match');
         })
     }
   })
@@ -62,10 +64,10 @@ export default function Password() {
                     </div>
 
                     <div className='text-center py-4'>
-                        <span className='text-gray-500'>
+                        <span className='text-gray-300'>
                             Forgot Password?
                             <a>  </a>
-                            <Link className="text-purple-500" to="/recovery">Recover from here</Link>
+                            <Link className="text-gray-50" to="/recovery">Recover from here</Link>
                         </span>
                     </div>
 

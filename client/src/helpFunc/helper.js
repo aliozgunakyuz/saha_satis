@@ -15,9 +15,8 @@ export async function getMail(){
 
 // auth func
 export async function authenticate(mail){
-    const decodedMail = decodeURIComponent(mail);
     try {
-        return await axios.post('/api/auth', {mail:decodedMail})
+        return await axios.post('/api/auth', {mail})
     } catch (error) {
         return {error: "Mail doesnt exist"}
     }
@@ -54,10 +53,9 @@ export async function registerUser(credentials){
 
 //login func
 export async function verifyPwd({mail,password}){
-    const decodedMail = decodeURIComponent(mail);
     try {
         if(mail){
-            const {data} = await axios.post('/api/login', {mail:decodedMail,password});
+            const {data} = await axios.post('/api/login', {mail,password});
             return Promise.resolve({data});
         }
     } catch (error) {

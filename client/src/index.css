@@ -4,5 +4,6 @@
 
 body{
     background: #dcdce6;
-    background-image: url(./assets/bgrnd.jpg);
+    background-image: url(./assets/bgrnd2.jpg);
+    background-size: 100%;
 }
