@@ -4,7 +4,7 @@
     box-shadow: 0 10px 60px #4747470b;
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.3);
-    @apply shrink-0 h-3/4 w-[30%] rounded-3xl py-20 px-7 min-w-max;
+    @apply shrink-0 h-3/4 w-[25%] rounded-3xl py-20 px-7 min-w-fit;
 }
 
 .profile_img{
