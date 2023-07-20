@@ -1,13 +1,21 @@
-import React from 'react';
-import {Link} from 'react-router-dom';
-import avatar_default from '../assets/avatar.png';
+import React, { useEffect } from 'react';
 import styles from '../styles/Username.module.css';
-import {Toaster} from 'react-hot-toast';
+import toast, {Toaster} from 'react-hot-toast';
 import { useFormik } from 'formik';
 import { repeatPasswordVerification } from '../helpFunc/PasswordValidate';
+import { resetpassword } from '../helpFunc/helper.js';
+import { useAuthStore } from '../store/store.js';
+import { useNavigate, Navigate } from 'react-router-dom';
+import useFetch from '../hoooks/hookk.js';
 
 
 export default function Reset() {
+
+ const {mail} = useAuthStore(state => state.auth);
+ const navigate = useNavigate();
+ const [{isLoading,apiData,status,serverError}] = useFetch('resetSession')
+ const decodedMail = decodeURIComponent(mail);
+
 
   const formik = useFormik({
     initialValues: {
@@ -18,9 +26,21 @@ export default function Reset() {
     validateOnBlur: false,
     validateOnChange: false,
     onSubmit: async values => {
-        console.log(values)
+        let resetPromise = resetpassword({mail:decodedMail,password:values.password})
+        toast.promise(resetPromise,{
+            loading: 'updating password...',
+            success: <b>Password reset successfull</b>,
+            error: <b>Error occurred</b>
+        });
+        console.log("yeter artık bit");
+        resetPromise.then(function(){navigate('/password')})
+
     }
   })
+
+  if(isLoading) return <h1 className='text-2xl font-bold'>Loading...</h1>
+  if(serverError) return <h1 className='text-xl text-gray-50'>{serverError.message}</h1>
+  if(status && status != 201) return <Navigate to={'/password'} replace={true}></Navigate>
 
   return (
     <div className='container mx-auto'>

@@ -1,8 +1,6 @@
 import React, {useState } from 'react';
 import {useNavigate} from 'react-router-dom';
-import avatar_default from '../assets/avatar.png';
 import useFetch from '../hoooks/hookk.js';
-import { useAuthStore } from '../store/store.js';
 import styles from '../styles/Username.module.css';
 import toast, {Toaster} from 'react-hot-toast';
 import { useFormik } from 'formik';

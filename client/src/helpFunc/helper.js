@@ -15,8 +15,9 @@ export async function getMail(){
 
 // auth func
 export async function authenticate(mail){
+    const decodedMail = decodeURIComponent(mail);
     try {
-        return await axios.post('/api/auth', {mail})
+        return await axios.post('/api/auth', {mail:decodedMail})
     } catch (error) {
         return {error: "Mail doesnt exist"}
     }
@@ -24,9 +25,9 @@ export async function authenticate(mail){
 
 //get user details
 export async function getUser({mail}){
-    let usermail = mail;
+    const decodedMail = decodeURIComponent(mail);
     try {
-        const {data}=await axios.get('/api/user/'+usermail);
+        const {data}=await axios.get('/api/user/'+decodedMail);
         return{data};
     } catch (error) {
         return {err: "Password doesnt match"}
@@ -53,9 +54,10 @@ export async function registerUser(credentials){
 
 //login func
 export async function verifyPwd({mail,password}){
+    const decodedMail = decodeURIComponent(mail);
     try {
         if(mail){
-            const {data} = await axios.post('/api/login', {mail,password});
+            const {data} = await axios.post('/api/login', {mail:decodedMail,password});
             return Promise.resolve({data});
         }
     } catch (error) {
@@ -103,11 +105,11 @@ export async function OTPverify({mail,code}){
     }
 }
 
-export async function resetpassword({mail,password}){
+export async function resetpassword({ mail, password }) {
     try {
-        const {data,status} = await axios.put('/api/passwordreset');
-        return Promise.resolve({data,status});
+        const { data, status } = await axios.put('/api/passwordreset', { mail, password });
+        return Promise.resolve({ data, status });
     } catch (error) {
-        return Promise.reject({error})
+        return Promise.reject({ error });
     }
 }

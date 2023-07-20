@@ -16,7 +16,8 @@ export default function useFetch(query){
                 setData(prev => ( {...prev,isLoading:true}));
 
                 const {mail} = !query ? await getMail() : '';
-                const {data,status} = !query ? await axios.get('/api/user/'+mail) : await axios.get('/api/'+query)
+                const decodedMail = decodeURIComponent(mail);
+                const {data,status} = !query ? await axios.get('/api/user/'+decodedMail) : await axios.get('/api/'+query)
 
                 if(status === 201){
                     setData(prev => ( {...prev,isLoading:false}));
