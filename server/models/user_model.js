@@ -26,6 +26,11 @@ export const Schema_User = new mongoose.Schema({
         required: true,
         unique: true,
     },
+    userType:{
+        type: String, 
+        default:'user',
+    },
+
 });
 
 export default mongoose.model('User', Schema_User);
