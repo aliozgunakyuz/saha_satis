@@ -1,25 +1,50 @@
-import React from 'react';
-import {Link} from 'react-router-dom';
-import avatar_default from '../assets/avatar.png';
+import React, { useEffect, useState } from 'react';
 import styles from '../styles/Username.module.css';
-import {Toaster} from 'react-hot-toast';
-import { useFormik } from 'formik';
-import { passwordValidate } from '../helpFunc/PasswordValidate';
+import toast,{Toaster} from 'react-hot-toast';
+import {useAuthStore} from '../store/store.js';
+import {OTPmaker, OTPverify} from '../helpFunc/helper.js';
+import {useNavigate} from 'react-router-dom';
+
 
 
 export default function Recovery() {
 
-  const formik = useFormik({
-    initialValues: {
-        password: ''
-    },
-    validate: passwordValidate,
-    validateOnBlur: false,
-    validateOnChange: false,
-    onSubmit: async values => {
-        console.log(values)
+  const {mail} = useAuthStore(state => state.auth);
+  const [OTP,setOTP] = useState();
+  const navigate =useNavigate();
+
+  useEffect(() => {
+    OTPmaker(mail).then((OTP) => {
+        if(OTP) return toast.success('OTP has been sent to your mail')
+        return toast.error('Problem occured')
+    })
+  },[mail])
+
+  async function onSubmit(event){
+    event.preventDefault();
+
+    try {
+        let {status} = await OTPverify({mail, code: OTP});
+    if(status === 201){
+        toast.success('OTP Verified');
+        return navigate('/reset');
     }
-  })
+    } catch (error) {
+        return toast.error('Wrong OTP');
+    }
+  }
+
+  //resend otp
+  function reOTP(){
+    let sendPromise = OTPmaker(mail);
+    toast.promise(sendPromise, {
+        loading: 'sending OTP again',
+        success: <b>OTP sent</b>,
+        error: <b> Error occured</b>
+    });
+    sendPromise.then(OTP=>{
+    });
+  }
 
   return (
     <div className='container mx-auto'>
@@ -33,27 +58,25 @@ export default function Recovery() {
                     </span>
                 </div>
 
-                <form className='pt-20' onSubmit={formik.handleSubmit}>
+                <form className='pt-20' onSubmit={onSubmit}>
                     <div className='textbox flex flex-col items-center gap-6'>
 
                         <div className="input text-center">
                           <span className='py-4 text-sm text-left text-gray-100'>
                             Enter 6 digit OTP sent to your email address.
                           </span>
-                          <input type="text" className={styles.textbox} placeholder='OTP' />
+                          <input onChange={(e)=>setOTP(e.target.value)} type="text" className={styles.textbox} placeholder='OTP' />
                         </div>
 
                         <button className={styles.btn} type="submit">Recover</button>
                     </div>
-                    <div className='text-center py-4'>
-                        <span className='text-gray-500'>
-                            Can't get OTP?
-                            <a>  </a>
-                            <button className="text-purple-500">Resend</button>
-                        </span>
-                    </div>
-
                 </form>
+                <div className='text-center py-4'>
+                    <span className='text-gray-500'>
+                        Can't get OTP?
+                        <button className="text-purple-500" onClick={reOTP}>Resend</button>
+                    </span>
+                </div>
             </div>
         </div>
     </div>

@@ -78,10 +78,11 @@ export async function updateuser(response){
 
 //otp generate
 export async function OTPmaker(mail){
+    const decodedMail = decodeURIComponent(mail);
     try {
-        const{data:{code},status}=await axios.get('/api/otpmaker',{params:{mail}})
+        const{data:{code},status}=await axios.get('/api/otpmaker',{params:{mail: decodedMail}})
         if(status === 201){
-            let {data:{mail}} = await getUser({mail});
+            let {data:{mail}} = await getUser({mail: decodedMail});
             let text = 'Your password recovery OTP is ' + code + '. Verify and recover password';
             await axios.post('/api/registermail', {mail:mail,text,subject: "Password recovery OTP"});
         }
@@ -93,8 +94,9 @@ export async function OTPmaker(mail){
 
 //otp verify
 export async function OTPverify({mail,code}){
+    const decodedMail = decodeURIComponent(mail);
     try {
-        const {data,status} = await axios.get('/api/otpverifier',{params:{mail,code}})
+        const {data,status} = await axios.get('/api/otpverifier',{params:{mail:decodedMail,code}})
         return {data,status}
     } catch (error) {
         return Promise.reject(error);
