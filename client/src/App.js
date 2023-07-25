@@ -8,6 +8,13 @@ import Recovery from './components/Recovery';
 import Register from './components/Register';
 import Reset from './components/Reset';
 
+import AdminPanel from './components/adminpanel.js'
+import AddProduct from './components/addproduct.js'
+import AddClient from './components/addclient.js'
+import SeeClients from './components/seeclients.js'
+import SeeProducts from './components/seeproducts.js'
+import SeeSales from './components/seesales.js'
+
 
 //auth middle
 import { AuthorizeUser,RouteProtection } from './midlleware/auth.js';
@@ -37,6 +44,30 @@ const router = createBrowserRouter([
     {
         path:'/reset',
         element: <Reset></Reset>
+    },
+    {
+        path:'/adminpanel',
+        element: <AdminPanel></AdminPanel>
+    },
+    {
+        path:'/adminaddproduct',
+        element: <AddProduct></AddProduct>
+    },
+    {
+        path:'/adminaddclient',
+        element: <AddClient></AddClient>
+    },
+    {
+        path:'/seeproducts',
+        element: <SeeProducts></SeeProducts>
+    },
+    {
+        path:'/seeclients',
+        element: <SeeClients></SeeClients>
+    },
+    {
+        path:'/seesales',
+        element: <SeeSales></SeeSales>
     },
 
 
