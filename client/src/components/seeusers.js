@@ -18,6 +18,18 @@ const Users = () => {
       });
   }, []);
 
+  const handleDelete = async (userId) => {
+    const confirmed = window.confirm('Are you sure you want to delete this user?');
+    if(confirmed){
+      try {
+        await axios.delete(`/api/users/${userId}`);
+        window.location.reload();
+      } catch (error) {
+        console.error('Error deleting user:', error);
+      }
+    }
+  };
+
   return (
     <div>
         <h1 className="products-title">Users List</h1>
@@ -40,7 +52,7 @@ const Users = () => {
                 <td>{user.mail}</td>
                 <td>{user.userType}</td>
                 <td><button className="btn2" onClick={()=>{navigate('/adminpanel')}}>Make Admin</button></td>
-                <td><button className="btn2" onClick={()=>{navigate('/adminpanel')}}>Delete</button></td>
+                <td><button className="btn2" onClick={() => handleDelete(user._id)}>Delete</button></td>
                 </tr>
             ))}
             </tbody>

@@ -181,3 +181,16 @@ export async function getuser(req, res) {
     return res.status(500).json({ error: 'Internal server error' });
   }
 }
+
+export async function deleteUser(req, res) {
+  try {
+    const userId = req.params.userId;
+    
+    // Find the product by its ID and delete it
+    await user_model.findByIdAndDelete(userId);
+
+    return res.status(200).send({ message: 'User deleted successfully' });
+  } catch (error) {
+    return res.status(500).send({ error: 'Internal server error' });
+  }
+}
