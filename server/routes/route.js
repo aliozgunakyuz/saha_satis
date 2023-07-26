@@ -15,10 +15,8 @@ router.route('/getuser').get(controller.getuser);
 router.route('/otpmaker').get(controller.userVerification, local_variables, controller.OTPgenerator);
 router.route('/otpverifier').get(controller.OTPverify);
 router.route('/resetSession').get(controller.resetSession);
-
 //product
 router.get('/getproducts', p_controller.getproducts);
-
 //client
 router.get('/getclients', c_controller.getclients);
 
@@ -37,10 +35,8 @@ router.route('/register').post(controller.register);
 router.route('/registermail').post(registerMail);
 router.route('/auth').post(controller.userVerification, (req,res) => res.end());
 router.route('/login').post(controller.userVerification,controller.login);
-
 //product
 router.route('/addproduct').post(p_controller.addproduct);
-
 //client
 router.route('/addclient').post(c_controller.addclient);
 
