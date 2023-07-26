@@ -6,7 +6,7 @@ import { useFormik } from 'formik';
 import { productValidate } from '../helpFunc/productValidation.js';
 import { addProduct } from '../helpFunc/productFunctions.js';
 
-export default function Register() {
+export default function AddProduct() {
 
   const navigate = useNavigate();
 

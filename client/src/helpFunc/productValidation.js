@@ -11,7 +11,7 @@ export async function productValidate(values){
 
 function productnameVerify(error = {}, values){
     if(!values.productname){
-        error.mail = toast.error('Product Name Required')
+        error.productname = toast.error('Product Name Required')
     } 
     return error;
 }

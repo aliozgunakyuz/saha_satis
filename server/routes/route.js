@@ -3,6 +3,7 @@ const router = Router();
 
 import * as controller from '../controllers/usercontrollers.js';
 import * as p_controller from '../controllers/productcontroller.js';
+import * as c_controller from '../controllers/clientcontroller.js'
 import { registerMail } from '../controllers/mailsender.js';
 import Auth, {local_variables} from '../middlewares/auth.js';
 
@@ -38,6 +39,7 @@ router.route('/login').post(controller.userVerification,controller.login);
 router.route('/addproduct').post(p_controller.addproduct);
 
 //client
+router.route('/addclient').post(c_controller.addclient);
 
 //DELETE
 //user
