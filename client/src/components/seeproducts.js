@@ -18,6 +18,18 @@ const Products = () => {
       });
   }, []);
 
+  const handleDelete = async (productId) => {
+    const confirmed = window.confirm('Are you sure you want to delete this product?');
+    if(confirmed){
+      try {
+        await axios.delete(`/api/products/${productId}`);
+        window.location.reload();
+      } catch (error) {
+        console.error('Error deleting product:', error);
+      }
+    }
+  };
+
   return (
     <div>
         <h1 className="products-title">Products List</h1>
@@ -43,7 +55,7 @@ const Products = () => {
                 <td>{product.color}</td>
                 <td>{product.category}</td>
                 <td><button className="btn2" onClick={()=>{navigate('/adminpanel')}}>Update</button></td>
-                <td><button className="btn2" onClick={()=>{navigate('/adminpanel')}}>Delete</button></td>
+                <td><button className="btn2" onClick={() => handleDelete(product._id)}>Delete</button></td>
                 </tr>
             ))}
             </tbody>

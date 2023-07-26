@@ -21,6 +21,7 @@ router.get('/getproducts', p_controller.getproducts);
 
 //client
 router.get('/getclients', c_controller.getclients);
+
 //PUT
 //user
 router.route('/userupdate').put(Auth, controller.updateUser);
@@ -47,6 +48,7 @@ router.route('/addclient').post(c_controller.addclient);
 //user
 
 //product
+router.delete('/products/:productId', p_controller.deleteProduct);
 
 //client
 

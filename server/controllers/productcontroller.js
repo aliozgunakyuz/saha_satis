@@ -40,3 +40,16 @@ export async function getproducts(req, res) {
       return res.status(500).json({ error: 'Internal server error' });
     }
   }
+
+  export async function deleteProduct(req, res) {
+    try {
+      const productId = req.params.productId;
+      
+      // Find the product by its ID and delete it
+      await product_model.findByIdAndDelete(productId);
+  
+      return res.status(200).send({ message: 'Product deleted successfully' });
+    } catch (error) {
+      return res.status(500).send({ error: 'Internal server error' });
+    }
+  }
