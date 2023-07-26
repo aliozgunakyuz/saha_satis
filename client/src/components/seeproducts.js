@@ -26,7 +26,6 @@ const Products = () => {
         <table className="products-table">
             <thead>
             <tr>
-                <th>Product ID</th>
                 <th>Product Name</th>
                 <th>Stock</th>
                 <th>Price</th>
@@ -38,7 +37,6 @@ const Products = () => {
             <tbody>
             {products.map((product) => (
                 <tr key={product._id}>
-                <td>{product._id}</td>
                 <td>{product.productname}</td>
                 <td>{product.stock}</td>
                 <td>{product.price}</td>

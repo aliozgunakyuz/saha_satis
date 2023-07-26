@@ -34,7 +34,6 @@ const Clients = () => {
             <tbody>
             {clients.map((client) => (
                 <tr key={client._id}>
-                <td>{client._id}</td>
                 <td>{client.clientname}</td>
                 <td>{client.clientphone}</td>
                 <td>{client.clientmail}</td>
