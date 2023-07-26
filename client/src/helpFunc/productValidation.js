@@ -37,7 +37,6 @@ function stockVerify(errors = {}, values){
 
 function priceVerify(errors = {}, values){
 
-    const specialCharacters = /[`!@#$%^&*()_+\-=\[\]{};':"\\|.<>\/?~]/;
     var lowerCase = /[a-z]/g;
     var upperCase = /[A-Z]/g;
     var numbers = /[0-9]/g;
@@ -46,7 +45,7 @@ function priceVerify(errors = {}, values){
         errors.price = toast.error("price Required");
     } else if(values.price.includes(" ")){
         errors.price = toast.error("Wrong price Format");
-    } else if(lowerCase.test(values.price) || upperCase.test(values.price) || specialCharacters.test(values.price)){
+    } else if(lowerCase.test(values.price) || upperCase.test(values.price)){
         errors.price = toast.error("Wrong price Format");
     } else if(!numbers.test(values.price)){
         errors.price = toast.error("price should be integer or float");

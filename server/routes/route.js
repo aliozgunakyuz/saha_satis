@@ -16,6 +16,7 @@ router.route('/otpverifier').get(controller.OTPverify);
 router.route('/resetSession').get(controller.resetSession);
 
 //product
+router.get('/getproducts', p_controller.getproducts);
 
 //client
 

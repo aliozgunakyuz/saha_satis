@@ -21,6 +21,7 @@ app.get('/', (req, res) => {
 
 //routes for APİ
 app.use('/api', router)
+app.use(express.json());
 
 
 connect().then(()=> {

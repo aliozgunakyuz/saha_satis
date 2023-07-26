@@ -11,3 +11,15 @@ export async function addProduct(credentials){
         return Promise.reject({error})
     }
 }
+
+export async function getProducts() {
+    try {
+      const response = await axios.get('/api/getproducts');
+  
+      // Assuming the response data is an array of products, you can directly return it
+      return Promise.resolve(response.data);
+    } catch (error) {
+      // If there's an error, reject the Promise with the error object
+      return Promise.reject(error);
+    }
+  }

@@ -1,10 +1,11 @@
 import React from 'react';
 import {Link, useNavigate} from 'react-router-dom';
 import styles from '../styles/Username.module.css';
+import { addClient } from '../helpFunc/clientFunctions.js';
 import toast,{Toaster} from 'react-hot-toast';
 import { useFormik } from 'formik';
 import { clientValidate } from '../helpFunc/clientValidation.js';
-import { addClient } from '../helpFunc/clientFunctions.js';
+
 
 export default function AddClient() {
 
