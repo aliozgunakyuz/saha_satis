@@ -39,3 +39,15 @@ export async function getclients(req, res) {
       return res.status(500).json({ error: 'Internal server error' });
     }
   }
+
+  export async function deleteClient(req, res) {
+    try {
+      const clientId = req.params.clientId;
+      
+      await client_model.findByIdAndDelete(clientId);
+  
+      return res.status(200).send({ message: 'Client deleted successfully' });
+    } catch (error) {
+      return res.status(500).send({ error: 'Internal server error' });
+    }
+  }

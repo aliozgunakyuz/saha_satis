@@ -51,7 +51,7 @@ router.route('/addclient').post(c_controller.addclient);
 router.delete('/products/:productId', p_controller.deleteProduct);
 
 //client
-
+router.delete('/clients/:clientId', c_controller.deleteClient);
 
 
 

@@ -17,6 +17,18 @@ const Clients = () => {
       });
   }, []);
 
+  const handleDelete = async (clientId) => {
+    const confirmed = window.confirm('Are you sure you want to delete this client?');
+    if(confirmed){
+      try {
+        await axios.delete(`/api/clients/${clientId}`);
+        window.location.reload();
+      } catch (error) {
+        console.error('Error deleting client:', error);
+      }
+    }
+  };
+
   return (
     <div>
         <h1 className="products-title">Clients List</h1>
@@ -39,7 +51,7 @@ const Clients = () => {
                 <td>{client.clientmail}</td>
                 <td>{client.clientaddress}</td>
                 <td><button className="btn2" onClick={()=>{navigate('/adminpanel')}}>Update</button></td>
-                <td><button className="btn2" onClick={()=>{navigate('/adminpanel')}}>Delete</button></td>
+                <td><button className="btn2" onClick={() => handleDelete(client._id)}>Delete</button></td>
                 </tr>
             ))}
             </tbody>
