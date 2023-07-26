@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import '../styles/datashowstyles.css';
 import {Link, useNavigate} from 'react-router-dom';
+import toast,{Toaster} from 'react-hot-toast';
+
 
 const Users = () => {
   const [users, setUsers] = useState([]);
@@ -23,8 +25,12 @@ const Users = () => {
     if(confirmed){
       try {
         await axios.delete(`/api/users/${userId}`);
-        window.location.reload();
+        toast.success('User deleted successfully');
+        setTimeout(() => {
+          window.location.reload();
+        }, 500);
       } catch (error) {
+        toast.error('Failed to delete user');
         console.error('Error deleting user:', error);
       }
     }
@@ -34,7 +40,7 @@ const Users = () => {
     <div>
         <h1 className="products-title">Users List</h1>
         <div className="products-wrapper">
-        
+        <Toaster position='top-center' reverseOrder={false}></Toaster>
         <table className="products-table">
             <thead>
             <tr>

@@ -49,7 +49,7 @@ export default function AddClient() {
                         <input {...formik.getFieldProps('clientphone')} type="text" className={styles.textbox} placeholder='Client Phone (as 5xxxxxxxxx' />
                         <input {...formik.getFieldProps('clientmail')} type="text" className={styles.textbox} placeholder='Client Mail' />
                         <button className={styles.btn} type="submit">Add Client</button>
-                        <button className={styles.btn} type="button">Back</button>
+                        <button className={styles.btn} onClick={()=>{navigate('/adminpanel')}}>Back</button>
                     </div>
                 </form>
             </div>

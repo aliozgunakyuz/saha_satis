@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import '../styles/datashowstyles.css';
 import {Link, useNavigate} from 'react-router-dom';
+import toast,{Toaster} from 'react-hot-toast';
+
 
 const Clients = () => {
   const [clients, setClients] = useState([]);
@@ -22,8 +24,12 @@ const Clients = () => {
     if(confirmed){
       try {
         await axios.delete(`/api/clients/${clientId}`);
-        window.location.reload();
+        toast.success('Client deleted successfully');
+        setTimeout(() => {
+          window.location.reload();
+        }, 500);
       } catch (error) {
+        toast.error('Failed to delete client');
         console.error('Error deleting client:', error);
       }
     }
@@ -33,7 +39,7 @@ const Clients = () => {
     <div>
         <h1 className="products-title">Clients List</h1>
         <div className="products-wrapper">
-        
+        <Toaster position='top-center' reverseOrder={false}></Toaster>
         <table className="products-table">
             <thead>
             <tr>

@@ -50,7 +50,7 @@ export default function AddProduct() {
                         <input {...formik.getFieldProps('color')} type="text" className={styles.textbox} placeholder='Color' />
                         <input {...formik.getFieldProps('category')} type="text" className={styles.textbox} placeholder='Category' />
                         <button className={styles.btn} type="submit">Add Product</button>
-                        <button className={styles.btn} type="button">Back</button>
+                        <button className={styles.btn} onClick={()=>{navigate('/adminpanel')}}>Back</button>
                     </div>
                 </form>
             </div>

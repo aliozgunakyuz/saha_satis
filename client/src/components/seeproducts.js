@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import '../styles/datashowstyles.css';
 import {Link, useNavigate} from 'react-router-dom';
+import toast,{Toaster} from 'react-hot-toast';
 
 const Products = () => {
   const [products, setProducts] = useState([]);
@@ -23,8 +24,12 @@ const Products = () => {
     if(confirmed){
       try {
         await axios.delete(`/api/products/${productId}`);
-        window.location.reload();
+        toast.success('Product deleted successfully');
+        setTimeout(() => {
+          window.location.reload();
+        }, 500);
       } catch (error) {
+        toast.error('Failed to delete product');
         console.error('Error deleting product:', error);
       }
     }
@@ -34,6 +39,7 @@ const Products = () => {
     <div>
         <h1 className="products-title">Products List</h1>
         <div className="products-wrapper">
+        <Toaster position='top-center' reverseOrder={false}></Toaster>
         
         <table className="products-table">
             <thead>
