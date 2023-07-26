@@ -7,12 +7,12 @@ export const Schema_Product = new mongoose.Schema({
         unique: true,
     },
     stock: {
-        type: Number,
+        type: String,
         required: true,
         unique: false,
     },
     price: {
-        type: Number,
+        type: String,
         required: true,
         unique: false,
     },

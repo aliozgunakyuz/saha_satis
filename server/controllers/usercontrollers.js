@@ -19,63 +19,6 @@ export async function userVerification(req, res, next){
 export async function register(req,res){
     try{
         const {name,surname,mail,phone,password} = req.body;
-        /*
-        const mailCheck = new Promise((resolve, reject) => {
-            user_model.findOne({mail}, function(err, mail){
-                if(err) reject(new Error(err))
-                if(mail) reject({error: 'This mail is already exist.'});
-                
-                resolve();
-            })
-        });
-
-        const phoneCheck = new Promise((resolve, reject) => {
-            user_model.findOne({phone}, function(err, phone){
-                if(err) reject(new Error(err))
-                if(phone) reject({error: 'This phone number is already exist.'});
-                
-                resolve();
-            })
-        });
-
-
-        const mailExists = await user_model.findOne({ mail });
-        const phoneExists = await user_model.findOne({ phone });
-
-        if (mailExists) {
-          return res.status(400).send({ error: 'This mail is already exist.' });
-        }
-
-        if (phoneExists) {
-        return res.status(400).send({ error: 'This phone number is already exist.' });
-        }
-
-        Promise.all([mailCheck, phoneCheck]).then(() => {
-            if(password){
-                bcrypt.hash(password,10).then(hashedPassword => {
-                    const user = new user_model ({
-                        name,
-                        surname,
-                        password: hashedPassword,
-                        phone,
-                        mail,
-                    });
-
-                    user.save()
-                        .then(result => res.status(201).send({msg: 'User registration successfully completed'}))
-                        .catch(error => res.status(500).send({error}))
-                }).catch(error => {
-                    return res.status(500).send({
-                        error: 'Enable password hash'
-                    })
-                })
-            }
-
-        }).catch(error => {
-            console.log('Z');
-            return res.status(500).send({error})
-        })
-        */
         const mailExists = await user_model.findOne({ mail });
         const phoneExists = await user_model.findOne({ phone });
     
