@@ -19,7 +19,7 @@ router.route('/resetSession').get(controller.resetSession);
 router.get('/getproducts', p_controller.getproducts);
 
 //client
-
+router.get('/getclients', c_controller.getclients);
 //PUT
 //user
 router.route('/userupdate').put(Auth, controller.updateUser);

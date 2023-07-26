@@ -26,3 +26,16 @@ export async function addclient(req, res) {
         return res.status(500).send({ error: 'Internal server error' });
     }
 }
+
+export async function getclients(req, res) {
+    try {
+      const clients = await client_model.find();
+  
+      if (!clients || clients.length === 0) {
+        return res.status(404).json({ message: 'No client found.' });
+      }
+      return res.status(200).json(clients);
+    } catch (error) {
+      return res.status(500).json({ error: 'Internal server error' });
+    }
+  }
