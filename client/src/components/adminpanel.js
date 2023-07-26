@@ -25,6 +25,8 @@ export default function Register() {
                         <button className={styles.btn} onClick={()=>{navigate('/seeclients')}}>See Clients</button>
                         <b className="text-gray-50">Sales</b>
                         <button className={styles.btn} onClick={()=>{navigate('/seesales')}}>See Sales</button>
+                        <b className="text-gray-50">Users</b>
+                        <button className={styles.btn} onClick={()=>{navigate('/seeusers')}}>See Users</button>
                         <button className={styles.btn} onClick={()=>{navigate('/')}}>Back</button>
                     </div>
                 </form>

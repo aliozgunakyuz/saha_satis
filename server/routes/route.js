@@ -11,6 +11,7 @@ import Auth, {local_variables} from '../middlewares/auth.js';
 //GET
 //user
 router.route('/user/:mail').get(controller.getUser);
+router.route('/getuser').get(controller.getuser);
 router.route('/otpmaker').get(controller.userVerification, local_variables, controller.OTPgenerator);
 router.route('/otpverifier').get(controller.OTPverify);
 router.route('/resetSession').get(controller.resetSession);
