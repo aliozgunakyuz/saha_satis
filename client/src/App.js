@@ -15,6 +15,7 @@ import SeeClients from './components/seeclients.js'
 import SeeProducts from './components/seeproducts.js'
 import SeeSales from './components/seesales.js'
 import SeeUsers from './components/seeusers.js'
+import UpdateProduct from './components/updateproduct'
 
 //auth middle
 import { AuthorizeUser,RouteProtection } from './midlleware/auth.js';
@@ -72,6 +73,10 @@ const router = createBrowserRouter([
     {
         path:'/seeusers',
         element: <SeeUsers></SeeUsers>
+    },
+    {
+        path:'/updateproduct/:productId',
+        element: <UpdateProduct></UpdateProduct>
     },
 
 
