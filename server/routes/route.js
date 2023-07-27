@@ -20,6 +20,7 @@ router.get('/getproducts', p_controller.getproducts);
 router.get('/api/getproductbyID/:productId', p_controller.getproductbyID);
 //client
 router.get('/getclients', c_controller.getclients);
+router.get('/api/getclientbyID/:clientId', c_controller.getclientbyID);
 
 //PUT
 //user
@@ -29,8 +30,8 @@ router.route('/passwordreset').put(controller.userVerification,controller.resetp
 //product
 router.put('/products/:productId', p_controller.updateProduct);
 
-
 //client
+router.put('/clients/:clientId', c_controller.updateClient);
 
 //POST
 //user

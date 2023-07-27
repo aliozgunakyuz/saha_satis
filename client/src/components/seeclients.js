@@ -34,6 +34,9 @@ const Clients = () => {
       }
     }
   };
+  const handleUpdate = (clientId) => {
+    navigate(`/updateclient/${clientId}`);
+  };
 
   return (
     <div>
@@ -56,7 +59,7 @@ const Clients = () => {
                 <td>{client.clientphone}</td>
                 <td>{client.clientmail}</td>
                 <td>{client.clientaddress}</td>
-                <td><button className="btn2" onClick={()=>{navigate('/adminpanel')}}>Update</button></td>
+                <td><button className="btn2" onClick={() => handleUpdate(client._id)}>Update</button></td>
                 <td><button className="btn2" onClick={() => handleDelete(client._id)}>Delete</button></td>
                 </tr>
             ))}

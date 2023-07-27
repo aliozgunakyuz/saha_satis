@@ -51,3 +51,44 @@ export async function getclients(req, res) {
       return res.status(500).send({ error: 'Internal server error' });
     }
   }
+
+  export async function updateClient(req, res) {
+    try {
+      const clientId = req.params.clientId;
+  
+      const client = await client_model.findById(clientId);
+  
+      if (!client) {
+        return res.status(404).json({ message: 'Client not found' });
+      }
+  
+      client.clientname = req.body.clientname;
+      client.clientaddress = req.body.clientaddress;
+      client.clientphone = req.body.clientphone;
+      client.clientmail = req.body.clientmail;
+  
+      await client.save();
+  
+      res.status(200).json(client);
+    } catch (error) {
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  }
+
+
+export async function getclientbyID(req, res) {
+  try {
+    const clientId = req.params.clientId;
+
+    // Find the product by its ID in the database
+    const client = await client_model.findById(clientId);
+
+    if (!client) {
+      return res.status(404).json({ message: 'Client not found' });
+    }
+
+    res.status(200).json(client);
+  } catch (error) {
+    res.status(500).json({ error: 'Internal server error' });
+  }
+}

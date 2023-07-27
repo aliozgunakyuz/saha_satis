@@ -16,7 +16,7 @@ import SeeProducts from './components/seeproducts.js'
 import SeeSales from './components/seesales.js'
 import SeeUsers from './components/seeusers.js'
 import UpdateProduct from './components/updateproduct'
-
+import UpdateClient from './components/updateclient'
 //auth middle
 import { AuthorizeUser,RouteProtection } from './midlleware/auth.js';
 
@@ -77,6 +77,10 @@ const router = createBrowserRouter([
     {
         path:'/updateproduct/:productId',
         element: <UpdateProduct></UpdateProduct>
+    },
+    {
+        path:'/updateclient/:clientId',
+        element: <UpdateClient></UpdateClient>
     },
 
 
