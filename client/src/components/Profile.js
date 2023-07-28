@@ -52,7 +52,6 @@ export default function Profile() {
                 <div className='title flex flex-col items-center text-gray-50' >
                     <h4 className='text-5xl font-bold'> Update Profile </h4>
                 </div>
-
                 <form className='py-1' onSubmit={formik.handleSubmit}>
                     <div className='textbox flex flex-col items-center gap-6'>
                       <span className='text-gray-50 text-sm text-left'>Update your profile.</span>

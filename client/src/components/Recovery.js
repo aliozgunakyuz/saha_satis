@@ -51,21 +51,18 @@ export default function Recovery() {
         <Toaster position='top-center' reverseOrder={false}></Toaster>
         <div className=' flex justify-center items-center h-screen'>
             <div className={styles.glass}>
-                <div className='title flex flex-col items-center text-gray-50' >
+                <div className='title flex flex-col items-center text-blue-950' >
                     <h4 className='text-5xl font-bold'> Recover Password </h4>
-                    <span className='py-4 text-xl w-2/3 text-center text-grey-500'>
+                    <span className='py-4 text-xl w-2/3 text-center'>
                         Enter OTP to recover password.
                     </span>
                 </div>
-
-                <form className='pt-20' onSubmit={onSubmit}>
+                <form className='pt-5' onSubmit={onSubmit}>
                     <div className='textbox flex flex-col items-center gap-6'>
 
                         <div className="input text-center">
-                          <span className='py-4 text-sm text-left text-gray-100'>
-                            Enter 6 digit OTP sent to your email address.
-                          </span>
-                          <input onChange={(e)=>setOTP(e.target.value)} type="text" className={styles.textbox} placeholder='OTP' />
+                          <span className='py-4 text-sm text-left text-blue-950'></span>
+                          <input onChange={(e)=>setOTP(e.target.value)} type="text" className={styles.textbox} placeholder='Enter 6 digit OTP sent to your email.' />
                         </div>
 
                         <button className={styles.btn} type="submit">Recover</button>
@@ -74,7 +71,7 @@ export default function Recovery() {
                 <div className='text-center py-4'>
                     <span className='text-gray-300'>
                         Can't get OTP?
-                        <button className="text-gray-50" onClick={reOTP}>Resend</button>
+                        <button className="text-blue-950" onClick={reOTP}>Resend</button>
                     </span>
                 </div>
             </div>

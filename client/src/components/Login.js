@@ -36,10 +36,10 @@ export default function Username() {
         <Toaster position='top-center' reverseOrder={false}></Toaster>
         <div className=' flex justify-center items-center h-screen'>
             <div className={styles.glass}>
-                <div className='title flex flex-col items-center text-gray-50' >
-                    <h4 className='text-5xl font-bold'> Hello </h4>
-                    <span className='py-4 text-xl w-2/3 text-center text-grey-500'>
-                        Write smth
+                <div className='title flex flex-col items-center indigo' >
+                    <h4 className='text-5xl text-blue-950 font-bold'> Hello </h4>
+                    <span className='py-4 text-xl w-2/3 text-center text-blue-950' >
+                        Please Log In
                     </span>
                 </div>
 
@@ -56,7 +56,7 @@ export default function Username() {
                         <span className='text-gray-300'>
                             Not a Member?
                             <a>  </a>
-                            <Link className="text-gray-50" to="/register">Register</Link>
+                            <Link className="text-blue-950" to="/register">Register</Link>
                         </span>
                     </div>
 

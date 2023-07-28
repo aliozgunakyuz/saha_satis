@@ -42,7 +42,7 @@ const Products = () => {
 
   return (
     <div>
-      <h1 className="products-title">Products List</h1>
+      <h1 className="products-title ">Products List</h1>
       <div className="products-wrapper">
         <Toaster position='top-center' reverseOrder={false}></Toaster>
 

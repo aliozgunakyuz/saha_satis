@@ -5,5 +5,5 @@
 body{
     background: #dcdce6;
     background-image: url(./assets/bgrnd.jpg);
-    background-size: fill;
+    background-size: 100%;
 }

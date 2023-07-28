@@ -38,7 +38,7 @@ export default function AddClient() {
         <Toaster position='top-center' reverseOrder={false}></Toaster>
         <div className=' flex justify-center items-center h-screen'>
             <div className={styles.glass} style={{ width: '60%'}} >
-                <div className='title flex flex-col items-center text-gray-50 gap-10' >
+                <div className='title flex flex-col items-center text-blue-950 gap-10' >
                     <h4 className='text-5xl font-bold py-2 '> Add Client </h4>
                     <h4></h4>
                 </div>
