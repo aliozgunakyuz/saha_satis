@@ -7,18 +7,50 @@ import toast, { Toaster } from 'react-hot-toast';
 
 const Products = () => {
   const [products, setProducts] = useState([]);
+  const [sortConfig, setSortConfig] = useState({ key: null, direction: null });
   const navigate = useNavigate();
 
   useEffect(() => {
     // Fetch products from the backend API
     axios.get('/api/getproducts')
       .then((response) => {
-        setProducts(response.data); // Assuming the API returns an array of products
+        const sortedProducts = response.data.sort((a, b) => a.productname.localeCompare(b.productname));
+        setProducts(sortedProducts);
       })
       .catch((error) => {
         console.error('Error fetching products:', error);
       });
   }, []);
+
+  const sortTable = (key) => {
+    let direction = 'ascending';
+    if (sortConfig && sortConfig.key === key && sortConfig.direction === 'ascending') {
+      direction = 'descending';
+    }
+
+    const sortedProducts = [...products].sort((a, b) => {
+      if (key === 'productname' || key === 'color' || key === 'category') {
+        const aValue = a[key].toString().toLowerCase();
+        const bValue = b[key].toString().toLowerCase();
+        return direction === 'ascending' ? aValue.localeCompare(bValue) : bValue.localeCompare(aValue);
+      } else if (key === 'stock' || key === 'price') {
+        return direction === 'ascending' ? a[key] - b[key] : b[key] - a[key];
+      }
+      // For any other column, retain the original order
+      return 0;
+    });
+
+    setProducts(sortedProducts);
+    setSortConfig({ key, direction });
+  };
+
+  const getSortIcon = (key) => {
+    if (!sortConfig || sortConfig.key !== key) {
+      return null; // No arrow icon when not sorted by this key
+    }
+
+    return sortConfig.direction === 'ascending' ? '↑' : '↓';
+  };
 
   const handleDelete = async (productId) => {
     const confirmed = window.confirm('Are you sure you want to delete this product?');
@@ -42,19 +74,25 @@ const Products = () => {
 
   return (
     <div>
-      <h1 className="products-title ">Products List</h1>
+      <h1 className="products-title">Products List</h1>
+      <h1 className='table-info-text'>You can sort table by clicking table column names.</h1>
       <div className="products-wrapper">
         <Toaster position='top-center' reverseOrder={false}></Toaster>
 
         <table className="products-table">
           <thead>
             <tr>
-              <th>Product Name</th>
-              <th>Stock</th>
-              <th>Price</th>
-              <th>Color</th>
-              <th>Category</th>
-
+              <th onClick={() => sortTable('productname')}>
+                Product Name {getSortIcon('productname')}
+              </th>
+              <th onClick={() => sortTable('stock')}>
+                Stock {getSortIcon('stock')}
+              </th>
+              <th onClick={() => sortTable('price')}>
+                Price {getSortIcon('price')}
+              </th>
+              <th onClick={() => sortTable('color')}>Color {getSortIcon('color')}</th>
+              <th onClick={() => sortTable('category')}>Category {getSortIcon('category')}</th>
             </tr>
           </thead>
           <tbody>

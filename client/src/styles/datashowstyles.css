@@ -12,6 +12,13 @@
     color: #164663;
     text-align: center; /* Center the heading text horizontally */
   }
+
+  .table-info-text{
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: #164663;
+    text-align: center; /* Center the heading text horizontally */
+  }
   
   .products-table {
     border-collapse: collapse;

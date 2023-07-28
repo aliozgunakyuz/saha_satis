@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import '../styles/datashowstyles.css';
-import {Link, useNavigate} from 'react-router-dom';
-import toast,{Toaster} from 'react-hot-toast';
-
+import { Link, useNavigate } from 'react-router-dom';
+import toast, { Toaster } from 'react-hot-toast';
 
 const Clients = () => {
   const [clients, setClients] = useState([]);
+  const [sortConfig, setSortConfig] = useState({ key: null, direction: null });
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -19,9 +19,33 @@ const Clients = () => {
       });
   }, []);
 
+  const sortTable = (key) => {
+    let direction = 'ascending';
+    if (sortConfig && sortConfig.key === key && sortConfig.direction === 'ascending') {
+      direction = 'descending';
+    }
+
+    const sortedClients = [...clients].sort((a, b) => {
+      const aValue = a[key].toString().toLowerCase();
+      const bValue = b[key].toString().toLowerCase();
+      return direction === 'ascending' ? aValue.localeCompare(bValue) : bValue.localeCompare(aValue);
+    });
+
+    setClients(sortedClients);
+    setSortConfig({ key, direction });
+  };
+
+  const getSortIcon = (key) => {
+    if (!sortConfig || sortConfig.key !== key) {
+      return null; // No arrow icon when not sorted by this key
+    }
+
+    return sortConfig.direction === 'ascending' ? '↑' : '↓';
+  };
+
   const handleDelete = async (clientId) => {
     const confirmed = window.confirm('Are you sure you want to delete this client?');
-    if(confirmed){
+    if (confirmed) {
       try {
         await axios.delete(`/api/clients/${clientId}`);
         toast.success('Client deleted successfully');
@@ -34,39 +58,65 @@ const Clients = () => {
       }
     }
   };
+
   const handleUpdate = (clientId) => {
     navigate(`/updateclient/${clientId}`);
   };
 
   return (
     <div>
-        <h1 className="products-title">Clients List</h1>
-        <div className="products-wrapper">
+      <h1 className="products-title">Clients List</h1>
+      <h1 className='table-info-text'>You can sort table by clicking table column names.</h1>
+      <div className="products-wrapper">
         <Toaster position='top-center' reverseOrder={false}></Toaster>
         <table className="products-table">
-            <thead>
+          <thead>
             <tr>
-                <th>Name</th>
-                <th>Phone</th>
-                <th>Mail</th>
-                <th>Address</th>
+              <th onClick={() => sortTable('clientname')}>
+                Name {getSortIcon('clientname')}
+              </th>
+              <th onClick={() => sortTable('clientphone')}>
+                Phone {getSortIcon('clientphone')}
+              </th>
+              <th onClick={() => sortTable('clientmail')}>
+                Mail {getSortIcon('clientmail')}
+              </th>
+              <th onClick={() => sortTable('clientaddress')}>
+                Address {getSortIcon('clientaddress')}
+              </th>
             </tr>
-            </thead>
-            <tbody>
+          </thead>
+          <tbody>
             {clients.map((client) => (
-                <tr key={client._id}>
+              <tr key={client._id}>
                 <td>{client.clientname}</td>
                 <td>{client.clientphone}</td>
                 <td>{client.clientmail}</td>
                 <td>{client.clientaddress}</td>
-                <td><button className="btn2" onClick={() => handleUpdate(client._id)}>Update</button></td>
-                <td><button className="btn2" onClick={() => handleDelete(client._id)}>Delete</button></td>
-                </tr>
+                <td>
+                  <button
+                    className="btn2"
+                    onClick={() => handleUpdate(client._id)}
+                  >
+                    Update
+                  </button>
+                </td>
+                <td>
+                  <button
+                    className="btn2"
+                    onClick={() => handleDelete(client._id)}
+                  >
+                    Delete
+                  </button>
+                </td>
+              </tr>
             ))}
-            </tbody>
+          </tbody>
         </table>
-        <button className="btn" onClick={()=>{navigate('/adminpanel')}}>Back</button>
-        </div>
+        <button className="btn" onClick={() => { navigate('/adminpanel') }}>
+          Back
+        </button>
+      </div>
     </div>
   );
 };
