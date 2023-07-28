@@ -50,17 +50,17 @@ const Products = () => {
     return sortConfig.direction === 'ascending' ? '↑' : '↓';
   };
 
-  const handleDelete = async (productId) => {
-    const confirmed = window.confirm('Are you sure you want to delete this product?');
+  const handleDelete = async (productId, productName) => {
+    const confirmed = window.confirm(`Are you sure you want to delete ${productName}?`);
     if (confirmed) {
       try {
         await axios.delete(`/api/products/${productId}`);
-        toast.success('Product deleted successfully');
+        toast.success(`${productName} deleted successfully`);
         setTimeout(() => {
           window.location.reload();
         }, 500);
       } catch (error) {
-        toast.error('Failed to delete product');
+        toast.error(`Failed to delete ${productName}: ${error.message}`);
         console.error('Error deleting product:', error);
       }
     }
@@ -101,7 +101,7 @@ const Products = () => {
                 <td>{product.color}</td>
                 <td>{product.category}</td>
                 <td><button className="btn2" onClick={() => handleUpdate(product._id)}>Update</button></td>
-                <td><button className="btn2" onClick={() => handleDelete(product._id)}>Delete</button></td>
+                <td><button className="btn2" onClick={() => handleDelete(product._id, product.productname)}>Delete</button></td>
               </tr>
             ))}
           </tbody>

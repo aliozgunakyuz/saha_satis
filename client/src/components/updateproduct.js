@@ -43,13 +43,18 @@ const UpdateProduct = () => {
       axios.put(`/api/products/${productId}`, values)
         .then((response) => {
           console.log('Product updated successfully:', response.data);
-          navigate('/seeproducts');
+          toast.success(`${values.productname} updated successfully`);
+          setTimeout(() => {
+            navigate('/seeproducts');
+          }, 500);
         })
         .catch((error) => {
+          toast.error(`Failed to update ${values.productname}: ${error.message}`);
           console.error('Error updating product:', error);
         });
     },
   });
+
   return (
     <div className='container mx-auto'>
       <Toaster position='top-center' reverseOrder={false}></Toaster>

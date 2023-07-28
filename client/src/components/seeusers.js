@@ -43,17 +43,17 @@ const Users = () => {
     return sortConfig.direction === 'ascending' ? '↑' : '↓';
   };
 
-  const handleDelete = async (userId) => {
-    const confirmed = window.confirm('Are you sure you want to delete this user?');
-    if(confirmed){
+  const handleDelete = async (userId, userName) => {
+    const confirmed = window.confirm(`Are you sure you want to delete ${userName}?`);
+    if (confirmed) {
       try {
         await axios.delete(`/api/users/${userId}`);
-        toast.success('User deleted successfully');
+        toast.success(`${userName} deleted successfully`);
         setTimeout(() => {
           window.location.reload();
         }, 500);
       } catch (error) {
-        toast.error('Failed to delete user');
+        toast.error(`Failed to delete ${userName}: ${error.message}`);
         console.error('Error deleting user:', error);
       }
     }
@@ -111,7 +111,7 @@ const Users = () => {
                   </button>
                 </td>
                 <td>
-                  <button type="button"  className="btn2" onClick={() => handleDelete(user._id)}> Delete</button>
+                  <button type="button"  className="btn2" onClick={() => handleDelete(user._id, `${user.name} ${user.surname}`)}> Delete</button>
                 </td>
               </tr>
             ))}

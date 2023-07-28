@@ -30,7 +30,7 @@ const UpdateClient = () => {
 
   const formik = useFormik({
     initialValues: {
-      clientname: '',
+      clientname: client.clientname,
       clientaddress: '',
       clientphone: '',
       clientmail: '',
@@ -42,9 +42,13 @@ const UpdateClient = () => {
       axios.put(`/api/clients/${clientId}`, values)
         .then((response) => {
           console.log('Client updated successfully:', response.data);
-          navigate('/seeclients');
+          toast.success(`${values.clientname} updated successfully`);
+          setTimeout(() => {
+            navigate('/seeclients');
+          }, 500);
         })
         .catch((error) => {
+          toast.error(`Failed to update ${values.clientname}: ${error.message}`);
           console.error('Error updating client:', error);
         });
     },

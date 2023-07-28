@@ -43,17 +43,17 @@ const Clients = () => {
     return sortConfig.direction === 'ascending' ? '↑' : '↓';
   };
 
-  const handleDelete = async (clientId) => {
-    const confirmed = window.confirm('Are you sure you want to delete this client?');
+  const handleDelete = async (clientId, clientName) => {
+    const confirmed = window.confirm(`Are you sure you want to delete ${clientName}?`);
     if (confirmed) {
       try {
         await axios.delete(`/api/clients/${clientId}`);
-        toast.success('Client deleted successfully');
+        toast.success(`${clientName} deleted successfully`);
         setTimeout(() => {
           window.location.reload();
         }, 500);
       } catch (error) {
-        toast.error('Failed to delete client');
+        toast.error(`Failed to delete ${clientName}: ${error.message}`);
         console.error('Error deleting client:', error);
       }
     }
@@ -97,7 +97,7 @@ const Clients = () => {
                   <button className="btn2" onClick={() => handleUpdate(client._id)} > Update </button>
                 </td>
                 <td>
-                  <button  className="btn2" onClick={() => handleDelete(client._id)} > Delete </button>
+                  <button  className="btn2" onClick={() => handleDelete(client._id, client.clientname)} > Delete </button>
                 </td>
               </tr>
             ))}
