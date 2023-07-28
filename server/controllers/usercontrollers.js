@@ -60,17 +60,8 @@ export async function login(req,res){
                 bcrypt.compare(password, user.password)
                     .then(passwordCheck => {
                         if(!passwordCheck) return res.status.send({error : "Don't have password"})
-
-                        const token = jwt.sign({
-                                            userID: user.id,
-                                            mail: user.mail
-                                        }, ENV.JWT_SECRET, {expiresIn:"24h"});
-                        return res.status(200).send({
-                            msg: "Successfully logged in",
-                            mail: user.mail,
-                            token
-                        })
-                    
+                        const token = jwt.sign({ userID: user.id,  mail: user.mail }, ENV.JWT_SECRET, {expiresIn:"24h"});
+                        return res.status(200).send({  msg: "Successfully logged in", mail: user.mail, token })
                     })
                     .catch(error =>{
                         return res.status(400).send({error : "Wrong password"})
@@ -200,7 +191,6 @@ export async function deleteUser(req, res) {
   try {
     const userId = req.params.userId;
     
-    // Find the product by its ID and delete it
     await user_model.findByIdAndDelete(userId);
 
     return res.status(200).send({ message: 'User deleted successfully' });

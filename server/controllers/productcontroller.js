@@ -45,7 +45,6 @@ export async function getproducts(req, res) {
     try {
       const productId = req.params.productId;
       
-      // Find the product by its ID and delete it
       await product_model.findByIdAndDelete(productId);
   
       return res.status(200).send({ message: 'Product deleted successfully' });
@@ -58,28 +57,22 @@ export async function getproducts(req, res) {
     try {
       const productId = req.params.productId;
   
-      // Find the product by its ID
       const product = await product_model.findById(productId);
   
       if (!product) {
-        // Product not found
         return res.status(404).json({ message: 'Product not found' });
       }
   
-      // Update the product data with the new information
       product.productname = req.body.productname;
       product.stock = req.body.stock;
       product.price = req.body.price;
       product.color = req.body.color;
       product.category = req.body.category;
   
-      // Save the updated product in the database
       await product.save();
   
-      // Return the updated product as the response
       res.status(200).json(product);
     } catch (error) {
-      // Handle any errors that might occur during the database operation
       res.status(500).json({ error: 'Internal server error' });
     }
   }
@@ -89,18 +82,14 @@ export async function getproductbyID(req, res) {
   try {
     const productId = req.params.productId;
 
-    // Find the product by its ID in the database
     const product = await product_model.findById(productId);
 
     if (!product) {
-      // If the product is not found, return a 404 status
       return res.status(404).json({ message: 'Product not found' });
     }
 
-    // If the product is found, return it as the response
     res.status(200).json(product);
   } catch (error) {
-    // Handle any errors that might occur during the database operation
     res.status(500).json({ error: 'Internal server error' });
   }
 }

@@ -25,7 +25,6 @@ let MailGenerator = new Mailgen({
 export const registerMail = async (req, res) => {
     const { name,mail, text, subject } = req.body;
 
-    // Create the email template
     const email = {
         body: {
             name: name,

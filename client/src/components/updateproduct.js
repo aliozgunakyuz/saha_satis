@@ -19,10 +19,8 @@ const UpdateProduct = () => {
   });
 
   useEffect(() => {
-    // Fetch product data from the backend API based on the productId
     axios.get(`/api/getproductbyID/${productId}`)
       .then((response) => {
-        // Set the product data from the API response
         setProduct(response.data);
       })
       .catch((error) => {
@@ -42,7 +40,6 @@ const UpdateProduct = () => {
     validateOnBlur: false,
     validateOnChange: false,
     onSubmit: (values) => {
-      // Send the updated product data to the backend API using axios.put
       axios.put(`/api/products/${productId}`, values)
         .then((response) => {
           console.log('Product updated successfully:', response.data);

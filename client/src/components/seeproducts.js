@@ -11,7 +11,6 @@ const Products = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Fetch products from the backend API
     axios.get('/api/getproducts')
       .then((response) => {
         const sortedProducts = response.data.sort((a, b) => a.productname.localeCompare(b.productname));
@@ -36,7 +35,6 @@ const Products = () => {
       } else if (key === 'stock' || key === 'price') {
         return direction === 'ascending' ? a[key] - b[key] : b[key] - a[key];
       }
-      // For any other column, retain the original order
       return 0;
     });
 
@@ -46,7 +44,7 @@ const Products = () => {
 
   const getSortIcon = (key) => {
     if (!sortConfig || sortConfig.key !== key) {
-      return null; // No arrow icon when not sorted by this key
+      return null; 
     }
 
     return sortConfig.direction === 'ascending' ? '↑' : '↓';
@@ -78,7 +76,6 @@ const Products = () => {
       <h1 className='table-info-text'>You can sort table by clicking table column names.</h1>
       <div className="products-wrapper">
         <Toaster position='top-center' reverseOrder={false}></Toaster>
-
         <table className="products-table">
           <thead>
             <tr>

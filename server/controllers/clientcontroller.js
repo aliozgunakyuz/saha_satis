@@ -80,7 +80,6 @@ export async function getclientbyID(req, res) {
   try {
     const clientId = req.params.clientId;
 
-    // Find the product by its ID in the database
     const client = await client_model.findById(clientId);
 
     if (!client) {

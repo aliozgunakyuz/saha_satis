@@ -37,7 +37,7 @@ const Users = () => {
 
   const getSortIcon = (key) => {
     if (!sortConfig || sortConfig.key !== key) {
-      return null; // No arrow icon when not sorted by this key
+      return null; 
     }
 
     return sortConfig.direction === 'ascending' ? '↑' : '↓';

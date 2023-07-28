@@ -1,12 +1,10 @@
 import React, {useState } from 'react';
 import {Link, useNavigate} from 'react-router-dom';
-import avatar_default from '../assets/avatar.png';
 import styles from '../styles/Username.module.css';
 import toast,{Toaster} from 'react-hot-toast';
 import { useFormik } from 'formik';
 import { registerValidate } from '../helpFunc/RegistrationValidation.js';
-import { mailValidate } from '../helpFunc/MailValidate.js';
-import img2base64 from '../helpFunc/convert.js';
+
 import { registerUser } from '../helpFunc/helper.js';
 
 export default function Register() {

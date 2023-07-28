@@ -37,7 +37,7 @@ const Clients = () => {
 
   const getSortIcon = (key) => {
     if (!sortConfig || sortConfig.key !== key) {
-      return null; // No arrow icon when not sorted by this key
+      return null; 
     }
 
     return sortConfig.direction === 'ascending' ? '↑' : '↓';
@@ -94,20 +94,10 @@ const Clients = () => {
                 <td>{client.clientmail}</td>
                 <td>{client.clientaddress}</td>
                 <td>
-                  <button
-                    className="btn2"
-                    onClick={() => handleUpdate(client._id)}
-                  >
-                    Update
-                  </button>
+                  <button className="btn2" onClick={() => handleUpdate(client._id)} > Update </button>
                 </td>
                 <td>
-                  <button
-                    className="btn2"
-                    onClick={() => handleDelete(client._id)}
-                  >
-                    Delete
-                  </button>
+                  <button  className="btn2" onClick={() => handleDelete(client._id)} > Delete </button>
                 </td>
               </tr>
             ))}
