@@ -7,13 +7,13 @@ import toast,{Toaster} from 'react-hot-toast';
 
 const Users = () => {
   const [users, setUsers] = useState([]);
+  const [userinf, setUserinf] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Fetch products from the backend API
     axios.get('/api/getuser')
       .then((response) => {
-        setUsers(response.data); // Assuming the API returns an array of products
+        setUsers(response.data); 
       })
       .catch((error) => {
         console.error('Error fetching products:', error);
@@ -35,38 +35,56 @@ const Users = () => {
       }
     }
   };
+  const handleUserTypeUpdate = async (userId, userType) => {
+    try {
+      console.log('User ID:', userId);
+      console.log('User Type:', userType);
+      const updatedUserType = userType === 'user' ? 'admin' : 'user';
+      await axios.put(`/api/users/${userId}/${updatedUserType}`, { userType: updatedUserType });
+      toast.success('User type updated successfully');
+      setTimeout(() => {
+        window.location.reload();
+      }, 500);
+    } catch (error) {
+      toast.error('Failed to update user type');
+      console.error('Error updating user type:', error);
+    }
+  };
 
   return (
     <div>
-        <h1 className="products-title">Users List</h1>
-        <div className="products-wrapper">
+      <h1 className="products-title">Users List</h1>
+      <div className="products-wrapper">
         <Toaster position='top-center' reverseOrder={false}></Toaster>
         <table className="products-table">
-            <thead>
+          <thead>
             <tr>
-                <th>Name</th>
-                <th>Phone</th>
-                <th>Mail</th>
-                <th>Type</th> 
+              <th>Name</th>
+              <th>Phone</th>
+              <th>Mail</th>
+              <th>Type</th>
             </tr>
-            </thead>
-            <tbody>
+          </thead>
+          <tbody>
             {users.map((user) => (
-                <tr key={user._id}>
-                <td>{user.name}  {user.surname}</td>
+              <tr key={user._id}>
+                <td>{user.name} {user.surname}</td>
                 <td>{user.phone}</td>
                 <td>{user.mail}</td>
                 <td>{user.userType}</td>
-                <td><button className="btn2" onClick={()=>{navigate('/adminpanel')}}>Make Admin</button></td>
-                <td><button className="btn2" onClick={() => handleDelete(user._id)}>Delete</button></td>
-                </tr>
+                <td><button type="button"className="btn2" onClick={() => handleUserTypeUpdate(user._id, user.userType)}>
+                  {user.userType === 'user' ? 'Make Admin' : 'Make User'}
+                </button></td>
+                <td><button type="button" className="btn2" onClick={() => handleDelete(user._id)}>Delete</button></td>
+              </tr>
             ))}
-            </tbody>
+          </tbody>
         </table>
         <button className="btn" onClick={()=>{navigate('/adminpanel')}}>Back</button>
-        </div>
+      </div>
     </div>
   );
 };
+
 
 export default Users;

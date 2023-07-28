@@ -22,10 +22,13 @@ router.get('/api/getproductbyID/:productId', p_controller.getproductbyID);
 router.get('/getclients', c_controller.getclients);
 router.get('/api/getclientbyID/:clientId', c_controller.getclientbyID);
 
+
 //PUT
 //user
 router.route('/userupdate').put(Auth, controller.updateUser);
 router.route('/passwordreset').put(controller.userVerification,controller.resetpassword);
+router.put('/users/:userId/:updatedUserType', controller.updateUserType);
+
 
 //product
 router.put('/products/:productId', p_controller.updateProduct);

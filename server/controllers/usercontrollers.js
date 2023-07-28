@@ -39,6 +39,7 @@ export async function register(req,res){
             password: hashedPassword,
             phone,
             mail,
+            userType,
           });
     
           const result = await user.save();
@@ -121,6 +122,19 @@ export async function updateUser(req, res) {
   }
 }
 
+export async function updateUserType(req, res) {
+  try {
+    const { userId, updatedUserType } = req.params;
+
+    await user_model.findByIdAndUpdate(userId, { userType: updatedUserType });
+
+    res.status(200).json({ message: 'User type updated successfully' });
+  } catch (error) {
+    console.error('Error updating user type:', error);
+    res.status(500).json({ message: 'Failed to update user type' });
+  }
+}
+
 export async function OTPgenerator(req,res){
     req.app.locals.OTP = await otpGenerator.generate(6,{lowerCaseAlphabets:false,upperCaseAlphabets:false, specialChars:false});
     res.status(201).send({code: req.app.locals.OTP});
@@ -194,3 +208,5 @@ export async function deleteUser(req, res) {
     return res.status(500).send({ error: 'Internal server error' });
   }
 }
+
+
