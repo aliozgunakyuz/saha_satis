@@ -7,6 +7,7 @@ import Profile from './components/Profile';
 import Recovery from './components/Recovery';
 import Register from './components/Register';
 import Reset from './components/Reset';
+import Home from './components/LandingPage'
 
 import AdminPanel from './components/adminpanel.js'
 import AddProduct from './components/addproduct.js'
@@ -81,6 +82,10 @@ const router = createBrowserRouter([
     {
         path:'/updateclient/:clientId',
         element: <UpdateClient></UpdateClient>
+    },
+    {
+        path:'/homepage',
+        element: <Home></Home>
     },
 
 

@@ -62,7 +62,7 @@ export default function Profile() {
                         <input {...formik.getFieldProps('mail')} type="text" className={styles.textbox} placeholder='Mail' />
                         <input {...formik.getFieldProps('phone')} type="text" className={styles.textbox} placeholder='Phone' />
                         <div className="name flex w-3/4 gap-10">
-                        <button className={styles.btn} type="back">Back</button>
+                        <button className="btn" onClick={() => { navigate('/homepage') }}>Back</button>
                         <button className={styles.btn} type="submit">Update</button>
                       </div>
                     </div>

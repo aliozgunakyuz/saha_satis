@@ -62,8 +62,6 @@ const Users = () => {
 
   const handleUserTypeUpdate = async (userId, userType) => {
     try {
-      console.log('User ID:', userId);
-      console.log('User Type:', userType);
       const updatedUserType = userType === 'user' ? 'admin' : 'user';
       await axios.put(`/api/users/${userId}/${updatedUserType}`, { userType: updatedUserType });
       toast.success('User type updated successfully');
@@ -72,7 +70,6 @@ const Users = () => {
       }, 500);
     } catch (error) {
       toast.error('Failed to update user type');
-      console.error('Error updating user type:', error);
     }
   };
   if (userType === 'admin') {
