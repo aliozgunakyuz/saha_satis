@@ -1,15 +1,12 @@
-import React, {useState } from 'react';
+import React, {useState, useEffect} from 'react';
 import {Link, useNavigate} from 'react-router-dom';
 import styles from '../styles/Username.module.css';
 import {Toaster} from 'react-hot-toast';
 
 export default function Register() {
-
   const navigate = useNavigate();
-  const [userType, setUserType] = useState('user');
 
 
- if (userType === 'admin') {
   return (
     <div className='container mx-auto'>
         <Toaster position='top-center' reverseOrder={false}></Toaster>
@@ -26,7 +23,7 @@ export default function Register() {
                         <b className="text-blue-950">Clients</b>
                         <button className={styles.btn} onClick={()=>{navigate('/adminaddclient')}}>Add Client</button>
                         <button className={styles.btn} onClick={()=>{navigate('/seeclients')}}>See Clients</button>
-                        <b className="ttext-blue-950">Sales</b>
+                        <b className="text-blue-950">Sales</b>
                         <button className={styles.btn} onClick={()=>{navigate('/seesales')}}>See Sales</button>
                         <b className="text-blue-950">Users</b>
                         <button className={styles.btn} onClick={()=>{navigate('/seeusers')}}>See Users</button>
@@ -36,8 +33,5 @@ export default function Register() {
             </div>
         </div>
     </div>
-    
-
-    )
-    }
+     )
 }
