@@ -55,7 +55,5 @@ export default function AddClient() {
             </div>
         </div>
     </div>
-    
-
   )
 }

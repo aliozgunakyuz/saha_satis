@@ -64,7 +64,7 @@ export default function Password() {
                     </div>
 
                     <div className='text-center py-4'>
-                        <span className='text-gray-300'>
+                        <span className='text-gray-900'>
                             Forgot Password?
                             <a>  </a>
                             <Link className="text-blue-950" to="/recovery">Recover from here</Link>
