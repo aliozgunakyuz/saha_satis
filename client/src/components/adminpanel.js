@@ -6,7 +6,10 @@ import {Toaster} from 'react-hot-toast';
 export default function Register() {
 
   const navigate = useNavigate();
+  const [userType, setUserType] = useState('user');
 
+
+ if (userType === 'admin') {
   return (
     <div className='container mx-auto'>
         <Toaster position='top-center' reverseOrder={false}></Toaster>
@@ -35,5 +38,6 @@ export default function Register() {
     </div>
     
 
-  )
+    )
+    }
 }

@@ -9,6 +9,7 @@ import { productValidate } from '../helpFunc/productValidation';
 const UpdateProduct = () => {
   const { productId } = useParams();
   const navigate = useNavigate();
+  const [userType, setUserType] = useState('user');
 
   const [product, setProduct] = useState({
     productname: '',
@@ -54,7 +55,7 @@ const UpdateProduct = () => {
         });
     },
   });
-
+  if (userType === 'admin') {
   return (
     <div className='container mx-auto'>
       <Toaster position='top-center' reverseOrder={false}></Toaster>
@@ -80,5 +81,5 @@ const UpdateProduct = () => {
     </div>
   );
 };
-
+}
 export default UpdateProduct;

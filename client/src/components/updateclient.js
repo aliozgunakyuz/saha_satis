@@ -10,6 +10,7 @@ import { clientValidate } from '../helpFunc/clientValidation.js';
 const UpdateClient = () => {
   const { clientId } = useParams();
   const navigate = useNavigate();
+  const [userType, setUserType] = useState('user');
 
   const [client, setClient] = useState({
     clientname: '',
@@ -53,6 +54,7 @@ const UpdateClient = () => {
         });
     },
   });
+  if (userType === 'admin') {
   return (
     <div className='container mx-auto'>
       <Toaster position='top-center' reverseOrder={false}></Toaster>
@@ -77,5 +79,6 @@ const UpdateClient = () => {
     </div>
   );
 };
+}
 
 export default UpdateClient;

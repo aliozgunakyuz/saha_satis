@@ -16,38 +16,38 @@ export async function userVerification(req, res, next){
     }
 }
 
-export async function register(req,res){
-    try{
-        const {name,surname,mail,phone,password} = req.body;
-        const mailExists = await user_model.findOne({ mail });
-        const phoneExists = await user_model.findOne({ phone });
-    
-        if (mailExists) {
-          return res.status(400).send({ error: 'This mail is already exist.' });
-        }
-    
-        if (phoneExists) {
-          return res.status(400).send({ error: 'This phone number is already exist.' });
-        }
-    
-        if (password) {
-          const hashedPassword = await bcrypt.hash(password, 10);
-    
-          const user = new user_model({
-            name,
-            surname,
-            password: hashedPassword,
-            phone,
-            mail,
-            userType,
-          });
-    
-          const result = await user.save();
-          return res.status(201).send({ msg: 'User registration successfully completed' });
-        }
-    } catch(error) {
-        return res.status(500).send(error);
+export async function register(req, res) {
+  try {
+    const { name, surname, mail, phone, password } = req.body;
+    const mailExists = await user_model.findOne({ mail });
+    const phoneExists = await user_model.findOne({ phone });
+
+    if (mailExists) {
+      return res.status(400).json({ error: 'This mail is already exist.' });
     }
+
+    if (phoneExists) {
+      return res.status(400).json({ error: 'This phone number is already exist.' });
+    }
+
+    if (password) {
+      const hashedPassword = await bcrypt.hash(password, 10);
+
+      const user = new user_model({
+        name,
+        surname,
+        password: hashedPassword,
+        phone,
+        mail,
+      });
+
+      const result = await user.save();
+      return res.status(201).json({ success: true, message: 'User registration successfully completed' });
+    }
+  } catch (error) {
+    console.error('Error during user registration:', error);
+    return res.status(500).json({ error: 'An error occurred during user registration.' });
+  }
 }
 
 

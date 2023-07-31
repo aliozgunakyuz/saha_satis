@@ -8,6 +8,7 @@ const Clients = () => {
   const [clients, setClients] = useState([]);
   const [sortConfig, setSortConfig] = useState({ key: null, direction: null });
   const navigate = useNavigate();
+  const [userType, setUserType] = useState('user');
 
   useEffect(() => {
     axios.get('/api/getclients')
@@ -62,7 +63,7 @@ const Clients = () => {
   const handleUpdate = (clientId) => {
     navigate(`/updateclient/${clientId}`);
   };
-
+  if (userType === 'admin') {
   return (
     <div>
       <h1 className="products-title">Clients List</h1>
@@ -110,5 +111,6 @@ const Clients = () => {
     </div>
   );
 };
+}
 
 export default Clients;

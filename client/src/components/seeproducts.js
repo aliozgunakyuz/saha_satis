@@ -9,6 +9,7 @@ const Products = () => {
   const [products, setProducts] = useState([]);
   const [sortConfig, setSortConfig] = useState({ key: null, direction: null });
   const navigate = useNavigate();
+  const [userType, setUserType] = useState('user');
 
   useEffect(() => {
     axios.get('/api/getproducts')
@@ -69,7 +70,7 @@ const Products = () => {
   const handleUpdate = (productId) => {
     navigate(`/updateproduct/${productId}`);
   };
-
+  if (userType === 'admin') {
   return (
     <div>
       <h1 className="products-title">Products List</h1>
@@ -111,5 +112,6 @@ const Products = () => {
     </div>
   );
 };
+}
 
 export default Products;

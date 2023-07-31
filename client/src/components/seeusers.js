@@ -8,6 +8,7 @@ const Users = () => {
   const [users, setUsers] = useState([]);
   const [sortConfig, setSortConfig] = useState({ key: null, direction: null });
   const navigate = useNavigate();
+  const [userType, setUserType] = useState('user');
 
   useEffect(() => {
     axios.get('/api/getuser')
@@ -74,7 +75,7 @@ const Users = () => {
       console.error('Error updating user type:', error);
     }
   };
-
+  if (userType === 'admin') {
   return (
     <div>
       <h1 className="products-title">Users List</h1>
@@ -124,5 +125,6 @@ const Users = () => {
     </div>
   );
 };
+}
 
 export default Users;
