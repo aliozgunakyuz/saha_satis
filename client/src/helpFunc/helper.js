@@ -75,6 +75,8 @@ export async function updateuser(response){
     }
 }
 
+
+
 //otp generate
 export async function OTPmaker(mail){
     const decodedMail = decodeURIComponent(mail);

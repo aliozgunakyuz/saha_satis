@@ -8,6 +8,7 @@ export default async function Auth(req,res,next){
         const tokendecode = await jwt.verify(token, ENV.JWT_SECRET);
 
         req.user = tokendecode;
+        
         next();
     } catch (error) {
         res.status(401).json({error: "Auth failed"})

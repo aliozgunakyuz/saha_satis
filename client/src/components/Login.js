@@ -14,10 +14,9 @@ export default function Username() {
   const navigate = useNavigate();
 
   const setMail = useAuthStore(state => state.setMail);
+  const mail = useAuthStore(state => state.auth.mail);
 
-  useEffect(() => {
-    
-  })
+
   const formik = useFormik({
     initialValues: {
         mail: ''
@@ -27,6 +26,7 @@ export default function Username() {
     validateOnChange: false,
     onSubmit: async values => {
         setMail(values.mail);
+        console.log(values.mail);
         navigate('/password')
     }
   })

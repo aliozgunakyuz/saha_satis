@@ -1,38 +1,41 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
-import {getMail} from '../helpFunc/helper.js'
+import { getMail } from '../helpFunc/helper.js';
 
 axios.defaults.baseURL = process.env.REACT_APP_SERVER_DOMAIN;
 
-export default function useFetch(query){
-    const[getData, setData] = useState({isLoading: false, apiData: undefined, status: null, serverError: null})
+export default function useFetch(queryOrMail) {
+  const [getData, setData] = useState({
+    isLoading: false,
+    apiData: { name: '', surname: '', mail: '', phone: '', userType: '' },
+    status: null,
+    serverError: null
+  });
 
-    useEffect(() => {
+  useEffect(() => {
+    if (!queryOrMail) return;
 
-        if(!query) return;
+    const fetchData = async () => {
+      try {
+        setData({ ...getData, isLoading: true });
 
-        const fetchData = async() => {
-            try {
-                setData(prev => ( {...prev,isLoading:true}));
+        if (!queryOrMail.includes('/')) {
+          // If it's not a query, consider it as mail
+          const mail = queryOrMail;
+          const encodedMail = encodeURIComponent(mail);
+          const { data, status } = await axios.get(`/api/user/${encodedMail}`);
+          setData({ ...getData, isLoading: false, apiData: data, status: status });
+        } else {
+          const { data, status } = await axios.get(`/api/${queryOrMail}`);
+          setData({ ...getData, isLoading: false, apiData: data, status: status });
+        }
+      } catch (error) {
+        setData({ ...getData, isLoading: false, serverError: error });
+      }
+    };
 
-                const {mail} = !query ? await getMail() : '';
-                const decodedMail = decodeURIComponent(mail);
-                const {data,status} = !query ? await axios.get('/api/user/'+decodedMail) : await axios.get('/api/'+query)
+    fetchData();
+  }, [queryOrMail]);
 
-                if(status === 201){
-                    setData(prev => ( {...prev,isLoading:false}));
-                    setData(prev => ( {...prev,apiData:data, status:status}));
-                }
-
-                setData(prev => ( {...prev,isLoading:false}));
-            } catch (error) {
-                setData(prev => ( {...prev,isLoading:false, serverError: error}))
-            }
-        };
-        fetchData()
-
-    },[query])
-
-    return [getData,setData];
-
+  return [getData, setData];
 }
