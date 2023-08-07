@@ -58,7 +58,7 @@ const Products = () => {
         await axios.delete(`/api/products/${productId}`);
         toast.success(`${productName} deleted successfully`);
         setTimeout(() => {
-          window.location.reload();
+          navigate('/adminpanel')
         }, 500);
       } catch (error) {
         toast.error(`Failed to delete ${productName}: ${error.message}`);

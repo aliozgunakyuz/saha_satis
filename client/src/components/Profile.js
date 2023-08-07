@@ -45,7 +45,21 @@ export default function Profile() {
     navigate('/');
   }
 
-  if (isLoading) return <h1 className='text-2xl font-bold'>Loading...</h1>;
+  if (isLoading) return <div style={{
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: '100vh',
+  }}>
+    <h1 style={{
+      fontSize: '2rem',
+      fontWeight: 'bold',
+      color: '#333',
+      textShadow: '2px 2px 4px rgba(0, 0, 0, 0.2)',
+    }}>
+      Loading...
+    </h1>
+  </div>;
   if (serverError) return <h1 className='text-xl text-gray-50'>{serverError.message}</h1>;
 
   return (

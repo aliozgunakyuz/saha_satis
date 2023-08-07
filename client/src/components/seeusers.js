@@ -72,7 +72,7 @@ const Users = () => {
       await axios.put(`/api/users/${userId}/${updatedUserType}`, { userType: updatedUserType });
       toast.success('User type updated successfully');
       setTimeout(() => {
-        window.location.reload();
+        navigate('/adminpanel')
       }, 500);
     } catch (error) {
       toast.error('Failed to update user type');

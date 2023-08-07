@@ -51,7 +51,7 @@ const Clients = () => {
         await axios.delete(`/api/clients/${clientId}`);
         toast.success(`${clientName} deleted successfully`);
         setTimeout(() => {
-          window.location.reload();
+          navigate('/adminpanel')
         }, 500);
       } catch (error) {
         toast.error(`Failed to delete ${clientName}: ${error.message}`);
@@ -63,6 +63,7 @@ const Clients = () => {
   const handleUpdate = (clientId) => {
     navigate(`/updateclient/${clientId}`);
   };
+  
   if (userType === 'admin') {
   return (
     <div>
