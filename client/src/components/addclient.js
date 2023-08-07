@@ -5,11 +5,15 @@ import { addClient } from '../helpFunc/clientFunctions.js';
 import toast,{Toaster} from 'react-hot-toast';
 import { useFormik } from 'formik';
 import { clientValidate } from '../helpFunc/clientValidation.js';
+import useFetch from '../hoooks/hookk.js';
+import { useAuthStore } from '../store/store.js';
 
 
 export default function AddClient() {
 
   const navigate = useNavigate();
+  const mail = useAuthStore((state) => state.auth.mail);
+  const [{ isLoading, apiData, serverError }, setData] = useFetch(mail);
 
   const formik = useFormik({
     initialValues: {
@@ -32,7 +36,7 @@ export default function AddClient() {
       addClientPromise.then(function(){navigate('/adminpanel')});
     }
   })
-
+  if (apiData?.userType === 'admin') {
   return (
     <div className='container mx-auto'>
         <Toaster position='top-center' reverseOrder={false}></Toaster>
@@ -56,4 +60,5 @@ export default function AddClient() {
         </div>
     </div>
   )
+}
 }

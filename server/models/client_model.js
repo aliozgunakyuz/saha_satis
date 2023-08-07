@@ -12,7 +12,7 @@ export const Schema_Client = new mongoose.Schema({
         unique: true,
     },
     clientphone: {
-        type: Number,
+        type: String,
         required: true,
         unique: false,
     },

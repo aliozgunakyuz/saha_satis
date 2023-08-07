@@ -5,11 +5,17 @@ import { useFormik } from 'formik';
 import styles from '../styles/Username.module.css';
 import toast, { Toaster } from 'react-hot-toast';
 import { productValidate } from '../helpFunc/productValidation';
+import useFetch from '../hoooks/hookk.js';
+import { useAuthStore } from '../store/store.js';
 
 const UpdateProduct = () => {
   const { productId } = useParams();
   const navigate = useNavigate();
   const [userType, setUserType] = useState('user');
+  const mail = useAuthStore((state) => state.auth.mail);
+  const [{ isLoading, apiData, serverError }, setData] = useFetch(mail);
+  const [isDataFetched, setIsDataFetched] = useState(false);
+
 
   const [product, setProduct] = useState({
     productname: '',
@@ -20,23 +26,25 @@ const UpdateProduct = () => {
   });
 
   useEffect(() => {
-    axios.get(`/api/getproductbyID/${productId}`)
-      .then((response) => {
-        setProduct(response.data);
-      })
-      .catch((error) => {
-        console.error('Error fetching product data:', error);
-      });
-  }, [productId]);
+  axios.get(`/api/getproductbyID/${productId}`)
+    .then((response) => {
+      console.log(response.data);
+      setProduct(response.data);
+    })
+    .catch((error) => {
+      console.error('Error fetching product data:', error);
+    });
+}, [productId]);
 
   const formik = useFormik({
     initialValues: {
-      productname: product.productname,
-      stock: product.stock,
-      price: product.price,
-      color: product.color,
-      category: product.category,
+      productname: '',
+      stock: '',
+      price: '',
+      color: '',
+      category: '',
     },
+    enableReinitialize: true,
     validate: productValidate,
     validateOnBlur: false,
     validateOnChange: false,
@@ -55,7 +63,19 @@ const UpdateProduct = () => {
         });
     },
   });
-  if (userType === 'admin') {
+
+  useEffect(() => {
+    axios.get(`/api/getproductbyID/${productId}`)
+      .then((response) => {
+        setProduct(response.data);
+        setIsDataFetched(true);
+      })
+      .catch((error) => {
+        console.error('Error fetching product data:', error);
+      });
+  }, [productId]);
+
+  if (apiData?.userType === 'admin') {
   return (
     <div className='container mx-auto'>
       <Toaster position='top-center' reverseOrder={false}></Toaster>

@@ -5,10 +5,14 @@ import toast,{Toaster} from 'react-hot-toast';
 import { useFormik } from 'formik';
 import { productValidate } from '../helpFunc/productValidation.js';
 import { addProduct } from '../helpFunc/productFunctions.js';
+import useFetch from '../hoooks/hookk.js';
+import { useAuthStore } from '../store/store.js';
 
 export default function AddProduct() {
 
   const navigate = useNavigate();
+  const mail = useAuthStore((state) => state.auth.mail);
+  const [{ isLoading, apiData, serverError }, setData] = useFetch(mail);
 
   const formik = useFormik({
     initialValues: {
@@ -32,7 +36,7 @@ export default function AddProduct() {
       addProductPromise.then(function(){navigate('/adminpanel')});
     }
   })
-
+  if (apiData?.userType === 'admin') {
   return (
     <div className='container mx-auto'>
         <Toaster position='top-center' reverseOrder={false}></Toaster>
@@ -59,4 +63,4 @@ export default function AddProduct() {
     
 
   )
-}
+}}

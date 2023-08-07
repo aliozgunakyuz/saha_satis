@@ -17,7 +17,7 @@ router.route('/otpverifier').get(controller.OTPverify);
 router.route('/resetSession').get(controller.resetSession);
 //product
 router.get('/getproducts', p_controller.getproducts);
-router.get('/api/getproductbyID/:productId', p_controller.getproductbyID);
+router.get('/api/getproductbyID/:_id', p_controller.getproductbyID);
 //client
 router.get('/getclients', c_controller.getclients);
 router.get('/api/getclientbyID/:clientId', c_controller.getclientbyID);

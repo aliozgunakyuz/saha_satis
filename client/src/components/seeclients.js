@@ -3,12 +3,16 @@ import axios from 'axios';
 import '../styles/datashowstyles.css';
 import { Link, useNavigate } from 'react-router-dom';
 import toast, { Toaster } from 'react-hot-toast';
+import useFetch from '../hoooks/hookk.js';
+import { useAuthStore } from '../store/store.js';
 
 const Clients = () => {
   const [clients, setClients] = useState([]);
   const [sortConfig, setSortConfig] = useState({ key: null, direction: null });
   const navigate = useNavigate();
   const [userType, setUserType] = useState('user');
+  const mail = useAuthStore((state) => state.auth.mail);
+  const [{ isLoading, apiData, serverError }, setData] = useFetch(mail);
 
   useEffect(() => {
     axios.get('/api/getclients')
@@ -64,7 +68,7 @@ const Clients = () => {
     navigate(`/updateclient/${clientId}`);
   };
   
-  if (userType === 'admin') {
+  if (apiData?.userType === 'admin') {
   return (
     <div>
       <h1 className="products-title">Clients List</h1>

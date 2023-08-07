@@ -1,10 +1,14 @@
 import React from 'react';
 import {useNavigate} from 'react-router-dom';
 import styles from '../styles/Username.module.css';
+import useFetch from '../hoooks/hookk.js';
+import { useAuthStore } from '../store/store.js';
 
 export default function Register() {
   const navigate = useNavigate();
-
+  const mail = useAuthStore((state) => state.auth.mail);
+  const [{ isLoading, apiData, serverError }, setData] = useFetch(mail);
+  if (apiData?.userType === 'admin') {
   return (
     <div className='container mx-auto'>
         <div className=' flex justify-center items-center h-screen'>
@@ -31,4 +35,5 @@ export default function Register() {
         </div>
     </div>
      )
+}
 }

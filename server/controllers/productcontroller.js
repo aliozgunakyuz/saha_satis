@@ -1,5 +1,6 @@
 import product_model from '../models/product_model.js';
 
+
 export async function addproduct(req, res) {
     try {
         const { productname, stock, price, color, category } = req.body;
@@ -53,36 +54,38 @@ export async function getproducts(req, res) {
     }
   }
 
-  export async function updateProduct(req, res) {
-    try {
-      const productId = req.params.productId;
-  
-      const product = await product_model.findById(productId);
-  
-      if (!product) {
-        return res.status(404).json({ message: 'Product not found' });
-      }
-  
-      product.productname = req.body.productname;
-      product.stock = req.body.stock;
-      product.price = req.body.price;
-      product.color = req.body.color;
-      product.category = req.body.category;
-  
-      await product.save();
-  
-      res.status(200).json(product);
-    } catch (error) {
-      res.status(500).json({ error: 'Internal server error' });
+export async function updateProduct(req, res) {
+  try {
+    const productId = req.params.productId;
+
+    const product = await product_model.findById(productId);
+
+    if (!product) {
+      return res.status(404).json({ message: 'Product not found' });
     }
+
+    product.productname = req.body.productname;
+    product.stock = req.body.stock;
+    product.price = req.body.price;
+    product.color = req.body.color;
+    product.category = req.body.category;
+
+    await product.save();
+
+    res.status(200).json(product);
+  } catch (error) {
+    res.status(500).json({ error: 'Internal server error' });
   }
+}
 
 
 export async function getproductbyID(req, res) {
   try {
     const productId = req.params.productId;
+    console.log("productId");
 
     const product = await product_model.findById(productId);
+    console.log("product")
 
     if (!product) {
       return res.status(404).json({ message: 'Product not found' });
