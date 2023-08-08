@@ -82,7 +82,7 @@ export async function updateProduct(req, res) {
 export async function getproductbyID(req, res) {
   try {
     const productId = req.params.productId;
-    const product = await product_model.findById(productId);
+    const product = await product_model.findOne({ _id: productId });
 
     if (!product) {
       return res.status(404).json({ message: 'Product not found' });
