@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 
+
 export const Schema_Product = new mongoose.Schema({
     productname: {
         type: String,
