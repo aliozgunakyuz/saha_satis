@@ -17,10 +17,10 @@ router.route('/otpverifier').get(controller.OTPverify);
 router.route('/resetSession').get(controller.resetSession);
 //product
 router.get('/getproducts', p_controller.getproducts);
-router.get('/api/getproductbyID/:productId', p_controller.getproductbyID);
+router.get('/getproductbyID/:productId', p_controller.getproductbyID);
 //client
 router.get('/getclients', c_controller.getclients);
-router.get('/api/getclientbyID/:clientId', c_controller.getclientbyID);
+router.get('/getclientbyID/:clientId', c_controller.getclientbyID);
 
 
 //PUT
@@ -28,7 +28,6 @@ router.get('/api/getclientbyID/:clientId', c_controller.getclientbyID);
 router.route('/userupdate').put(Auth, controller.updateUser);
 router.route('/passwordreset').put(controller.userVerification,controller.resetpassword);
 router.put('/users/:userId/:updatedUserType', controller.updateUserType);
-
 
 //product
 router.put('/products/:productId', p_controller.updateProduct);

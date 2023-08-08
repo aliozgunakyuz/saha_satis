@@ -12,7 +12,6 @@ import { useAuthStore } from '../store/store.js';
 const UpdateClient = () => {
   const { clientId } = useParams();
   const navigate = useNavigate();
-  const [userType, setUserType] = useState('user');
   const mail = useAuthStore((state) => state.auth.mail);
   const [{ isLoading, apiData, serverError }, setData] = useFetch(mail);
 
@@ -36,10 +35,11 @@ const UpdateClient = () => {
   const formik = useFormik({
     initialValues: {
       clientname: client.clientname,
-      clientaddress: '',
-      clientphone: '',
-      clientmail: '',
+      clientaddress: client.clientaddress,
+      clientphone: client.clientphone,
+      clientmail: client.clientmail,
     },
+    enableReinitialize: true,
     validate: clientValidate,
     validateOnBlur: false,
     validateOnChange: false,

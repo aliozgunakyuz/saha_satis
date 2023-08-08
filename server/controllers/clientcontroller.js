@@ -76,18 +76,16 @@ export async function getclients(req, res) {
   }
 
 
-export async function getclientbyID(req, res) {
-  try {
-    const clientId = req.params.clientId;
-
-    const client = await client_model.findById(clientId);
-
-    if (!client) {
-      return res.status(404).json({ message: 'Client not found' });
+  export async function getclientbyID(req, res) {
+    try {
+      const clientId = req.params.clientId;  
+      const client = await client_model.findOne({ _id: clientId });
+  
+      if (!client) {
+        return res.status(404).json({ message: 'Client not found' });
+      }
+      res.status(200).json(client);
+    } catch (error) {
+      res.status(500).json({ error: 'Internal server error' });
     }
-
-    res.status(200).json(client);
-  } catch (error) {
-    res.status(500).json({ error: 'Internal server error' });
   }
-}

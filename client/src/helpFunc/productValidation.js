@@ -25,8 +25,6 @@ function stockVerify(errors = {}, values){
 
     if(!values.stock){
         errors.stock = toast.error("Stock Required");
-    } else if(values.stock.includes(" ")){
-        errors.stock = toast.error("Wrong Stock Format");
     } else if(lowerCase.test(values.stock) || upperCase.test(values.stock) || specialCharacters.test(values.stock)){
         errors.stock = toast.error("Wrong Stock Format");
     } else if(!numbers.test(values.stock)){
@@ -43,8 +41,6 @@ function priceVerify(errors = {}, values){
 
     if(!values.price){
         errors.price = toast.error("price Required");
-    } else if(values.price.includes(" ")){
-        errors.price = toast.error("Wrong price Format");
     } else if(lowerCase.test(values.price) || upperCase.test(values.price)){
         errors.price = toast.error("Wrong price Format");
     } else if(!numbers.test(values.price)){
