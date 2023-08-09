@@ -26,7 +26,6 @@ export default function Username() {
     validateOnChange: false,
     onSubmit: async values => {
         setMail(values.mail);
-        console.log(values.mail);
         navigate('/password')
     }
   })

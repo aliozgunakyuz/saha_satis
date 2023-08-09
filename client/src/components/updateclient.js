@@ -28,7 +28,7 @@ const UpdateClient = () => {
         setClient(response.data);
       })
       .catch((error) => {
-        console.error('Error fetching client data:', error);
+        toast.error('Error fetching clients please try again later. Error: '+error)
       });
   }, [clientId]);
 
@@ -46,7 +46,6 @@ const UpdateClient = () => {
     onSubmit: (values) => {
       axios.put(`/api/clients/${clientId}`, values)
         .then((response) => {
-          console.log('Client updated successfully:', response.data);
           toast.success(`${values.clientname} updated successfully`);
           setTimeout(() => {
             navigate('/seeclients');
@@ -54,7 +53,6 @@ const UpdateClient = () => {
         })
         .catch((error) => {
           toast.error(`Failed to update ${values.clientname}: ${error.message}`);
-          console.error('Error updating client:', error);
         });
     },
   });

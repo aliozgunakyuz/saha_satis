@@ -45,7 +45,6 @@ export async function register(req, res) {
       return res.status(201).json({ success: true, message: 'User registration successfully completed' });
     }
   } catch (error) {
-    console.error('Error during user registration:', error);
     return res.status(500).json({ error: 'An error occurred during user registration.' });
   }
 }
@@ -121,7 +120,6 @@ export async function updateUserType(req, res) {
 
     res.status(200).json({ message: 'User type updated successfully' });
   } catch (error) {
-    console.error('Error updating user type:', error);
     res.status(500).json({ message: 'Failed to update user type' });
   }
 }

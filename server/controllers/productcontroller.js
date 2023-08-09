@@ -1,9 +1,4 @@
 import product_model from '../models/product_model.js';
-import multer from 'multer';
-
-const storage = multer.memoryStorage();
-const upload = multer({ storage });
-
 
 export async function addproduct(req, res) {
     try {

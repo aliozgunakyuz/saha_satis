@@ -32,7 +32,6 @@ export default function Reset() {
             success: <b>Password reset successfull</b>,
             error: <b>Error occurred</b>
         });
-        console.log("yeter artık bit");
         resetPromise.then(function(){navigate('/password')})
 
     }

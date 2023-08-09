@@ -20,7 +20,7 @@ const Users = () => {
         setUsers(response.data); 
       })
       .catch((error) => {
-        console.error('Error fetching users:', error);
+        toast.error('Error fetching users please try again later. Error: ' + error)
       });
   }, []);
 
@@ -59,7 +59,6 @@ const Users = () => {
         }, 500);
       } catch (error) {
         toast.error(`Failed to delete ${userName}: ${error.message}`);
-        console.error('Error deleting user:', error);
       }
     }
   };

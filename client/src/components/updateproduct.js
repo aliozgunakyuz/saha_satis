@@ -29,7 +29,7 @@ const UpdateProduct = () => {
         setProduct(response.data);
       })
       .catch((error) => {
-        console.error('Error fetching product data:', error);
+        toast.error('Error fetching products please try again later. Error: '+error)
       });
   }, [productId]);
 
@@ -49,7 +49,6 @@ const UpdateProduct = () => {
       const updatedProduct = { ...values, productimage: file || product.productimage || '' };
       axios.put(`/api/products/${productId}`, updatedProduct)
         .then((response) => {
-          console.log('Product updated successfully:', response.data);
           toast.success(`${values.productname} updated successfully`);
           setTimeout(() => {
             navigate('/seeproducts');
@@ -57,7 +56,6 @@ const UpdateProduct = () => {
         })
         .catch((error) => {
           toast.error(`Failed to update ${values.productname}: ${error.message}`);
-          console.error('Error updating product:', error);
         });
     },
   });

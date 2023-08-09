@@ -22,7 +22,7 @@ const Products = () => {
         setProducts(sortedProducts);
       })
       .catch((error) => {
-        console.error('Error fetching products:', error);
+        toast.error('Error fetching products please try again later. Error: '+error)
       });
   }, []);
 
@@ -66,7 +66,6 @@ const Products = () => {
         }, 500);
       } catch (error) {
         toast.error(`Failed to delete ${productName}: ${error.message}`);
-        console.error('Error deleting product:', error);
       }
     }
   };
