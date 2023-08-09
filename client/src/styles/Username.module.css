@@ -6,6 +6,18 @@
     @apply hover:border-gray-200;
 }
 
+.product_img {
+    border-color: #164663;
+    @apply border-4 w-[335px] h-[335px] shadow-lg cursor-pointer;
+    @apply hover:border-gray-200;
+  }
+
+.little_product_img {
+  border-color: #164663;
+  @apply border-4 w-[80px] h-[80px] shadow-lg cursor-pointer;
+  @apply hover:border-gray-200;
+}
+
 .textbox{
     @apply border-0 px-5 py-4 rounded-xl w-3/4 shadow-sm text-lg;
     @apply focus:outline-none;

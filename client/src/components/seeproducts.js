@@ -4,14 +4,16 @@ import { useNavigate } from 'react-router-dom';
 import toast, { Toaster } from 'react-hot-toast';
 import useFetch from '../hoooks/hookk.js';
 import { useAuthStore } from '../store/store.js';
+import styles from '../styles/Username.module.css';
+
 
 const Products = () => {
   const [products, setProducts] = useState([]);
   const [sortConfig, setSortConfig] = useState({ key: null, direction: null });
   const navigate = useNavigate();
-  const [userType, setUserType] = useState('user');
   const mail = useAuthStore((state) => state.auth.mail);
   const [{ isLoading, apiData, serverError }, setData] = useFetch(mail);
+  const [file, setFile] = useState();
 
   useEffect(() => {
     axios.get('/api/getproducts')
@@ -82,6 +84,7 @@ const Products = () => {
         <table className="products-table">
           <thead>
             <tr>
+            <th>Product Image </th>
               <th onClick={() => sortTable('productname')}>
                 Product Name {getSortIcon('productname')}
               </th>
@@ -98,6 +101,11 @@ const Products = () => {
           <tbody>
             {products.map((product) => (
               <tr key={product._id}>
+                <td>
+                <label htmlFor="productimage">
+                    <img src={product.productimage} className={`${styles.little_product_img}`} alt="avatar" />
+                  </label>
+                </td>
                 <td>{product.productname}</td>
                 <td>{product.stock}</td>
                 <td>{product.price}</td>

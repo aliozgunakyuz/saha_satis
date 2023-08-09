@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import '../styles/datashowstyles.css';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import toast, { Toaster } from 'react-hot-toast';
 import useFetch from '../hoooks/hookk.js';
 import { useAuthStore } from '../store/store.js';
@@ -12,7 +11,6 @@ const Users = () => {
   const [users, setUsers] = useState([]);
   const [sortConfig, setSortConfig] = useState({ key: null, direction: null });
   const navigate = useNavigate();
-  const [userType, setUserType] = useState('user');
   const mail = useAuthStore((state) => state.auth.mail);
   const [{ isLoading, apiData, serverError }, setData] = useFetch(mail);
 

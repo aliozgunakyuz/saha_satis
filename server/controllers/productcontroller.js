@@ -1,9 +1,13 @@
 import product_model from '../models/product_model.js';
+import multer from 'multer';
+
+const storage = multer.memoryStorage();
+const upload = multer({ storage });
 
 
 export async function addproduct(req, res) {
     try {
-        const { productname, stock, price, color, category } = req.body;
+        const { productimage, productname, stock, price, color, category } = req.body;
         const productnameExists = await product_model.findOne({ productname });
 
         if (productnameExists) {
@@ -15,6 +19,7 @@ export async function addproduct(req, res) {
         }
 
         const product = new product_model({
+            productimage: productimage || '',
             productname,
             stock,
             price,
