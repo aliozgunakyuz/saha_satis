@@ -8,6 +8,7 @@ import { addProduct } from '../helpFunc/productFunctions.js';
 import useFetch from '../hoooks/hookk.js';
 import { useAuthStore } from '../store/store.js';
 import img2base64 from '../helpFunc/convert'; 
+import def_prod_img from '../assets/deafult_product_img.jpg';
 
 export default function AddProduct() {
 
@@ -50,14 +51,15 @@ export default function AddProduct() {
         <Toaster position='top-center' reverseOrder={false}></Toaster>
         <div className=' flex justify-center items-center h-screen'>
             <div className={styles.glass} style={{ width: '60%'}} >
-                <div className='title flex flex-col items-center text-blue-950 gap-10' >
-                    <h4 className='text-5xl font-bold py-2 '> Add Product </h4>
+                <div className='title flex flex-col items-center text-blue-950 gap-5' >
+                    <h4 className='text-5xl font-bold p '> Add Product </h4>
                     <h4></h4>
                 </div>
                 <form className='py-1' onSubmit={formik.handleSubmit}>
                     <div className='profile flex justify-center py-4'>
                       <label htmlFor="productimage">
-                        <img src={file} className={styles.product_img} alt="click here to add image" />
+                        <img src={file || def_prod_img} className={styles.product_img} alt="click here to add image" />
+                        <b className='text-blue-900'>Click above to add image</b>
                       </label>
                       <input onChange={onUpload} type="file" id='productimage' name='productimage' />
                     </div>
