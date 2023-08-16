@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link, useNavigate} from 'react-router-dom';
+import { useNavigate} from 'react-router-dom';
 import styles from '../styles/Username.module.css';
 import toast,{Toaster} from 'react-hot-toast';
 import { useFormik } from 'formik';
@@ -13,7 +13,7 @@ export default function AddDiscount() {
 
   const navigate = useNavigate();
   const mail = useAuthStore((state) => state.auth.mail);
-  const [{ isLoading, apiData, serverError }, setData] = useFetch(mail);
+  const [{ apiData }] = useFetch(mail);
 
   const formik = useFormik({
     initialValues: {

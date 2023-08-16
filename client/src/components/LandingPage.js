@@ -10,7 +10,6 @@ import mainscreencheese from '../assets/mainscreencheese.png';
 export default function Username() {
 
   const navigate = useNavigate();
-  const [userType, setUserType] = useState('user');
   const [products, setProducts] = useState([]);
 
   useEffect(() => {

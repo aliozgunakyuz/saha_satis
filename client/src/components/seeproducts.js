@@ -13,7 +13,6 @@ const Products = () => {
   const navigate = useNavigate();
   const mail = useAuthStore((state) => state.auth.mail);
   const [{ isLoading, apiData, serverError }, setData] = useFetch(mail);
-  const [file, setFile] = useState();
 
   useEffect(() => {
     axios.get('/api/getproducts')
