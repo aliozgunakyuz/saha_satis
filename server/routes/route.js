@@ -4,6 +4,7 @@ const router = Router();
 import * as controller from '../controllers/usercontrollers.js';
 import * as p_controller from '../controllers/productcontroller.js';
 import * as c_controller from '../controllers/clientcontroller.js'
+import * as d_controller from '../controllers/discountcontroller.js';
 import { registerMail } from '../controllers/mailsender.js';
 import Auth, {local_variables} from '../middlewares/auth.js';
 
@@ -21,6 +22,8 @@ router.get('/getproductbyID/:productId', p_controller.getproductbyID);
 //client
 router.get('/getclients', c_controller.getclients);
 router.get('/getclientbyID/:clientId', c_controller.getclientbyID);
+//discounts
+router.get('/getdiscounts', d_controller.getdiscounts);
 
 
 //PUT
@@ -45,6 +48,8 @@ router.route('/login').post(controller.userVerification,controller.login);
 router.route('/addproduct').post(p_controller.addproduct);
 //client
 router.route('/addclient').post(c_controller.addclient);
+//discounts
+router.route('/adddiscount').post(d_controller.adddiscount);
 
 //DELETE
 //user
@@ -53,6 +58,8 @@ router.delete('/users/:userId', controller.deleteUser);
 router.delete('/products/:productId', p_controller.deleteProduct);
 //client
 router.delete('/clients/:clientId', c_controller.deleteClient);
+//discount
+router.delete('/discounts/:discountId', d_controller.deleteDiscount);
 
 
 

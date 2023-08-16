@@ -24,6 +24,6 @@ export const Schema_Sale = new mongoose.Schema({
         type: String, 
         default:'waiting...',
     },
-});
+},{timestamps: true});
 
 export default mongoose.model('Sale', Schema_Sale);

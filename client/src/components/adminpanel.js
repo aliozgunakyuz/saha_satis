@@ -30,8 +30,10 @@ export default function Register() {
                             <b className="text-blue-950">Clients</b>
                             <button className={styles.btn} onClick={()=>{navigate('/adminaddclient')}}>Add Client</button>
                             <button className={styles.btn} onClick={()=>{navigate('/seeclients')}}>See Clients</button>
-                            <b className="text-blue-950">Sales</b>
+                            <b className="text-blue-950">Sales & Discounts</b>
                             <button className={styles.btn} onClick={()=>{navigate('/seesales')}}>See Sales</button>
+                            <button className={styles.btn} onClick={()=>{navigate('/adddiscount')}}>Add Discount</button>
+                            <button className={styles.btn} onClick={()=>{navigate('/seediscounts')}}>See Discounts</button>
                             <b className="text-blue-950">Users</b>
                             <button className={styles.btn} onClick={()=>{navigate('/seeusers')}}>See Users</button>
                             <button className={styles.btn} onClick={()=>{navigate('/homepage')}}>Back</button>
