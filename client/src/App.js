@@ -1,5 +1,5 @@
 import React from 'react'
-import {createBrowserRouter, RouterProvider} from 'react-router-dom'
+import { createBrowserRouter, RouterProvider, useRoutes } from 'react-router-dom'
 
 import Username from './components/Login';
 import Password from './components/Password';
@@ -22,89 +22,89 @@ import UpdateClient from './components/updateclient'
 import SeeDiscounts from './components/seediscounts.js'
 import AddDiscount from './components/adddiscount.js'
 //auth middle
-import { AuthorizeUser,RouteProtection } from './midlleware/auth.js';
+import { AuthorizeUser, RouteProtection } from './midlleware/auth.js';
+import NavigationBar from './components/NavigationBar';
 
 
 const router = createBrowserRouter([
     {
-        path:'/',
+        path: '/',
         element: <Username></Username>
     },
     {
-        path:'/register',
+        path: '/register',
         element: <Register></Register>
     },
     {
-        path:'/password',
+        path: '/password',
         element: <RouteProtection><Password /></RouteProtection>
     },
     {
-        path:'/profile',
+        path: '/profile',
         element: <AuthorizeUser><Profile /></AuthorizeUser>
     },
     {
-        path:'/recovery',
+        path: '/recovery',
         element: <Recovery></Recovery>
     },
     {
-        path:'/reset',
+        path: '/reset',
         element: <Reset></Reset>
     },
     {
-        path:'/adminpanel',
+        path: '/adminpanel',
         element: <AdminPanel></AdminPanel>
     },
     {
-        path:'/adminaddproduct',
+        path: '/adminaddproduct',
         element: <AddProduct></AddProduct>
     },
     {
-        path:'/adminaddclient',
+        path: '/adminaddclient',
         element: <AddClient></AddClient>
     },
     {
-        path:'/seeproducts',
+        path: '/seeproducts',
         element: <SeeProducts></SeeProducts>
     },
     {
-        path:'/seeclients',
+        path: '/seeclients',
         element: <SeeClients></SeeClients>
     },
     {
-        path:'/seesales',
+        path: '/seesales',
         element: <SeeSales></SeeSales>
     },
     {
-        path:'/seeusers',
+        path: '/seeusers',
         element: <SeeUsers></SeeUsers>
     },
     {
-        path:'/updateproduct/:productId',
+        path: '/updateproduct/:productId',
         element: <UpdateProduct></UpdateProduct>
     },
     {
-        path:'/updateclient/:clientId',
+        path: '/updateclient/:clientId',
         element: <UpdateClient></UpdateClient>
     },
     {
-        path:'/homepage',
+        path: '/homepage',
         element: <Home></Home>
     },
     {
-        path:'/adddiscount',
+        path: '/adddiscount',
         element: <AddDiscount></AddDiscount>
     },
     {
-        path:'/seediscounts',
+        path: '/seediscounts',
         element: <SeeDiscounts></SeeDiscounts>
     },
 
 
 ])
 
-
 export default function App() {
-    return(
+    return (
         <main>
             <RouterProvider router={router}></RouterProvider>
         </main>
