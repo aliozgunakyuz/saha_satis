@@ -74,8 +74,8 @@ const Discounts = () => {
         <table className="products-table">
           <thead>
             <tr>
-              <th onClick={() => sortTable('discountname')}>
-                Discount Code {getSortIcon('discountname')}
+              <th>
+                Discount Code
               </th>
               <th onClick={() => sortTable('discountpercent')}>
                 Percent {getSortIcon('discountpercent')}

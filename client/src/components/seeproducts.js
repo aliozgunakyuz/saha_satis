@@ -91,7 +91,7 @@ const Products = () => {
                 Stock {getSortIcon('stock')}
               </th>
               <th onClick={() => sortTable('price')}>
-                Price {getSortIcon('price')}
+                Price (TRY) {getSortIcon('price')}
               </th>
               <th onClick={() => sortTable('color')}>Color {getSortIcon('color')}</th>
               <th onClick={() => sortTable('category')}>Category {getSortIcon('category')}</th>
@@ -107,7 +107,7 @@ const Products = () => {
                 </td>
                 <td>{product.productname}</td>
                 <td>{product.stock}</td>
-                <td>{product.price}</td>
+                <td>{product.price}₺</td>
                 <td>{product.color}</td>
                 <td>{product.category}</td>
                 <td><button className="btn2" onClick={() => handleUpdate(product._id)}>Update</button></td>
