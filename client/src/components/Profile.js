@@ -40,12 +40,6 @@ export default function Profile() {
     },
   });
 
-  // Logout handler
-  function userLogout() {
-    localStorage.removeItem('token');
-    navigate('/');
-  }
-
   if (isLoading) return <div style={{
     display: 'flex',
     justifyContent: 'center',
@@ -96,11 +90,6 @@ export default function Profile() {
               </div>
             </div>
           </form>
-          <div className='text-center py-4'>
-            <button className={styles.btn} onClick={userLogout} type='submit'>
-              Logout
-            </button>
-          </div>
         </div>
       </div>
     </div>

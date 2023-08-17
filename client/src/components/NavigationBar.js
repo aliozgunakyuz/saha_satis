@@ -1,7 +1,8 @@
 import { useRef } from "react";
 import { useNavigate } from 'react-router-dom';
 import { FaBars, FaTimes, FaShoppingCart } from "react-icons/fa";
-import { BsPerson, BsGraphUp, BsTools } from "react-icons/bs"; // Import icons you need
+import { FiLogOut } from "react-icons/fi";
+import { BsPerson, BsGraphUp, BsTools } from "react-icons/bs"; 
 import "../styles/navbarstyles.css";
 
 export default function Navbar() {
@@ -11,6 +12,12 @@ export default function Navbar() {
   const showNavbar = () => {
     navRef.current.classList.toggle("responsive_nav");
   };
+
+  function userLogout() {
+    localStorage.removeItem('token');
+    navigate('/');
+  }
+  
 
   return (
     <header className="header">
@@ -30,6 +37,9 @@ export default function Navbar() {
         </button>
         <button href="/#" className="nav-link">
         <BsTools className="nav-icon"/> Admin Panel 
+        </button>
+        <button href="/#" className="nav-link" onClick={userLogout}>
+        <FiLogOut className="nav-icon"/> Logout
         </button>
       </nav>
       <button className="nav-btn" onClick={showNavbar}>
