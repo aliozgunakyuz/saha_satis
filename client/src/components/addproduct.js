@@ -9,6 +9,7 @@ import useFetch from '../hoooks/hookk.js';
 import { useAuthStore } from '../store/store.js';
 import img2base64 from '../helpFunc/convert'; 
 import def_prod_img from '../assets/deafult_product_img.jpg';
+import Layout from './Layout';
 
 export default function AddProduct() {
 
@@ -47,7 +48,8 @@ export default function AddProduct() {
 
   if (apiData?.userType === 'admin') {
   return (
-    <div className='container mx-auto'>
+    <Layout>
+      <div className='container mx-auto'>
         <Toaster position='top-center' reverseOrder={false}></Toaster>
         <div className=' flex justify-center items-center h-screen'>
             <div className={styles.glass} style={{ width: '60%'}} >
@@ -76,6 +78,7 @@ export default function AddProduct() {
             </div>
         </div>
     </div>
+    </Layout>
     
 
   )

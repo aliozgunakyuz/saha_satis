@@ -7,6 +7,7 @@ import toast, { Toaster } from 'react-hot-toast';
 import { clientValidate } from '../helpFunc/clientValidation.js';
 import useFetch from '../hoooks/hookk.js';
 import { useAuthStore } from '../store/store.js';
+import Layout from './Layout';
 
 
 const UpdateClient = () => {
@@ -58,7 +59,8 @@ const UpdateClient = () => {
   });
   if (apiData?.userType === 'admin') {
   return (
-    <div className='container mx-auto'>
+    <Layout>
+      <div className='container mx-auto'>
       <Toaster position='top-center' reverseOrder={false}></Toaster>
       <div className=' flex justify-center items-center h-screen'>
         <div className={styles.glass} style={{ width: '60%' }} >
@@ -79,6 +81,7 @@ const UpdateClient = () => {
         </div>
       </div>
     </div>
+    </Layout>
   );
 };
 }

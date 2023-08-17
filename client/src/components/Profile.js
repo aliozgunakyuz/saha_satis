@@ -8,6 +8,7 @@ import { profileValidate } from '../helpFunc/MailValidate.js';
 import { updateuser } from '../helpFunc/helper.js';
 import { useAuthStore } from '../store/store.js';
 import axios from 'axios';
+import Layout from './Layout.js';
 
 axios.defaults.baseURL = process.env.REACT_APP_SERVER_DOMAIN;
 
@@ -63,7 +64,8 @@ export default function Profile() {
   if (serverError) return <h1 className='text-xl text-gray-50'>{serverError.message}</h1>;
 
   return (
-    <div className='container mx-auto'>
+    <Layout>
+      <div className='container mx-auto'>
       <Toaster position='top-center' reverseOrder={false}></Toaster>
       <div className='flex justify-center items-center h-screen'>
         <div className={styles.glass} style={{ width: '50%' }}>
@@ -102,5 +104,6 @@ export default function Profile() {
         </div>
       </div>
     </div>
+    </Layout>
   );
 }

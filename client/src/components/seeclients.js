@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import toast, { Toaster } from 'react-hot-toast';
 import useFetch from '../hoooks/hookk.js';
 import { useAuthStore } from '../store/store.js';
+import Layout from './Layout';
 
 const Clients = () => {
   const [clients, setClients] = useState([]);
@@ -70,7 +71,8 @@ const Clients = () => {
   
   if (apiData?.userType === 'admin') {
   return (
-    <div>
+    <Layout>
+      <div>
       <h1 className="products-title">Clients List</h1>
       <h1 className='table-info-text'>You can sort table by clicking table column names.</h1>
       <div className="products-wrapper">
@@ -114,6 +116,7 @@ const Clients = () => {
         </button>
       </div>
     </div>
+    </Layout>
   );
 };
 }

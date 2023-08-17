@@ -5,6 +5,7 @@ import {useNavigate} from 'react-router-dom';
 import '../styles/landingpage.css'
 
 import mainscreencheese from '../assets/mainscreencheese.png';
+import Layout from './Layout';
 
 
 export default function Username() {
@@ -31,10 +32,9 @@ export default function Username() {
 
   return (
     <>
+      <Layout>
       <div >
-        <button className='bg-custom-blue text-white font-semibold py-1 px-3 rounded hover:bg-white hover:text-blue-950' onClick={() => { navigate('/profile') }}>Update Profile</button>
-        <button className='bg-custom-blue text-white font-semibold py-1 px-3 rounded hover:bg-white hover:text-blue-950' onClick={() => { navigate('/adminpanel') }}>Admin Panel</button>
-        <button className='bg-custom-blue text-white font-semibold py-1 px-3 rounded hover:bg-white hover:text-blue-950' onClick={userLogout}>Logout</button>
+        
         <div className='relative h-auto w-auto flex flex-col'>
           <div className='bg-theme clip-path h-[85vh] lg:h-[75vh] md:h-[65vh] sm:h-[55vh] w-auto absolute top-0 left-0 right-0 opacity-100 z-10'></div>
           
@@ -84,7 +84,8 @@ export default function Username() {
           </div>
           ))}
         </div>
-      </>
+        </Layout>  
+    </>
     
 
   )

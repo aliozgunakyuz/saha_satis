@@ -7,6 +7,7 @@ import useFetch from '../hoooks/hookk.js';
 import { useAuthStore } from '../store/store.js';
 import { addDiscount} from '../helpFunc/discountFunctions.js';
 import { discountValidate } from '../helpFunc/discountValidation.js';
+import Layout from './Layout';
 
 
 export default function AddDiscount() {
@@ -36,7 +37,9 @@ export default function AddDiscount() {
   })
   if (apiData?.userType === 'admin') {
   return (
-    <div className='container mx-auto'>
+    
+    <Layout>
+      <div className='container mx-auto'>
         <Toaster position='top-center' reverseOrder={false}></Toaster>
         <div className=' flex justify-center items-center h-screen'>
             <div className={styles.glass} style={{ width: '60%'}} >
@@ -55,6 +58,7 @@ export default function AddDiscount() {
             </div>
         </div>
     </div>
+    </Layout>
   )
 }
 }

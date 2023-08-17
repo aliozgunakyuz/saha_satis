@@ -8,6 +8,7 @@ import { productValidate } from '../helpFunc/productValidation';
 import useFetch from '../hoooks/hookk.js';
 import { useAuthStore } from '../store/store.js';
 import img2base64 from '../helpFunc/convert';
+import Layout from './Layout';
 
 const UpdateProduct = () => {
   const { productId } = useParams();
@@ -68,7 +69,8 @@ const UpdateProduct = () => {
 
   if (apiData?.userType === 'admin') {
   return (
-    <div className='container mx-auto'>
+    <Layout>
+      <div className='container mx-auto'>
       <Toaster position='top-center' reverseOrder={false}></Toaster>
       <div className=' flex justify-center items-center h-screen'>
         <div className={styles.glass} style={{ width: '60%' }} >
@@ -96,6 +98,7 @@ const UpdateProduct = () => {
         </div>
       </div>
     </div>
+    </Layout>
   );
 };
 }
