@@ -27,7 +27,8 @@
     "react-scripts": "5.0.1",
     "redux": "^4.2.1",
     "web-vitals": "^2.1.4",
-    "zustand": "^4.3.9"
+    "zustand": "^4.4.1",
+    "zustand-persist-cookie-storage": "^1.2.12"
   },
   "scripts": {
     "start": "react-scripts start",
