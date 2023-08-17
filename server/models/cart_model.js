@@ -1,14 +1,37 @@
 import mongoose from 'mongoose';
 
-
-export const Schema_Cart = new mongoose.Schema({
-    cartproducts: {
-        type: String,
-        value: [String],
+const cartProductSchema = new mongoose.Schema({
+    productId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Product',
+        required: true,
     },
-    carttotal: {
+    quantity: {
         type: Number,
+        required: true,
+        default: 1,
     },
 });
 
-export default mongoose.model('Cart', Schema_Cart);
+const cartSchema = new mongoose.Schema({
+    userId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true,
+    },
+    products: [cartProductSchema],
+    carttotal: {
+        type: Number,
+        default: 0,
+    },
+});
+
+cartSchema.methods.calculateTotal = function () {
+    this.carttotal = this.products.reduce((total, product) => {
+        return total + product.quantity * product.productId.price;
+    }, 0);
+};
+
+const Cart = mongoose.model('Cart', cartSchema);
+
+export default Cart;

@@ -1,6 +1,9 @@
 
 .footer {
     background-color: #164663;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
     padding: 20px 0;
     text-align: center;
   }
@@ -9,9 +12,7 @@
     max-width: 1200px;
     margin: 0 auto;
   }
-  
-  /* Optional: Style the text if needed */
-  .footer p {
+    .footer p {
     color: #ffffff;
     font-size: 14px;
   }

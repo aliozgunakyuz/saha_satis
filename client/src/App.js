@@ -19,6 +19,8 @@ import SeeUsers from './components/seeusers.js'
 import UpdateProduct from './components/updateproduct'
 import UpdateClient from './components/updateclient'
 
+import Cart from './components/Cart';
+
 import SeeDiscounts from './components/seediscounts.js'
 import AddDiscount from './components/adddiscount.js'
 //auth middle
@@ -97,6 +99,10 @@ const router = createBrowserRouter([
     {
         path:'/seediscounts',
         element: <SeeDiscounts></SeeDiscounts>
+    },
+    {
+        path:'/cart',
+        element: <Cart></Cart>
     },
 
 

@@ -12,6 +12,17 @@ export default function Username() {
 
   const navigate = useNavigate();
   const [products, setProducts] = useState([]);
+  const [cart, setCart] = useState([]);
+
+  const addToCart = async (productId) => {
+    try {
+      const response = await axios.post('/api/addtocart', { productId });
+      setCart(response.data.products); 
+      toast.success('Product added to cart');
+    } catch (error) {
+      toast.error('Error adding product to cart. Please try again.');
+    }
+  };
 
   useEffect(() => {
     axios.get('/api/getproducts')
@@ -20,39 +31,16 @@ export default function Username() {
         setProducts(sortedProducts);
       })
       .catch((error) => {
-        toast.error('Error fetching products please try again later. Error: '+error)
+        toast.error('Error fetching products please try again later. Error: '+ error)
       });
   }, []);
-
-
-  function userLogout(){
-    localStorage.removeItem('token');
-    navigate('/');
-  }
 
   return (
     <>
       <Layout>
-      <div >
-        
-        <div className='relative h-auto w-auto flex flex-col'>
-          <div className='bg-theme clip-path h-[85vh] lg:h-[75vh] md:h-[65vh] sm:h-[55vh] w-auto absolute top-0 left-0 right-0 opacity-100 z-10'></div>
-          
-            <div className='relative opacity-100 z-20 grid items-center justify-items-center item-container'>
-              <div className='grid items-center justify-items-center mt-28 ms:mt-24'>
-                <h1 className='text-6xl lg:text-5xl md:text-4xl sm:text-3xl xsm:text-2xl font-extrabold filter drop-shadow-sm text-custom-blue '>Hoşgeldiniz</h1>
-                <h1 className='text-6xl lg:text-5xl md:text-4xl sm:text-3xl xsm:text-2xl font-extrabold filter drop-shadow-sm text-custom-blue'>Aşağı kaydırarak ürünlerimiz görebilirsiniz</h1>
-                <div className='flex items-center'>
-                  <img
-                    src={mainscreencheese}
-                    alt='maincheeseimg'
-                    className='w-auto h-[45vh] lg:h-[35vh] md:h-[31vh] sm:h-[21vh] xsm:h-[19vh] transitions-theme -rotate-[25deg] hover:rotate-0 cursor-pointer object-fill' />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+      <Toaster position='top-center' reverseOrder={false}></Toaster>
         <div className='text-center mb-10'>
+          <p></p>
           <h1 className='text-custom-blue text-4xl lg:text-5xl md:text-4xl sm:text-3xl xsm:text-2xl font-bold'>
             Ürünlerimiz
           </h1>
@@ -77,8 +65,8 @@ export default function Username() {
             <p className='text-white mb-1'>Price: {product.price}₺</p>
             <p className='text-white mb-1'>Category: {product.category}</p>
             <div className='flex justify-center'>
-              <button className='bg-custom-blue text-white font-semibold py-1 px-3 rounded hover:bg-white hover:text-blue-950'>
-                Sepete Ekle
+              <button className='bg-custom-blue text-white font-semibold py-1 px-3 rounded hover:bg-white hover:text-blue-950' onClick={() => addToCart(product.id)}>
+                Add to cart
               </button>
             </div>
           </div>
