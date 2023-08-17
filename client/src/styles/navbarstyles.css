@@ -1,86 +1,108 @@
-@import url('https://fonts.googleapis.com/css2?family=Titillium+Web:wght@300;400;700&family=Ysabeau+SC:wght@300&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Titillium+Web:wght@300;400;700&display=swap");
 
-*{
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-    font-family: 'Titillium Web', sans-serif;
+* {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+	font-family: "Titillium Web", sans-serif;
 }
 
-:root{
-    --mainColor: #164663;
-    --mainColorLight: #085f94;
-    --secondaryColor: #ffffff8a;
-    --textColor: #ffffff
+:root {
+	--mainColor: #164663;
+	--mainColorLight: #085f94;
+	--secondaryColor: #ffffff8a;
+	--textColor: #ffffff;
 }
 
 header {
-    display:flex;
-    align-items: center;
+    display: flex;
     justify-content: space-between;
-    height: 80px;
-    padding: 0 2rem;
+    align-items: center;
+    padding: 20px;
     background-color: var(--mainColor);
-    color: var(--textColor)
-}
-
-nav a{
-    margin: 0 2rem;
+    color: var(--textColor);
+  }
+  
+  nav {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .nav-link {
     color: var(--textColor);
     text-decoration: none;
+    display: flex; /* Display flex to align items in a row */
+    align-items: center; /* Align items vertically */
+  }
+  
+  /* Adjust the right side alignment */
+  .nav-links {
+    margin-left: auto; /* Pushes the navigation titles to the right */
+  }
 
+  .nav-icon {
+    margin-right: 8px; /* Add some space between the title and icon */
+  }
+
+nav button {
+	margin: 0 ;
+	color: var(--textColor);
+	text-decoration: none;
 }
 
-nav a:hover{
-    color: var(--secondaryColor);
+nav button:hover {
+	color: var(--secondaryColor);
 }
 
-header .nav-btn{
-    padding: 5px;
-    cursor: pointer;
-    background: transparent;
-    border: none;
-    outline: none;
-    color: var(--textColor);
-    visibility: hidden;
-    opacity: 0;
-    font-size: 1.8rem;
+header .nav-btn {
+	cursor: pointer;
+	background: transparent;
+	border: none;
+	outline: none;
+	color: var(--textColor);
+	visibility: hidden;
+	opacity: 0;
+	font-size: 1.8rem;
 }
 
-@media only screen and (max-width: 1024px){
-    header .nav-btn{
-        visibility: visible;
-        opacity: 1;
-    }
+header div,
+nav {
+	display: flex;
+	align-items: center;
+}
 
-    header nav{
-        position: fixed;
-        top: 0;
-        left: 0;
-        height: 100%;
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 1.5rem;
-        background-color: var(--mainColor);
-        transition: 1s;
-        transform: translateY(-100vh);
-    }
+@media only screen and (max-width: 1024px) {
+	header .nav-btn {
+		visibility: visible;
+		opacity: 1;
+	}
 
-    header .responsive_nav{
-        transform: none;
-    }
+	header nav {
+		position: fixed;
+		top: -100vh;
+		left: 0;
+		height: 100%;
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		gap: 1.5rem;
+		background-color: var(--mainColor);
+		transition: 1s;
+	}
 
-    nav .nav-close-btn{
-        position: absolute;
-        top: 2 rem;
-        right: 2rem;
-    }
+	header .responsive_nav {
+		transform: translateY(100vh);
+	}
 
-    nav a{
-        font-size: 1.5 rem;
-    }
+	nav .nav-close-btn {
+		top: 2rem;
+		right: 2rem;
+	}
 
+	nav button {
+		font-size: 1.5rem;
+	}
 }
