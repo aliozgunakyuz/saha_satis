@@ -6,10 +6,16 @@ export async function addItem2Cart(req,res){
     console.log('addItem2Cart function called');
     try {
         const { productId } = req.body;
-        const cart = await cart_model.findOne({ userId: req.user._id }); 
+        const user = req.user;
+
+        if (!user) {
+            return res.status(401).json({ error: 'You must be logged in' });
+        }
+
+        const cart = await cart_model.findById( user._id );
 
         if (!cart) {
-            return res.status(404).json({ error: 'Cart not found' });
+            cart = new cart_model({ userId: user._id });
         }
 
         const existingProductIndex = cart.products.findIndex(product => product.productId.toString() === productId);
@@ -31,4 +37,3 @@ export async function addItem2Cart(req,res){
         return res.status(500).json({ error: 'An error occurred' });
     }
 }
-

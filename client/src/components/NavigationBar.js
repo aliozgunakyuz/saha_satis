@@ -21,7 +21,7 @@ export default function Navbar() {
 
   return (
     <header className="header">
-      <a className="logo">LOGO</a>
+      <a className="logo" onClick={() => { navigate('/homepage') }}>BHCVN</a>
       <nav ref={navRef} className="nav-links">
         <button className="nav-btn nav-close-btn" onClick={showNavbar}>
           <FaTimes />
@@ -32,10 +32,10 @@ export default function Navbar() {
         <button href="/#" className="nav-link">
         <BsGraphUp className="nav-icon" /> Sales 
         </button>
-        <button href="/#" className="nav-link">
+        <button href="/#" className="nav-link" onClick={() => { navigate('/cart') }}>
         <FaShoppingCart className="nav-icon"/> Cart 
         </button>
-        <button href="/#" className="nav-link">
+        <button href="/#" className="nav-link" onClick={() => { navigate('/adminpanel') }}>
         <BsTools className="nav-icon"/> Admin Panel 
         </button>
         <button href="/#" className="nav-link" onClick={userLogout}>

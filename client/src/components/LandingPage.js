@@ -16,8 +16,8 @@ export default function Username() {
 
   const addToCart = async (productId) => {
     try {
-      const response = await axios.post('/api/addtocart', { productId });
-      setCart(response.data.products); 
+      const response = await axios.post('/api/addtocart',{ productId });
+      setCart(response.data.products);
       toast.success('Product added to cart');
     } catch (error) {
       toast.error('Error adding product to cart. Please try again.');
