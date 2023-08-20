@@ -11,6 +11,10 @@ const cartProductSchema = new mongoose.Schema({
         required: true,
         default: 1,
     },
+    price: {
+        type: mongoose.Schema.Types.Number,
+        required: true,
+    },
 });
 
 const cartSchema = new mongoose.Schema({
@@ -21,14 +25,15 @@ const cartSchema = new mongoose.Schema({
     },
     products: [cartProductSchema],
     carttotal: {
-        type: Number,
+        type: mongoose.Schema.Types.Number,
         default: 0,
     },
 });
 
 cartSchema.methods.calculateTotal = function () {
     this.carttotal = this.products.reduce((total, product) => {
-        return total + product.quantity * product.productId.price;
+        console.log("product: ", product);
+        return total + (product.quantity * product.price);
     }, 0);
 };
 

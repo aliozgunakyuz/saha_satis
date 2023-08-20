@@ -1,4 +1,4 @@
-import {Router} from 'express';
+import { Router } from 'express';
 const router = Router();
 
 import * as controller from '../controllers/usercontrollers.js';
@@ -7,7 +7,7 @@ import * as c_controller from '../controllers/clientcontroller.js'
 import * as d_controller from '../controllers/discountcontroller.js';
 import * as cart_controller from '../controllers/cartcontroller.js'
 import { registerMail } from '../controllers/mailsender.js';
-import Auth, {local_variables} from '../middlewares/auth.js';
+import Auth, { local_variables } from '../middlewares/auth.js';
 
 
 //GET
@@ -29,7 +29,7 @@ router.get('/getdiscounts', d_controller.getdiscounts);
 //PUT
 //user
 router.route('/userupdate').put(Auth, controller.updateUser);
-router.route('/passwordreset').put(controller.userVerification,controller.resetpassword);
+router.route('/passwordreset').put(controller.userVerification, controller.resetpassword);
 router.put('/users/:userId/:updatedUserType', controller.updateUserType);
 //product
 router.put('/products/:productId', p_controller.updateProduct);
@@ -40,8 +40,8 @@ router.put('/clients/:clientId', c_controller.updateClient);
 //user
 router.route('/register').post(controller.register);
 router.route('/registermail').post(registerMail);
-router.route('/auth').post(controller.userVerification, (req,res) => res.end());
-router.route('/login').post(controller.userVerification,controller.login);
+router.route('/auth').post(controller.userVerification, (req, res) => res.end());
+router.route('/login').post(controller.userVerification, controller.login);
 //product
 router.route('/addproduct').post(p_controller.addproduct);
 //client
@@ -49,7 +49,10 @@ router.route('/addclient').post(c_controller.addclient);
 //discounts
 router.route('/adddiscount').post(d_controller.adddiscount);
 //cart
-router.route('/addtocart').post(cart_controller.addItem2Cart);
+router.route('/addtocart').post(Auth, cart_controller.addItem2Cart);
+router.route('/cart').get(Auth, cart_controller.getCart);
+router.route('/cart/:productId').delete(Auth, cart_controller.deleteItemFromCart);
+
 
 //DELETE
 //user

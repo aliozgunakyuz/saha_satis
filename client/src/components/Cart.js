@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import '../styles/cartstyles.css'; 
+import '../styles/cartstyles.css';
+import service from '../service';
 
 function Cart() {
     const [cart, setCart] = useState({ products: [], carttotal: 0 });
@@ -11,7 +12,7 @@ function Cart() {
 
     const fetchCart = async () => {
         try {
-            const response = await axios.get('/api/cart'); 
+            const response = await service.get('/api/cart');
             setCart(response.data);
         } catch (error) {
             console.error('Error fetching cart:', error);
@@ -20,7 +21,7 @@ function Cart() {
 
     const removeFromCart = async (productId) => {
         try {
-            await axios.delete(`/api/cart/delete/${productId}`);
+            await service.delete(`/api/cart/${productId}`);
             fetchCart();
         } catch (error) {
             console.error('Error removing from cart:', error);
