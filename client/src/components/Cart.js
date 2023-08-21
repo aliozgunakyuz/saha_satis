@@ -42,7 +42,7 @@ function Cart() {
                 productId: product.productId,
                 productName: product.productId.productname,
                 productPrice: product.price,
-                productWeight: 'product_weight',
+                productWeight: 0,
             })),
             discountCode: isValidDiscount ? document.getElementById('discount-code').value : '',
             discountPercent: isValidDiscount ? discountPercent : 0,
@@ -52,7 +52,7 @@ function Cart() {
         };
     
         try {
-            await axios.post('/api/save-final-sale', {finalSaleData} , {
+            await axios.post('/api/save-final-sale', finalSaleData , {
                 headers: {
                   Authorization: `Bearer ${localStorage.getItem('token')}`,
                 },});
