@@ -49,3 +49,19 @@ export async function getdiscounts(req, res) {
       return res.status(500).send({ error: 'Internal server error' });
     }
   }
+
+  export async function discountcheck(req, res) {
+    const discountCode = req.params.code;
+
+    try {
+        const existingCode = await discount_model.findOne({ discountcode: discountCode });
+
+        if (existingCode) {
+            res.json({ isValid: true, discountPercent: existingCode.discountpercent });
+        } else {
+            res.json({ isValid: false });
+        }
+    } catch (error) {
+        res.status(500).json({ error: 'An error occurred' });
+    }
+}

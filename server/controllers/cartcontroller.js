@@ -3,7 +3,6 @@ import cart_model from '../models/cart_model.js';
 
 
 export async function addItem2Cart(req, res) {
-    console.log('addItem2Cart function called');
     try {
         const { productId } = req.body;
         const user = req.user;
@@ -24,7 +23,6 @@ export async function addItem2Cart(req, res) {
             if (!product) {
                 return res.status(404).json({ error: 'Product not found' });
             }
-            console.log("price", product.price);
             cart.products.push({ productId, quantity: 1, price: product.price });
         }
 
@@ -33,7 +31,6 @@ export async function addItem2Cart(req, res) {
 
         return res.json(cart);
     } catch (error) {
-        console.log("error: ", error);
         return res.status(500).json({ error: 'An error occurred' });
     }
 }

@@ -78,4 +78,65 @@
   .add-to-cart-button:hover {
     background-color: #2980b9;
   }
+
+  .checkout-button {
+    width: 100%;
+    background-color: #2980b9;
+    color: #fff;
+    border: none;
+    padding: 8px 10px; 
+    font-size: 18px;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
   
+  .checkout-button:hover {
+    background-color: #245a7e;
+  }
+
+  .client-dropdown{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    margin-bottom: 10px;
+    border-radius: 5px;
+  }
+
+  .additional-info{
+    width: 70%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin: 0;
+  }
+
+  .apply-button {
+    width: 30%;
+    background-color: #2980b9;
+    color: #fff;
+    border: none;
+    padding: 8px 10px; 
+    font-size: 18px;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .apply-button:hover {
+    background-color: #245a7e;
+  }
+
+  .discount-input-container {
+    display: flex;
+    align-items: center; /* Vertical alignment */
+    gap: 10px; /* Gap between input and button */
+}

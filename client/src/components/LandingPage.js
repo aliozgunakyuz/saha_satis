@@ -12,7 +12,6 @@ export default function Username() {
   const [cart, setCart] = useState([]);
 
   const addToCart = async (productId) => {
-    console.log("productId: ", productId);
     try {
       const response = await axios.post('/api/addtocart', { productId }, {
         headers: {

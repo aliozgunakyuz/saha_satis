@@ -25,6 +25,8 @@ router.get('/getclients', c_controller.getclients);
 router.get('/getclientbyID/:clientId', c_controller.getclientbyID);
 //discounts
 router.get('/getdiscounts', d_controller.getdiscounts);
+router.get('/check-discount/:code', d_controller.discountcheck);
+
 
 //PUT
 //user

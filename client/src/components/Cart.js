@@ -13,8 +13,38 @@ function Cart() {
     const [cart, setCart] = useState({ products: [], carttotal: 0 });
     const mail = useAuthStore((state) => state.auth.mail);
     const [{ isLoading, apiData, serverError }, setData] = useFetch(mail);
+    const [clients, setClients] = useState([]);
+    const [isValidDiscount, setIsValidDiscount] = useState(false);
+    const [discountPercent, setDiscountPercent] = useState(null);
+    let discountmessage = "Discount code does not entered";
+
+
+    const checkDiscountCode = async () => {
+        const discountCode = document.getElementById('discount-code').value;
+        if (discountCode === null || discountCode === '') {
+            return;
+        }
+        try {
+            const response = await axios.get(`/api/check-discount/${discountCode}`);
+            setIsValidDiscount(response.data.isValid);
+            if (response.data.isValid) {
+                setDiscountPercent(response.data.discountPercent);
+            } else {
+                setDiscountPercent(null);
+            }
+        } catch (error) {
+            console.error('Error checking discount code:', error);
+        }
+    };
 
     useEffect(() => {
+        axios.get('/api/getclients')
+            .then((response) => {
+                setClients(response.data); 
+            })
+            .catch((error) => {
+                console.error('Error fetching clients:', error);
+        });
         fetchCart();
     }, []);
 
@@ -37,7 +67,7 @@ function Cart() {
     };
     return (
         <Layout>
-            <div className="cart-container w-100">
+            <div className="cart-container">
                 <h2 className="cart-header">{apiData.name} {apiData.surname}'s Cart</h2>
                 <ul className="cart-list">
                     {cart.products.map((product) => (
@@ -56,7 +86,31 @@ function Cart() {
                         </li>
                     ))}
                 </ul>
-                <p className="cart-total">Total: ${cart.carttotal}</p>
+                <label for="client-dropdown">Select a Client:</label>
+                    <select id="client-dropdown" className='client-dropdown'>
+                    {clients.map((client) => (
+                        <option value="product1" key={client._id}>{client.clientname}</option>
+                    ))}
+                    </select>
+                    <div className="discount-input-container">
+                        <input
+                            type="text"
+                            id="discount-code"
+                            className="additional-info"
+                            placeholder="Discount Code (Optional)"
+                        />
+                        <button className="apply-button" onClick={checkDiscountCode}>
+                            Apply Discount
+                        </button>
+                    </div>
+                    
+                    {isValidDiscount ? <p>Valid discount code applied! Discount: {discountPercent}%</p> : <p>{discountmessage}</p>}
+                    {isValidDiscount ? <p className='cart-total'>
+                        Total: {cart.carttotal.toFixed(2)} / Discounted Total: {(cart.carttotal - (cart.carttotal * discountPercent / 100)).toFixed(2)}₺
+                    </p> : <p className='cart-total'>Total: {cart.carttotal.toFixed(2)} </p> }
+                <div>
+                    <button className="checkout-button">CHECKOUT</button>
+                </div>
             </div>
         </Layout>
     );
