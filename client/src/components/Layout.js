@@ -4,7 +4,7 @@ import Footer from './Footer'
 
 export default function Layout({children }) {
     return (
-        <div className='flex flex-col'>
+        <div>
             <NavigationBar />
             <p>&nbsp;</p>
             {children}

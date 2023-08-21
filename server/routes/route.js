@@ -49,7 +49,9 @@ router.route('/addclient').post(c_controller.addclient);
 //discounts
 router.route('/adddiscount').post(d_controller.adddiscount);
 //cart
-router.route('/addtocart').post(cart_controller.addItem2Cart);
+router.route('/addtocart').post(Auth, cart_controller.addItem2Cart);
+router.route('/cart').get(Auth, cart_controller.getCart);
+router.route('/cart/:productId').delete(Auth, cart_controller.deleteItemFromCart);
 
 //DELETE
 //user
