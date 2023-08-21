@@ -6,6 +6,7 @@ import * as p_controller from '../controllers/productcontroller.js';
 import * as c_controller from '../controllers/clientcontroller.js'
 import * as d_controller from '../controllers/discountcontroller.js';
 import * as cart_controller from '../controllers/cartcontroller.js'
+import * as sale_controller from '../controllers/finalsalecontroller.js'
 import { registerMail } from '../controllers/mailsender.js';
 import Auth, {local_variables} from '../middlewares/auth.js';
 
@@ -54,6 +55,8 @@ router.route('/adddiscount').post(d_controller.adddiscount);
 router.route('/addtocart').post(Auth, cart_controller.addItem2Cart);
 router.route('/cart').get(Auth, cart_controller.getCart);
 router.route('/cart/:productId').delete(Auth, cart_controller.deleteItemFromCart);
+
+router.route('/save-final-sale').post(Auth, sale_controller.saveFinalSale);
 
 //DELETE
 //user

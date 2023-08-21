@@ -16,8 +16,49 @@ function Cart() {
     const [clients, setClients] = useState([]);
     const [isValidDiscount, setIsValidDiscount] = useState(false);
     const [discountPercent, setDiscountPercent] = useState(null);
+    const [selectedClientName, setSelectedClientName] = useState('');
     let discountmessage = "Discount code does not entered";
 
+
+    const handleCheckout = async () => {
+        if (cart.products.length === 0) {
+            return;
+        }
+    
+        const selectedClient = clients.find((client) => client.clientname === selectedClientName);
+    
+        const finalSaleData = {
+            userID: apiData.userId,
+            username: apiData.name,
+            usersurname: apiData.surname,
+            usermail: apiData.mail,
+            userphone: apiData.phone,
+            clientId: selectedClient._id,
+            clientname: selectedClient.clientname,
+            clientphone: selectedClient.clientphone,
+            clientmail: selectedClient.clientmail,
+            clientaddress: selectedClient.clientaddress,
+            products: cart.products.map((product) => ({
+                productId: product.productId,
+                productName: product.productId.productname,
+                productPrice: product.price,
+                productWeight: 'product_weight',
+            })),
+            discountCode: isValidDiscount ? document.getElementById('discount-code').value : '',
+            discountPercent: isValidDiscount ? discountPercent : 0,
+            totalPrice: cart.carttotal,
+            discountedPrice: isValidDiscount ? cart.carttotal - (cart.carttotal * discountPercent / 100) : cart.carttotal,
+            status: 'waiting...',
+        };
+    
+        try {
+            console.log(finalSaleData)
+            await axios.post('/save-final-sale', finalSaleData);
+        } catch (error) {
+            console.error('Error saving final sale:', error);
+        }
+    };
+    
 
     const checkDiscountCode = async () => {
         const discountCode = document.getElementById('discount-code').value;
@@ -87,11 +128,21 @@ function Cart() {
                     ))}
                 </ul>
                 <label for="client-dropdown">Select a Client:</label>
-                    <select id="client-dropdown" className='client-dropdown'>
+                <select
+                    id="client-dropdown"
+                    className="client-dropdown"
+                    value={selectedClientName}
+                    onChange={(e) => setSelectedClientName(e.target.value)}
+                >
+                    <option value="" disabled>
+                        Select a Client
+                    </option>
                     {clients.map((client) => (
-                        <option value="product1" key={client._id}>{client.clientname}</option>
+                        <option value={client.clientname} key={client._id}>
+                            {client.clientname}
+                        </option>
                     ))}
-                    </select>
+                </select>
                     <div className="discount-input-container">
                         <input
                             type="text"
@@ -109,7 +160,7 @@ function Cart() {
                         Total: {cart.carttotal.toFixed(2)} / Discounted Total: {(cart.carttotal - (cart.carttotal * discountPercent / 100)).toFixed(2)}₺
                     </p> : <p className='cart-total'>Total: {cart.carttotal.toFixed(2)} </p> }
                 <div>
-                    <button className="checkout-button">CHECKOUT</button>
+                    <button className={`checkout-button ${!selectedClientName ? 'disabled-button' : ''}`} onClick={handleCheckout} disabled={!selectedClientName}>CHECKOUT</button>
                 </div>
             </div>
         </Layout>

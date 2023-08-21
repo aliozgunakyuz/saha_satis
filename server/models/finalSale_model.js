@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const finalSaleSchema = new mongoose.Schema({
+const Schema_FinalSale = new mongoose.Schema({
     userID: { type: mongoose.Schema.Types.ObjectId, required: true },
     username: { type: String, required: true },
     usersurname: { type: String, required: true },
@@ -26,6 +26,4 @@ const finalSaleSchema = new mongoose.Schema({
     status: { type: String, default:"waiting..." },
 }, { timestamps: true });
 
-const FinalSale = mongoose.model('FinalSale', finalSaleSchema);
-
-export default FinalSale;
+export default mongoose.model('FinalSale', Schema_FinalSale);

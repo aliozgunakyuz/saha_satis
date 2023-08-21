@@ -140,3 +140,14 @@
     align-items: center; /* Vertical alignment */
     gap: 10px; /* Gap between input and button */
 }
+.disabled-button {
+  background-color: gray; /* Change this to your desired disabled button color */
+  color: white; /* Change this to your desired text color */
+  cursor: not-allowed; /* Show not-allowed cursor on disabled button */
+}
+
+.disabled-button:hover {
+  background-color: gray; /* Change this to your desired disabled button color */
+  color: white; /* Change this to your desired text color */
+  cursor: not-allowed; /* Show not-allowed cursor on disabled button */
+}
