@@ -52,8 +52,10 @@ function Cart() {
         };
     
         try {
-            console.log(finalSaleData)
-            await axios.post('/save-final-sale', finalSaleData);
+            await axios.post('/api/save-final-sale', {finalSaleData} , {
+                headers: {
+                  Authorization: `Bearer ${localStorage.getItem('token')}`,
+                },});
         } catch (error) {
             console.error('Error saving final sale:', error);
         }

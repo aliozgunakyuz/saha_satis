@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 
 const Schema_FinalSale = new mongoose.Schema({
-    userID: { type: mongoose.Schema.Types.ObjectId, required: true },
+    userID: { type: mongoose.Schema.Types.ObjectId},
     username: { type: String, required: true },
     usersurname: { type: String, required: true },
     usermail: { type: String, required: true },

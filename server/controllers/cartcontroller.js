@@ -44,12 +44,10 @@ export async function getCart(req, res) {
     }
 
     let cart = await cart_model.findOne({ userId: user._id }).populate('products.productId');
-    console.log("cart: ", cart);
     if (!cart) {
         return res.status(404).json({ error: 'Cart not found' });
 
     }
-    console.log("cart: ", cart);
     res.json(cart);
 }
 
@@ -58,7 +56,6 @@ export async function deleteItemFromCart(req, res) {
 
     const user = req.user;
     const productId = req.params.productId;
-    console.log("productId: ", productId);
     let cart = await cart_model.findOne({ userId: user._id }).populate('products.productId');
 
     if (!cart) {
@@ -66,7 +63,6 @@ export async function deleteItemFromCart(req, res) {
     }
 
     const products = cart.products.filter(product => product.productId._id.toString() !== productId);
-    console.log("products: ", products);
 
     cart.products = products;
 
