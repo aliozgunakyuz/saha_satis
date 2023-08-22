@@ -17,6 +17,7 @@ function Cart() {
     const [isValidDiscount, setIsValidDiscount] = useState(false);
     const [discountPercent, setDiscountPercent] = useState(null);
     const [selectedClientName, setSelectedClientName] = useState('');
+    
     let discountmessage = "Discount code does not entered";
 
 
@@ -57,6 +58,8 @@ function Cart() {
                 products: cart.products.map((product) => ({
                     productId: product.productId,
                     productName: product.productId.productname,
+                    productCategory: product.productId.category,
+                    productQuantity: product.quantity,
                     productPrice: product.price,
                     productWeight: 0,
                 })),

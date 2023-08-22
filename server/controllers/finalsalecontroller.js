@@ -19,3 +19,12 @@ export const saveFinalSale = async (req, res) => {
         res.status(500).json({ error: 'An error occurred while saving the final sale.' });
     }
 };
+
+export const getFinalSales = async (req, res) => {
+    try {
+        const finalSales = await finalSale_model.find(); 
+        res.status(200).json(finalSales); 
+    } catch (error) {
+        res.status(500).json({ error: 'Internal server error' });
+    }
+};

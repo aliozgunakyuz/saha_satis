@@ -9,6 +9,8 @@ export default function Layout({children }) {
             <p>&nbsp;</p>
             {children}
             <p>&nbsp;</p>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
             <Footer />
         </div>
     )

@@ -16,6 +16,8 @@ const Schema_FinalSale = new mongoose.Schema({
             productId: { type: mongoose.Schema.Types.ObjectId, required: true },
             productName: { type: String, required: true },
             productPrice: { type: Number, required: true },
+            productCategory: {type: String, required:true},
+            productQuantity: {type: Number, required: true},
             productWeight: {type: Number, required: true },
         }
     ],

@@ -57,6 +57,8 @@ router.route('/cart').get(Auth, cart_controller.getCart);
 router.route('/cart/:productId').delete(Auth, cart_controller.deleteItemFromCart);
 
 router.route('/save-final-sale').post(Auth, sale_controller.saveFinalSale);
+router.route('/getfinalsales').get(sale_controller.getFinalSales);
+
 
 //DELETE
 //user
