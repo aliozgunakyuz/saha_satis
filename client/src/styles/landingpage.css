@@ -15,3 +15,22 @@
     padding: 4px 8px; 
     @apply  w-3/4 py-4 rounded-lg text-gray-50 text-xl shadow-sm text-center;
 }
+
+.menu-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 1rem; /* Adjust the spacing as needed */
+}
+
+.products-dropdown{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}

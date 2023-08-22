@@ -39,11 +39,42 @@ export default function Username() {
     <>
       <Layout>
         <Toaster position='top-center' reverseOrder={false}></Toaster>
-        <div className='text-center mb-10'>
+        
+        <div className='flex justify-center items-center flex-col pb-4'>
           <p></p>
           <h1 className='text-custom-blue text-4xl lg:text-5xl md:text-4xl sm:text-3xl xsm:text-2xl font-bold'>
             Ürünlerimiz
           </h1>
+          <p></p>
+        </div>
+        <div className='flex flex-row justify-center menu-container'>
+          <div className='text-center mb-10'>
+          <label for="client-dropdown text-custom-blue">Category:</label>
+            <select
+            id="category-dropdown"
+            className="product-dropdown">
+              <option value="" disabled>
+                Select a Category
+              </option>
+            {products.map((product) => (
+              <option value='all'>{product.category}</option>
+              ))}
+            </select>
+          </div>
+          
+          <div className='text-center mb-10'>
+          <label for="weight-dropdown text-custom-blue">Weight:</label>
+            <select
+            id="weight-dropdown"
+            className="product-dropdown">
+              <option value="" disabled>
+                        Select Weight
+              </option>
+            {products.map((product) => (
+              <option value='all'>{product.weight}</option>
+              ))}
+            </select>
+          </div>
         </div>
         <div className='flex flex-wrap justify-center space-x-4'>
           {products.map((product) => (
