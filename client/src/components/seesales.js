@@ -218,6 +218,17 @@ export default function Seesales({ userType }) {
     const [finalSales, setFinalSales] = useState([]);
     const mail = useAuthStore((state) => state.auth.mail);
     const [{ isLoading, apiData, serverError }, setData] = useFetch(mail);
+    const [sortColumn, setSortColumn] = useState(null);
+    const [sortOrder, setSortOrder] = useState('asc'); // 'asc' or 'desc'
+
+    const handleSort = (columnName) => {
+      if (sortColumn === columnName) {
+        setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
+      } else {
+        setSortColumn(columnName);
+        setSortOrder('asc');
+      }
+    };
 
     const handleSaleStatusChange = () => {
       axios.get('/api/getfinalsales')
@@ -230,13 +241,22 @@ export default function Seesales({ userType }) {
     };
 
     useEffect(() => {
-        axios.get('/api/getfinalsales')
-            .then((response) => {
-                setFinalSales(response.data);
-            })
-            .catch(error => {
-                console.error('Error fetching final sales:', error);
-            });
+      axios
+        .get('/api/getfinalsales')
+        .then((response) => {
+          const sortedSales = response.data.sort((a, b) => {
+
+            const aValue = a['createdAt'];
+            const bValue = b['createdAt'];
+    
+            return bValue.toString().localeCompare(aValue.toString());
+          });
+    
+          setFinalSales(sortedSales);
+        })
+        .catch((error) => {
+          console.error('Error fetching final sales:', error);
+        });
     }, []);
 
     const filteredSales = apiData.userType === 'admin'
@@ -246,25 +266,45 @@ export default function Seesales({ userType }) {
         return (
             <Layout>
               <div className='paper-container'>
+                
                 <TableContainer component={Paper}>
+                <Box textAlign="center">
+                  <b className='text-black'>You can sort by pressing table heads</b>
+                </Box>
                     <Table aria-label="collapsible table">
                     <TableHead>
                         <TableRow>
                         <TableCell />
-                        <TableCell><b>Date</b></TableCell>
-                        <TableCell align="right"><b>Salesman</b></TableCell>
-                        <TableCell align="right"><b>Client&nbsp;</b></TableCell>
-                        <TableCell align="right"><b>Discount Code&nbsp;</b></TableCell>
+                        <TableCell onClick={() => handleSort('createdAt')}><b>Date</b></TableCell>
+                        <TableCell align="right" onClick={() => handleSort('username')}><b>Salesman</b></TableCell>
+                        <TableCell align="right" onClick={() => handleSort('clientname')}><b>Client&nbsp;</b></TableCell>
+                        <TableCell align="right"onClick={() => handleSort('discountCode')} ><b>Discount Code&nbsp;</b></TableCell>
                         <TableCell align="right"><b>Discount Percent&nbsp;</b></TableCell>
                         <TableCell align="right"><b>Total&nbsp;</b></TableCell>
                         <TableCell align="right"><b>Discounted Total&nbsp;</b></TableCell>
-                        <TableCell align="right"><b>Status&nbsp;</b></TableCell>
+                        <TableCell align="right" onClick={() => handleSort('status')}><b>Status&nbsp;</b></TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                            {filteredSales.map((sale) => (
-                              <Row key={sale._id} sale={sale} onSaleStatusChange={handleSaleStatusChange} />
-                            ))}
+                    {filteredSales
+                      .sort((a, b) => {
+                        if (sortColumn) {
+                          const aValue = a[sortColumn];
+                          const bValue = b[sortColumn];
+                          
+                          if (sortColumn === 'discountPercent' || sortColumn === 'totalPrice') {
+                            // For integer columns, compare as numbers
+                            return sortOrder === 'asc' ? aValue - bValue : bValue - aValue;
+                          }
+                          
+                          // For string columns, use localeCompare
+                          return sortOrder === 'asc' ? aValue.localeCompare(bValue) : bValue.localeCompare(aValue);
+                        }
+                        return 0;
+                      })
+                      .map((sale) => (
+                        <Row key={sale._id} sale={sale} onSaleStatusChange={handleSaleStatusChange} />
+                      ))}
                     </TableBody>
                     </Table>
                 </TableContainer>

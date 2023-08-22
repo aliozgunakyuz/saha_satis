@@ -51,6 +51,7 @@ router.delete('/discounts/:discountId', d_controller.deleteDiscount);
 router.route('/addtocart').post(Auth, cart_controller.addItem2Cart);
 router.route('/cart').get(Auth, cart_controller.getCart);
 router.route('/cart/:productId').delete(Auth, cart_controller.deleteItemFromCart);
+router.put('/quantityincrease/:productId', Auth, cart_controller.increaseQuantity);
 router.delete('/cleancart', Auth, cart_controller.deleteAllItemsFromCart);
 
 //SALE

@@ -94,3 +94,37 @@ export async function deleteAllItemsFromCart(req, res) {
 
     res.json(cart);
 }
+export async function increaseQuantity(req, res){
+    const user = req.user;
+    const productId = req.params.productId;
+
+    if (!user) {
+        return res.status(401).json({ error: 'You must be logged in' });
+    }
+
+    let cart = await cart_model.findOne({ userId: user._id }).populate('products.productId');
+    
+
+    if (!cart) {
+        return res.status(404).json({ error: 'Cart not found' });
+    }
+
+    const productIndex = cart.products.findIndex(product => product.productId.toString() === productId.toString());
+
+
+    console.log('ProductID:', productId);
+    console.log('Cart:', cart);
+    console.log('Cart products:', cart.products);
+
+
+    if (productIndex !== -1) {
+        cart.products[productIndex].quantity++;
+        cart.calculateTotal();
+        await cart.save(); 
+
+        res.json(cart);
+    } else {
+        return res.status(404).json({ error: 'Product not found in cart' });
+    }
+    
+}

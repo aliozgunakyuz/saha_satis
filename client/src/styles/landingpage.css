@@ -8,3 +8,10 @@
   .text-custom-blue {
     color: #164663;
   }
+
+  .btncrement{
+    background-color: #c71c1c;
+    font-size: 12px; 
+    padding: 4px 8px; 
+    @apply  w-3/4 py-4 rounded-lg text-gray-50 text-xl shadow-sm text-center;
+}

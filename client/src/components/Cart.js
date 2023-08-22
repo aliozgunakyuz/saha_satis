@@ -24,7 +24,6 @@ function Cart() {
     const removeFromCart = async (productIds) => {
         try {
             service.delete(`/api/cleancart`)
-    
             fetchCart();
         } catch (error) {
             console.error('Error removing from cart:', error);
@@ -138,6 +137,15 @@ function Cart() {
         }
     };
 
+    const increaseQuantity = async (productId) => {
+        try {
+          await service.put(`/api/quantityincrease/${productId}`);;
+          fetchCart();
+        } catch (error) {
+          console.error("An error occurred:", error);
+        }
+      };
+
     return (
         <Layout>
             <div className="cart-container">
@@ -147,16 +155,19 @@ function Cart() {
                         <li key={product._id} className="cart-item">
                             <div className="product-info bg-custom-blue rounded-lg">
                                 <div>
-                                <label htmlFor="productimage">
-                                    <img src={product.productId.productimage}
-                                        alt={product.productId.productname}
-                                        className="product-image" />
-                                </label>
+                                    <label htmlFor="productimage">
+                                        <img src={product.productId.productimage}
+                                            alt={product.productId.productname}
+                                            className="product-image" />
+                                    </label>
                                 </div>
                             </div>
                             <div className="product-name">{product.productId.productname}</div>
-                            <div className="product-quantity">Weight: {product.weight}gr</div>
-                            <div className="product-quantity">Quantity: {product.quantity}</div>
+                            <div className="product-quantity">{product.weight}gr</div>
+                            <button onClick={() => increaseQuantity(product.productId)}><b>-</b></button>
+                            <div className="product-quantity">{product.quantity}</div>
+                           
+                            <button onClick={() => increaseQuantity(product.productId._id)}><b>+</b></button>
                             <div className="product-quantity">{product.price}₺</div>
                             <button className="remove-button" onClick={() => removeFromCart2(product.productId._id,product.productId.productname,product.weight,product.quantity)}>
                                 Remove
