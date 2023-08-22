@@ -71,7 +71,7 @@ export default function Username() {
                         Select Weight
               </option>
             {products.map((product) => (
-              <option value='all'>{product.weight}</option>
+              <option value='all'>{product.weight}gr</option>
               ))}
             </select>
           </div>
