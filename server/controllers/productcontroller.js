@@ -2,7 +2,7 @@ import product_model from '../models/product_model.js';
 
 export async function addproduct(req, res) {
     try {
-        const { productimage, productname, stock, price, color, category } = req.body;
+        const { productimage, productname, stock, price, weight, category } = req.body;
         const productnameExists = await product_model.findOne({ productname });
 
         if (productnameExists) {
@@ -18,7 +18,7 @@ export async function addproduct(req, res) {
             productname,
             stock,
             price,
-            color,
+            weight,
             category,
         });
 
@@ -67,7 +67,7 @@ export async function getproducts(req, res) {
       product.productname = req.body.productname;
       product.stock = req.body.stock;
       product.price = req.body.price;
-      product.color = req.body.color;
+      product.weight = req.body.weight;
       product.category = req.body.category;
   
       if (req.body.productimage) {

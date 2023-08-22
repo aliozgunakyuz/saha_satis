@@ -20,7 +20,7 @@ const UpdateProduct = () => {
     productname: '',
     stock: '',
     price: '',
-    color: '',
+    weight: '',
     category: '',
   });
 
@@ -39,7 +39,7 @@ const UpdateProduct = () => {
       productname: product.productname,
       stock: product.stock,
       price: product.price,
-      color: product.color,
+      weight: product.weight,
       category: product.category,
     },
     enableReinitialize: true,
@@ -89,7 +89,7 @@ const UpdateProduct = () => {
               <input {...formik.getFieldProps('productname')} type="text" className={styles.textbox} placeholder='Name' />
               <input {...formik.getFieldProps('stock')} type="text" className={styles.textbox} placeholder='Stock' />
               <input {...formik.getFieldProps('price')} type="text" className={styles.textbox} placeholder='Price' />
-              <input {...formik.getFieldProps('color')} type="text" className={styles.textbox} placeholder='Color' />
+              <input {...formik.getFieldProps('weight')} type="text" className={styles.textbox} placeholder='Weight' />
               <input {...formik.getFieldProps('category')} type="text" className={styles.textbox} placeholder='Category' />
               <button className={styles.btn} type="submit">Update Product</button>
               <button className={styles.btn} onClick={() => { navigate('/seeproducts') }}>Back</button>

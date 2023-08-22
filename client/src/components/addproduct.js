@@ -23,7 +23,7 @@ export default function AddProduct() {
       productname: '',
       stock: '',
       price: '',
-      color: '',
+      weight: '',
       category: '',
     },
     validate: productValidate,
@@ -69,7 +69,7 @@ export default function AddProduct() {
                         <input {...formik.getFieldProps('productname')} type="text" className={styles.textbox} placeholder='Product Name' />
                         <input {...formik.getFieldProps('stock')} type="text" className={styles.textbox} placeholder='Stock (Should be Integer' />
                         <input {...formik.getFieldProps('price')} type="text" className={styles.textbox} placeholder='Price (e.g. 3,99)' />
-                        <input {...formik.getFieldProps('color')} type="text" className={styles.textbox} placeholder='Color' />
+                        <input {...formik.getFieldProps('weight')} type="text" className={styles.textbox} placeholder='Weight (as gr)' />
                         <input {...formik.getFieldProps('category')} type="text" className={styles.textbox} placeholder='Category' />
                         <button className={styles.btn} type="submit">Add Product</button>
                         <button className={styles.btn} onClick={()=>{navigate('/adminpanel')}}>Back</button>

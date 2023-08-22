@@ -33,11 +33,11 @@ const Products = () => {
     }
 
     const sortedProducts = [...products].sort((a, b) => {
-      if (key === 'productname' || key === 'color' || key === 'category') {
+      if (key === 'productname' || key === 'category') {
         const aValue = a[key].toString().toLowerCase();
         const bValue = b[key].toString().toLowerCase();
         return direction === 'ascending' ? aValue.localeCompare(bValue) : bValue.localeCompare(aValue);
-      } else if (key === 'stock' || key === 'price') {
+      } else if (key === 'stock' || key === 'price' || key === 'weight') {
         return direction === 'ascending' ? a[key] - b[key] : b[key] - a[key];
       }
       return 0;
@@ -94,7 +94,7 @@ const Products = () => {
               <th onClick={() => sortTable('price')}>
                 Price (TRY) {getSortIcon('price')}
               </th>
-              <th onClick={() => sortTable('color')}>Color {getSortIcon('color')}</th>
+              <th onClick={() => sortTable('weight')}>Weight {getSortIcon('weight')} (gr)</th>
               <th onClick={() => sortTable('category')}>Category {getSortIcon('category')}</th>
             </tr>
           </thead>
@@ -109,7 +109,7 @@ const Products = () => {
                 <td>{product.productname}</td>
                 <td>{product.stock}</td>
                 <td>{product.price}₺</td>
-                <td>{product.color}</td>
+                <td>{product.weight}gr</td>
                 <td>{product.category}</td>
                 <td><button className="btn2" onClick={() => handleUpdate(product._id)}>Update</button></td>
                 <td><button className="btn2" onClick={() => handleDelete(product._id, product.productname)}>Delete</button></td>

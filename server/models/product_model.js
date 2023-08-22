@@ -22,8 +22,8 @@ export const Schema_Product = new mongoose.Schema({
         required: true,
         unique: false,
     },
-    color: {
-        type: String,
+    weight: {
+        type: Number,
         required: true,
         unique: false,
     },
