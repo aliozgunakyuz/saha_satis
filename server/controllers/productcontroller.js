@@ -3,13 +3,14 @@ import product_model from '../models/product_model.js';
 export async function addproduct(req, res) {
     try {
         const { productimage, productname, stock, price, weight, category } = req.body;
+        console.log(req.body);
         const productnameExists = await product_model.findOne({ productname });
 
         if (productnameExists) {
             return res.status(400).send({ error: 'Product already exists.' });
         }
 
-        if (!price || !stock) {
+        if (!price || !stock || !weight) {
             return res.status(400).send({ error: 'Price and stock are required fields.' });
         }
 
@@ -25,6 +26,7 @@ export async function addproduct(req, res) {
         const result = await product.save();
         return res.status(201).send({ message: 'Product registration successfully completed' });
     } catch (error) {
+        console.error('Error adding product:', error);
         return res.status(500).send({ error: 'Internal server error' });
     }
 }

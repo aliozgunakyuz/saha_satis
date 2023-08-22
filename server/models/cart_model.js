@@ -15,6 +15,10 @@ const cartProductSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.Number,
         required: true,
     },
+    weight: {
+        type: mongoose.Schema.Types.Number,
+        required: true,
+    },
 });
 
 const cartSchema = new mongoose.Schema({

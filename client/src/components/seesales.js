@@ -43,8 +43,8 @@ function Row(props) {
           <TableCell align="right">{sale.clientname}</TableCell>
           <TableCell align="right">{sale.discountCode}</TableCell>
           <TableCell align="right">{sale.discountPercent}</TableCell>
-          <TableCell align="right">{sale.totalPrice.toFixed(2)}</TableCell>
-          <TableCell align="right">{sale.discountedPrice.toFixed(2)}</TableCell>
+          <TableCell align="right">{sale.totalPrice}</TableCell>
+          <TableCell align="right">{sale.discountedPrice}</TableCell>
           <TableCell align="right">{sale.status}</TableCell>
         </TableRow>
         <TableRow>
@@ -125,7 +125,7 @@ function Row(props) {
                         <TableCell align="right">{product.productWeight}</TableCell>
                         <TableCell align="right">{product.productQuantity}</TableCell>
                         <TableCell align="right">{product.productPrice}</TableCell>
-                        <TableCell align="right">{(product.productPrice*product.productQuantity).toFixed(2)}</TableCell>
+                        <TableCell align="right">{(product.productPrice*product.productQuantity)}</TableCell>
                       </TableRow>
                     ))}
                   </TableBody>

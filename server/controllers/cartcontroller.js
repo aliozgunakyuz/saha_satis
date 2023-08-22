@@ -23,7 +23,7 @@ export async function addItem2Cart(req, res) {
             if (!product) {
                 return res.status(404).json({ error: 'Product not found' });
             }
-            cart.products.push({ productId, quantity: 1, price: product.price });
+            cart.products.push({ productId, quantity: 1, price: product.price, weight: product.weight });
         }
 
         cart.calculateTotal();

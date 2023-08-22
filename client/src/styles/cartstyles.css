@@ -151,3 +151,9 @@
   color: white; /* Change this to your desired text color */
   cursor: not-allowed; /* Show not-allowed cursor on disabled button */
 }
+
+.product-image {
+  width: 100px; /* Set the desired fixed width */
+  height: 100px; /* Set the desired fixed height */
+  object-fit: cover; /* Maintain aspect ratio and fill the container */
+}

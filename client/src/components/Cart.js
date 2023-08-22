@@ -23,7 +23,13 @@ function Cart() {
 
     const removeFromCart = async (productIds) => {
         try {
-            await Promise.all(productIds.map(productId => service.delete(`/api/cart/${productId}`)));
+            const deletePromises = productIds.map(productId =>
+                service.delete(`/api/cart/${productId}`)
+            );
+    
+            await Promise.all(deletePromises);
+    
+            fetchCart();
         } catch (error) {
             console.error('Error removing from cart:', error);
         }
@@ -61,7 +67,7 @@ function Cart() {
                     productCategory: product.productId.category,
                     productQuantity: product.quantity,
                     productPrice: product.price,
-                    productWeight: 0,
+                    productWeight: product.weight,
                 })),
                 discountCode: isValidDiscount ? document.getElementById('discount-code').value : '',
                 discountPercent: isValidDiscount ? discountPercent : 0,
@@ -75,7 +81,7 @@ function Cart() {
                     headers: {
                     Authorization: `Bearer ${localStorage.getItem('token')}`,
                     },});
-
+                    console.log(productIdsToRemove);
                     await removeFromCart(productIdsToRemove)
                     fetchCart();
             } catch (error) {
@@ -86,8 +92,6 @@ function Cart() {
         
     };
     
-    
-
     const checkDiscountCode = async () => {
         const discountCode = document.getElementById('discount-code').value;
         if (discountCode === null || discountCode === '') {
@@ -147,13 +151,18 @@ function Cart() {
                         <li key={product._id} className="cart-item">
                             <div className="product-info bg-custom-blue rounded-lg">
                                 <div>
-                                    <img src={product.productId.productimage} alt={product.productId.productname} className="product-image" />
+                                <label htmlFor="productimage">
+                                    <img src={product.productId.productimage}
+                                        alt={product.productId.productname}
+                                        className="product-image" />
+                                </label>
                                 </div>
                             </div>
                             <div className="product-name">{product.productId.productname}</div>
+                            <div className="product-quantity">Weight: {product.weight}gr</div>
                             <div className="product-quantity">Quantity: {product.quantity}</div>
                             <div className="product-quantity">{product.price}₺</div>
-                            <button className="remove-button" onClick={() => removeFromCart2(product.productId._id,product.productId.productname,product.quantity)}>
+                            <button className="remove-button" onClick={() => removeFromCart2(product.productId._id,product.productId.productname,product.weight,product.quantity)}>
                                 Remove
                             </button>
                         </li>
