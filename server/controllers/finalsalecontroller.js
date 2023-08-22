@@ -32,8 +32,6 @@ export const getFinalSales = async (req, res) => {
 export async function updateSaleStatus(req, res) {
     try {
       const { saleId,newstatus} = req.params;
-      console.log(saleId);
-      console.log(newstatus);
   
       await finalSale_model.findByIdAndUpdate(saleId, { status: newstatus });
   

@@ -11,7 +11,7 @@ export default function Navbar() {
   const navRef = useRef();
   const navigate = useNavigate();
   const mail = useAuthStore((state) => state.auth.mail);
-    const [{ isLoading, apiData, serverError }, setData] = useFetch(mail);
+  const [{ isLoading, apiData, serverError }, setData] = useFetch(mail);
 
   const showNavbar = () => {
     navRef.current.classList.toggle("responsive_nav");

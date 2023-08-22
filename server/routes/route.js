@@ -39,7 +39,7 @@ router.put('/products/:productId', p_controller.updateProduct);
 //client
 router.put('/clients/:clientId', c_controller.updateClient);
 
-router.put('/updatesalestatus/:saleId/:newstatus', sale_controller.updateSaleStatus);
+router.route('/updatesalestatus/:saleId/:newstatus').put( sale_controller.updateSaleStatus);
 
 //POST
 //user

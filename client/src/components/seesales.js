@@ -60,6 +60,8 @@ function Row(props) {
   };
     const { sale } = props;
     const [open, setOpen] = React.useState(false);
+    const mail = useAuthStore((state) => state.auth.mail);
+    const [{ isLoading, apiData, serverError }, setData] = useFetch(mail);
   
     return (
       <React.Fragment>
@@ -95,6 +97,7 @@ function Row(props) {
                 <Table size="small" >
                   <TableHead>
                     <TableRow>
+                    {apiData.userType === 'admin' && (
                       <TableCell align="center">
                         <button 
                           className="btnaccept" 
@@ -118,6 +121,7 @@ function Row(props) {
                         </button>
                         
                         </TableCell>
+                    )}
                     </TableRow>
                   </TableHead>
                 </Table>
