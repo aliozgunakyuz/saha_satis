@@ -58,7 +58,6 @@ function Row(props) {
         console.error('Error updating sale status:', error);
       });
   };
-
     const { sale } = props;
     const [open, setOpen] = React.useState(false);
   
@@ -83,7 +82,10 @@ function Row(props) {
           <TableCell align="right">{sale.discountPercent}</TableCell>
           <TableCell align="right">{sale.totalPrice}</TableCell>
           <TableCell align="right">{sale.discountedPrice}</TableCell>
-          <TableCell align="right">{sale.status}</TableCell>
+          <TableCell align="right">
+          <span
+            className={`sale-status ${sale.status === 'Accepted' ? 'green' : sale.status === 'Declined' ? 'red' : 'yellow'}`}
+          >{sale.status}</span></TableCell>
         </TableRow>
         <TableRow>
           <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={9}>

@@ -36,3 +36,21 @@
 .paper-container {
     margin: 0 16px; /* Adjust the margin as needed */
   }
+
+  .sale-status {
+    font-weight: bold;
+    padding: 2px 6px;
+    border-radius: 4px;
+  }
+  
+  .green {
+    color: #1a9c54;
+  }
+  
+  .red {
+    color: #c71c1c;
+  }
+  
+  .yellow {
+    color: #e0d216;
+  }
