@@ -20,46 +20,69 @@ function Cart() {
     let discountmessage = "Discount code does not entered";
 
 
+    const removeFromCart = async (productIds) => {
+        try {
+            await Promise.all(productIds.map(productId => service.delete(`/api/cart/${productId}`)));
+        } catch (error) {
+            console.error('Error removing from cart:', error);
+        }
+    };
+
+  
+
     const handleCheckout = async () => {
         if (cart.products.length === 0) {
             return;
         }
+
+        const confirmed = window.confirm("Are you sure you want finish sale process? This will remove all items from your cart.");
+
+        const productIdsToRemove = cart.products.map(product => product.productId._id);
+
+        if (confirmed) {
     
-        const selectedClient = clients.find((client) => client.clientname === selectedClientName);
-    
-        const finalSaleData = {
-            userID: apiData.userId,
-            username: apiData.name,
-            usersurname: apiData.surname,
-            usermail: apiData.mail,
-            userphone: apiData.phone,
-            clientId: selectedClient._id,
-            clientname: selectedClient.clientname,
-            clientphone: selectedClient.clientphone,
-            clientmail: selectedClient.clientmail,
-            clientaddress: selectedClient.clientaddress,
-            products: cart.products.map((product) => ({
-                productId: product.productId,
-                productName: product.productId.productname,
-                productPrice: product.price,
-                productWeight: 0,
-            })),
-            discountCode: isValidDiscount ? document.getElementById('discount-code').value : '',
-            discountPercent: isValidDiscount ? discountPercent : 0,
-            totalPrice: cart.carttotal,
-            discountedPrice: isValidDiscount ? cart.carttotal - (cart.carttotal * discountPercent / 100) : cart.carttotal,
-            status: 'waiting...',
+            const selectedClient = clients.find((client) => client.clientname === selectedClientName);
+        
+            const finalSaleData = {
+                userID: apiData.userId,
+                username: apiData.name,
+                usersurname: apiData.surname,
+                usermail: apiData.mail,
+                userphone: apiData.phone,
+                clientId: selectedClient._id,
+                clientname: selectedClient.clientname,
+                clientphone: selectedClient.clientphone,
+                clientmail: selectedClient.clientmail,
+                clientaddress: selectedClient.clientaddress,
+                products: cart.products.map((product) => ({
+                    productId: product.productId,
+                    productName: product.productId.productname,
+                    productPrice: product.price,
+                    productWeight: 0,
+                })),
+                discountCode: isValidDiscount ? document.getElementById('discount-code').value : '',
+                discountPercent: isValidDiscount ? discountPercent : 0,
+                totalPrice: cart.carttotal,
+                discountedPrice: isValidDiscount ? cart.carttotal - (cart.carttotal * discountPercent / 100) : '',
+                status: 'waiting...',
+            };
+        
+            try {
+                await axios.post('/api/save-final-sale', finalSaleData , {
+                    headers: {
+                    Authorization: `Bearer ${localStorage.getItem('token')}`,
+                    },});
+
+                    await removeFromCart(productIdsToRemove)
+                    fetchCart();
+            } catch (error) {
+                console.error('Error saving final sale:', error);
+            }
         };
-    
-        try {
-            await axios.post('/api/save-final-sale', finalSaleData , {
-                headers: {
-                  Authorization: `Bearer ${localStorage.getItem('token')}`,
-                },});
-        } catch (error) {
-            console.error('Error saving final sale:', error);
-        }
+
+        
     };
+    
     
 
     const checkDiscountCode = async () => {
@@ -100,14 +123,18 @@ function Cart() {
         }
     };
 
-    const removeFromCart = async (productId) => {
-        try {
-            await service.delete(`/api/cart/${productId}`);
-            fetchCart();
-        } catch (error) {
-            console.error('Error removing from cart:', error);
+    const removeFromCart2 = async (productId) => {
+        const confirmed2 = window.confirm("Are you sure you want finish sale process? This will remove all items from your cart.");
+        if(confirmed2){
+            try {
+                await service.delete(`/api/cart/${productId}`);
+                fetchCart();
+            } catch (error) {
+                console.error('Error removing from cart:', error);
+            }
         }
     };
+
     return (
         <Layout>
             <div className="cart-container">
@@ -123,7 +150,7 @@ function Cart() {
                             <div className="product-name">{product.productId.productname}</div>
                             <div className="product-quantity">Quantity: {product.quantity}</div>
                             <div className="product-quantity">{product.price}₺</div>
-                            <button className="remove-button" onClick={() => removeFromCart(product.productId._id)}>
+                            <button className="remove-button" onClick={() => removeFromCart2(product.productId._id,product.productId.productname,product.quantity)}>
                                 Remove
                             </button>
                         </li>
