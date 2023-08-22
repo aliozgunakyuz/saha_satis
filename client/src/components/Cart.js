@@ -23,11 +23,7 @@ function Cart() {
 
     const removeFromCart = async (productIds) => {
         try {
-            const deletePromises = productIds.map(productId =>
-                service.delete(`/api/cart/${productId}`)
-            );
-    
-            await Promise.all(deletePromises);
+            service.delete(`/api/cleancart`)
     
             fetchCart();
         } catch (error) {

@@ -72,3 +72,25 @@ export async function deleteItemFromCart(req, res) {
 
     res.json(cart);
 }
+
+export async function deleteAllItemsFromCart(req, res) {
+    const user = req.user;
+
+    if (!user) {
+        return res.status(401).json({ error: 'You must be logged in' });
+    }
+
+    let cart = await cart_model.findOne({ userId: user._id }).populate('products.productId');
+
+    if (!cart) {
+        return res.status(404).json({ error: 'Cart not found' });
+    }
+
+    cart.products = [];
+
+    cart.calculateTotal();
+
+    await cart.save();
+
+    res.json(cart);
+}
