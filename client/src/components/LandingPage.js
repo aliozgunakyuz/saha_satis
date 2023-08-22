@@ -56,6 +56,7 @@ export default function Username() {
               <option value="" disabled>
                 Select a Category
               </option>
+              <option>All</option>
             {products.map((product) => (
               <option value='all'>{product.category}</option>
               ))}
@@ -70,6 +71,7 @@ export default function Username() {
               <option value="" disabled>
                         Select Weight
               </option>
+              <option>All</option>
             {products.map((product) => (
               <option value='all'>{product.weight}gr</option>
               ))}
