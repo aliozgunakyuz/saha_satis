@@ -10,6 +10,7 @@ export default function Username() {
   const navigate = useNavigate();
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState('all');
 
   const addToCart = async (productId) => {
     try {
@@ -35,6 +36,10 @@ export default function Username() {
       });
   }, []);
 
+  const filteredProducts = selectedCategory === 'all'
+  ? products
+  : products.filter(product => product.category === selectedCategory);
+
   return (
     <>
       <Layout>
@@ -52,7 +57,8 @@ export default function Username() {
           <label for="client-dropdown text-custom-blue">Category:</label>
             <select
             id="category-dropdown"
-            className="product-dropdown">
+            className="product-dropdown"
+            onChange={(e) => setSelectedCategory(e.target.value)}>
               <option value="" disabled>
                 Select a Category
               </option>
@@ -79,7 +85,7 @@ export default function Username() {
           </div>
         </div>
         <div className='flex flex-wrap justify-center space-x-4'>
-          {products.map((product) => (
+          {filteredProducts.map((product) => (
             <div
               key={product.id}
               className='p-6 rounded-lg'
