@@ -1,0 +1,38 @@
+.btnaccept{
+    background-color: #1a9c54;
+    font-size: 12px; 
+    padding: 4px 8px; 
+    @apply  w-3/4 py-4 rounded-lg text-gray-50 text-xl shadow-sm text-center;
+}
+
+.btnaccept:hover{
+    background-color: #c1c1c1;
+    color:#1a9c54;
+}
+
+.btndecline{
+    background-color: #c71c1c;
+    font-size: 12px; 
+    padding: 4px 8px; 
+    @apply  w-3/4 py-4 rounded-lg text-gray-50 text-xl shadow-sm text-center;
+}
+
+.btndecline:hover{
+    background-color: #c1c1c1;
+    color:#c71c1c;
+}
+
+.btnwaiting{
+    background-color: #e0d216;
+    font-size: 12px; 
+    padding: 4px 8px; 
+    @apply  w-3/4 py-4 rounded-lg text-gray-50 text-xl shadow-sm text-center;
+}
+
+.btnwaiting:hover{
+    background-color: #c1c1c1;
+    color:#e0d216;
+}
+.paper-container {
+    margin: 0 16px; /* Adjust the margin as needed */
+  }

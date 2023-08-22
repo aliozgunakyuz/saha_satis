@@ -28,3 +28,18 @@ export const getFinalSales = async (req, res) => {
         res.status(500).json({ error: 'Internal server error' });
     }
 };
+
+export async function updateSaleStatus(req, res) {
+    try {
+      const { saleId,newstatus} = req.params;
+      console.log(saleId);
+      console.log(newstatus);
+  
+      await finalSale_model.findByIdAndUpdate(saleId, { status: newstatus });
+  
+      res.status(200).json({ message: 'Sale Status updated successfully' });
+    } catch (error) {
+        console.error(error);
+      res.status(500).json({ message: 'Failed to update sale status' });
+    }
+  }

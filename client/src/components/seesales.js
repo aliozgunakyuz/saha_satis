@@ -3,6 +3,7 @@ import axios from 'axios';
 import Layout from './Layout';
 import { useAuthStore } from '../store/store.js';
 import useFetch from '../hoooks/hookk.js';
+import '../styles/salesstyles.css';
 
 import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
@@ -21,6 +22,43 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 
 
 function Row(props) {
+  let status;
+  const handleAcceptClick = (saleId) => {
+    status = 'Accepted';
+    axios
+      .put(`/api/updatesalestatus/${saleId}/${status}`)
+      .then((response) => {
+        props.onSaleStatusChange(); 
+      })
+      .catch((error) => {
+        console.error('Error updating sale status:', error);
+      });
+  };
+
+  const handleDeclineClick = (saleId) => {
+    status = 'Declined';
+    axios
+      .put(`/api/updatesalestatus/${saleId}/${status}`)
+      .then((response) => {
+        props.onSaleStatusChange(); 
+      })
+      .catch((error) => {
+        console.error('Error updating sale status:', error);
+      });
+  };
+
+  const handleWaitingClick = (saleId) => {
+    status = 'waiting...';
+    axios
+      .put(`/api/updatesalestatus/${saleId}/${status}`)
+      .then((response) => {
+        props.onSaleStatusChange(); 
+      })
+      .catch((error) => {
+        console.error('Error updating sale status:', error);
+      });
+  };
+
     const { sale } = props;
     const [open, setOpen] = React.useState(false);
   
@@ -50,6 +88,38 @@ function Row(props) {
         <TableRow>
           <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={9}>
             <Collapse in={open} timeout="auto" unmountOnExit>
+            
+            <Box sx={{ margin: 1, width: '100%' }} >
+                <Table size="small" >
+                  <TableHead>
+                    <TableRow>
+                      <TableCell align="center">
+                        <button 
+                          className="btnaccept" 
+                          style={{ fontSize: '15px', padding: '4px 8px',width: '70px' }} 
+                          onClick={() => handleAcceptClick(sale._id)}
+                          >Accept
+                        </button>
+                        &nbsp;
+                        <button 
+                          className="btnwaiting" 
+                          style={{ fontSize: '15px', padding: '4px 8px',width: '70px' }} 
+                          onClick={() => handleWaitingClick(sale._id,)}
+                          >waiting...
+                        </button>
+                        &nbsp;
+                        <button 
+                          className="btndecline" 
+                          style={{ fontSize: '15px', padding: '4px 8px',width: '70px' }} 
+                          onClick={() => handleDeclineClick(sale._id)}
+                          >Decline
+                        </button>
+                        
+                        </TableCell>
+                    </TableRow>
+                  </TableHead>
+                </Table>
+              </Box>
               <Box sx={{ margin: 1, width: '100%' }} >
                 <Typography variant="h6" gutterBottom component="div">
                   <b>Salesman Informations</b>
@@ -143,6 +213,16 @@ export default function Seesales({ userType }) {
     const mail = useAuthStore((state) => state.auth.mail);
     const [{ isLoading, apiData, serverError }, setData] = useFetch(mail);
 
+    const handleSaleStatusChange = () => {
+      axios.get('/api/getfinalsales')
+        .then((response) => {
+          setFinalSales(response.data);
+        })
+        .catch((error) => {
+          console.error('Error fetching final sales:', error);
+        });
+    };
+
     useEffect(() => {
         axios.get('/api/getfinalsales')
             .then((response) => {
@@ -159,6 +239,7 @@ export default function Seesales({ userType }) {
 
         return (
             <Layout>
+              <div className='paper-container'>
                 <TableContainer component={Paper}>
                     <Table aria-label="collapsible table">
                     <TableHead>
@@ -176,11 +257,12 @@ export default function Seesales({ userType }) {
                     </TableHead>
                     <TableBody>
                             {filteredSales.map((sale) => (
-                              <Row key={sale._id} sale={sale} />
+                              <Row key={sale._id} sale={sale} onSaleStatusChange={handleSaleStatusChange} />
                             ))}
                     </TableBody>
                     </Table>
                 </TableContainer>
+                </div>
             </Layout>
         );
       }
