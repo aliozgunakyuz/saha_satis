@@ -92,7 +92,7 @@ export default function Username() {
               .sort((a, b) => parseFloat(a) - parseFloat(b)) // Sort the weights in ascending order
               .map((weight, index) => (
                 <option key={index} value={weight}>
-                  {weight}
+                  {weight}gr
                 </option>
               ))}
           </select>

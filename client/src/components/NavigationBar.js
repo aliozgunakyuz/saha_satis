@@ -31,21 +31,21 @@ export default function Navbar() {
           <FaTimes />
         </button>
         <button href="/#" className="nav-link " onClick={() => { navigate('/profile') }}>
-        <BsPerson className="nav-icon text-[#145728]" /> Profile 
+        <BsPerson className="nav-icon " /> Profile 
         </button>
         <button href="/#" className="nav-link" onClick={() => { navigate('/seesales') }}>
         <BsGraphUp className="nav-icon" /> Sales 
         </button>
         <button href="/#" className="nav-link" onClick={() => { navigate('/cart') }}>
-        <FaShoppingCart className="nav-icon text-[#145728]"/> Cart 
+        <FaShoppingCart className="nav-icon "/> Cart 
         </button>
         {apiData.userType === 'admin' && (
           <button href="/#" className="nav-link" onClick={() => { navigate('/adminpanel') }}>
-          <BsTools className="nav-icon text-[#145728]"/> Admin Panel 
+          <BsTools className="nav-icon "/> Admin Panel 
           </button>
         )}
         <button href="/#" className="nav-link" onClick={userLogout}>
-        <FiLogOut className="nav-icon text-[#145728]"/> Logout
+        <FiLogOut className="nav-icon "/> Logout
         </button>
       </nav>
       <button className="nav-btn" onClick={showNavbar}>
