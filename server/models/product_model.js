@@ -4,7 +4,6 @@ import mongoose from 'mongoose';
 export const Schema_Product = new mongoose.Schema({
     productimage: {
         type: String,
-        required: true,
         unique: false,
     },
     productname: {

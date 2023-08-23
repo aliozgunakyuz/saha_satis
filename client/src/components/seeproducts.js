@@ -6,6 +6,8 @@ import useFetch from '../hoooks/hookk.js';
 import { useAuthStore } from '../store/store.js';
 import styles from '../styles/Username.module.css';
 import Layout from './Layout.js';
+import defimg from '../assets/deafult_product_img.jpg'
+
 
 
 const Products = () => {
@@ -103,7 +105,7 @@ const Products = () => {
               <tr key={product._id}>
                 <td>
                 <label htmlFor="productimage">
-                    <img src={product.productimage} className={`${styles.little_product_img}`} alt="avatar" />
+                    <img src={product.productimage || defimg} className={`${styles.little_product_img}`} alt="avatar" />
                   </label>
                 </td>
                 <td>{product.productname}</td>

@@ -1,5 +1,6 @@
 import product_model from '../models/product_model.js';
 
+
 export async function addproduct(req, res) {
     try {
         const { productimage, productname, stock, price, weight, category } = req.body;

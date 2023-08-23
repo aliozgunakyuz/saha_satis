@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import toast, { Toaster } from 'react-hot-toast';
 import '../styles/landingpage.css'
+import defimg from '../assets/deafult_product_img.jpg'
 
 import Layout from './Layout';
 export default function Username() {
@@ -97,7 +98,7 @@ export default function Username() {
           </select>
           </div>
         </div>
-        <div className='flex flex-wrap justify-center space-x-4'>
+        <div className='flex flex-wrap justify-center space-x-2 px-1'>
         {filteredProducts
           .filter(product => 
             filteredProductsByWeight.includes(product) || 
@@ -107,13 +108,13 @@ export default function Username() {
             
             <div
               key={product.id}
-              className='p-6 rounded-lg flex flex-col items-center'
+              className='p-6 rounded-lg flex flex-col items-center w-[280px]'
               style={{
                 backgroundImage: 'linear-gradient(to bottom, #145728, transparent)',
               }}
             >
               <img
-                src={product.productimage}
+                src={product.productimage || defimg} 
                 alt='product'
                 className='mx-auto mb-2'
                 width={120}
