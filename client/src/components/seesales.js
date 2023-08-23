@@ -76,7 +76,7 @@ function Row(props) {
             </IconButton>
           </TableCell>
           <TableCell component="th" scope="sale">
-            {sale.createdAt}
+            {sale.createdAt.substring(8,10)}.{sale.createdAt.substring(5,7)}.{sale.createdAt.substring(0,4)} / {sale.createdAt.substring(11,16)} 
           </TableCell>
           <TableCell align="right">{sale.username} {sale.usersurname}</TableCell>
           <TableCell align="right">{sale.clientname}</TableCell>
@@ -296,6 +296,7 @@ export default function Seesales({ userType }) {
               <div className='paper-container'>
                 
                 <TableContainer component={Paper}>
+                  
                 <div className='flex flex-row justify-center menu-container'>
                 <div className='text-center mb-10'>
                 <label for="sale-dropdown text-custom-blue">Salesman Name:</label>

@@ -1,4 +1,7 @@
 import mongoose from 'mongoose';
+import moment from 'moment-timezone';
+const currentDateTimeWithOffset = new Date();
+currentDateTimeWithOffset.setHours(currentDateTimeWithOffset.getHours() + 3);
 
 const Schema_FinalSale = new mongoose.Schema({
     userID: { type: mongoose.Schema.Types.ObjectId},
@@ -26,6 +29,11 @@ const Schema_FinalSale = new mongoose.Schema({
     totalPrice: { type: Number, required: true },
     discountedPrice: { type: Number },
     status: { type: String, default:"waiting..." },
-}, { timestamps: true });
+
+    createdAt: {
+        type: Date,
+        default: currentDateTimeWithOffset,
+      },
+},);
 
 export default mongoose.model('FinalSale', Schema_FinalSale);

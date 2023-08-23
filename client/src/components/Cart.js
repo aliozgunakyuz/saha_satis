@@ -36,54 +36,64 @@ function Cart() {
         if (cart.products.length === 0) {
             return;
         }
+        const productExceedsStock = cart.products.some(product => product.quantity > product.productId.stock);
+        const productsExceedingStock = cart.products.filter(product => product.quantity > product.productId.stock);
 
-        const confirmed = window.confirm("Are you sure you want finish sale process? This will remove all items from your cart.");
+        if (productsExceedingStock.length > 0) {
+            const productsInfo = productsExceedingStock.map(product => {
+                return `${product.productId.productname} (Available Stock: ${product.productId.stock})`;
+            }).join(', ');
+            alert(`The following products in your cart exceed available stock: ${productsInfo}. Please adjust quantities.`);
+            return;
+        } else {
 
-        const productIdsToRemove = cart.products.map(product => product.productId._id);
+            const confirmed = window.confirm("Are you sure you want finish sale process? This will remove all items from your cart.");
 
-        if (confirmed) {
-    
-            const selectedClient = clients.find((client) => client.clientname === selectedClientName);
+            const productIdsToRemove = cart.products.map(product => product.productId._id);
+
+            if (confirmed) {
         
-            const finalSaleData = {
-                userID: apiData.userId,
-                username: apiData.name,
-                usersurname: apiData.surname,
-                usermail: apiData.mail,
-                userphone: apiData.phone,
-                clientId: selectedClient._id,
-                clientname: selectedClient.clientname,
-                clientphone: selectedClient.clientphone,
-                clientmail: selectedClient.clientmail,
-                clientaddress: selectedClient.clientaddress,
-                products: cart.products.map((product) => ({
-                    productId: product.productId,
-                    productName: product.productId.productname,
-                    productCategory: product.productId.category,
-                    productQuantity: product.quantity,
-                    productPrice: product.price,
-                    productWeight: product.weight,
-                })),
-                discountCode: isValidDiscount ? document.getElementById('discount-code').value : 'No Discount',
-                discountPercent: isValidDiscount ? discountPercent : 0,
-                totalPrice: cart.carttotal,
-                discountedPrice: isValidDiscount ? cart.carttotal - (cart.carttotal * discountPercent / 100) : '',
-                status: 'waiting...',
+                const selectedClient = clients.find((client) => client.clientname === selectedClientName);
+            
+                const finalSaleData = {
+                    userID: apiData.userId,
+                    username: apiData.name,
+                    usersurname: apiData.surname,
+                    usermail: apiData.mail,
+                    userphone: apiData.phone,
+                    clientId: selectedClient._id,
+                    clientname: selectedClient.clientname,
+                    clientphone: selectedClient.clientphone,
+                    clientmail: selectedClient.clientmail,
+                    clientaddress: selectedClient.clientaddress,
+                    products: cart.products.map((product) => ({
+                        productId: product.productId,
+                        productName: product.productId.productname,
+                        productCategory: product.productId.category,
+                        productQuantity: product.quantity,
+                        productPrice: product.price,
+                        productWeight: product.weight,
+                    })),
+                    discountCode: isValidDiscount ? document.getElementById('discount-code').value : 'No Discount',
+                    discountPercent: isValidDiscount ? discountPercent : 0,
+                    totalPrice: cart.carttotal,
+                    discountedPrice: isValidDiscount ? cart.carttotal - (cart.carttotal * discountPercent / 100) : '',
+                    status: 'waiting...',
+                };
+            
+                try {
+                    await axios.post('/api/save-final-sale', finalSaleData , {
+                        headers: {
+                        Authorization: `Bearer ${localStorage.getItem('token')}`,
+                        },});
+                        console.log(productIdsToRemove);
+                        await removeFromCart(productIdsToRemove)
+                        fetchCart();
+                } catch (error) {
+                    console.error('Error saving final sale:', error);
+                }
             };
-        
-            try {
-                await axios.post('/api/save-final-sale', finalSaleData , {
-                    headers: {
-                    Authorization: `Bearer ${localStorage.getItem('token')}`,
-                    },});
-                    console.log(productIdsToRemove);
-                    await removeFromCart(productIdsToRemove)
-                    fetchCart();
-            } catch (error) {
-                console.error('Error saving final sale:', error);
-            }
-        };
-
+    };
         
     };
     
