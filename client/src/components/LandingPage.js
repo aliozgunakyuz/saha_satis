@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import toast, { Toaster } from 'react-hot-toast';
-import { useNavigate } from 'react-router-dom';
 import '../styles/landingpage.css'
 
 import Layout from './Layout';
 export default function Username() {
-  const navigate = useNavigate();
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('all');
@@ -124,6 +122,7 @@ export default function Username() {
               <h2 className='text-white font-semibold mb-1'>{product.productname}</h2>
               <p className='text-white mb-1'>{product.category}</p>
               <p className='text-white mb-1'>{product.weight}gr</p>
+              <p className='text-white mb-1'>Stock: {product.stock}</p>
               <p className='text-white mb-1'>{product.price}₺</p>
               
               <div className='flex justify-center'>

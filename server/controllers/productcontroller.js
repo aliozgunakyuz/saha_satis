@@ -3,7 +3,6 @@ import product_model from '../models/product_model.js';
 export async function addproduct(req, res) {
     try {
         const { productimage, productname, stock, price, weight, category } = req.body;
-        console.log(req.body);
         const productnameExists = await product_model.findOne({ productname });
 
         if (productnameExists) {

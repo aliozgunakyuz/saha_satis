@@ -5,14 +5,12 @@ export const saveFinalSale = async (req, res) => {
         
         const finalSaleData = req.body;
         const user = req.user;
-        console.log(finalSaleData);
         if (!user) {
             return res.status(401).json({ error: 'You must be logged in' });
         }
         const newFinalSale = new finalSale_model(finalSaleData);
         const savedFinalSale = await newFinalSale.save();
 
-        console.log("aaaaaaaaa" ,savedFinalSale);
         res.status(201).json({ message: 'Final sale data saved successfully', data: finalSaleData });
     } catch (error) {
         console.error('Error saving final sale:', error);

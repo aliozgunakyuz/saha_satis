@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import toast,{Toaster} from 'react-hot-toast';
 import '../styles/cartstyles.css';
 import service from '../service';
 import Layout from './Layout';
@@ -99,8 +100,8 @@ function Cart() {
                         headers: {
                         Authorization: `Bearer ${localStorage.getItem('token')}`,
                         },});
-                        console.log(productIdsToRemove);
                         await removeFromCart(productIdsToRemove)
+                        toast.success('Sale succesfully sent')
                         fetchCart();
                 } catch (error) {
                     console.error('Error saving final sale:', error);
@@ -142,7 +143,9 @@ function Cart() {
     const fetchCart = async () => {
         try {
             const response = await service.get('/api/cart');
-            setCart(response.data);
+            const filteredProducts = response.data.products.filter(product => product.quantity > 0);
+            const updatedCart = { ...response.data, products: filteredProducts };
+            setCart(updatedCart);
         } catch (error) {
             console.error('Error fetching cart:', error);
         }
@@ -180,6 +183,7 @@ function Cart() {
 
     return (
         <Layout>
+            <Toaster position='top-center' reverseOrder={false}></Toaster>
             <div className="cart-container">
                 <h2 className="cart-header">{apiData.name} {apiData.surname}'s Cart</h2>
                 <ul className="cart-list">
