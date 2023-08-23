@@ -1,14 +1,14 @@
 {
   "name": "server",
   "version": "1.0.0",
-  "description": "",
+  "description": "Bahçivan Peynirleri için oluşturulan saha satış uygulaması",
   "main": "index.js",
   "type": "module",
   "scripts": {
     "start": "nodemon server.js"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["sahasatiş","sale","sahasatış","saha","satis","satış"],
+  "author": "Ali Özgün Akyüz",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.1.0",
