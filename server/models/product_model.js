@@ -9,7 +9,6 @@ export const Schema_Product = new mongoose.Schema({
     productname: {
         type: String,
         required: true,
-        unique: true,
     },
     stock: {
         type: Number,

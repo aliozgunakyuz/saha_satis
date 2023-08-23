@@ -67,13 +67,13 @@ export default function Username() {
               Select a Category
             </option>
             <option value="all">All</option>
-            {[...new Set(products.map((product) => product.category))].map(
-              (category, index) => (
-                <option key={index} value={category}>
-                  {category}
-                </option>
-              )
-            )}
+            {[...new Set(products.map((product) => product.category))]
+            .sort() // Sort the categories alphabetically
+            .map((category, index) => (
+              <option key={index} value={category}>
+                {category}
+              </option>
+            ))}
           </select>
           </div>
           
@@ -88,13 +88,13 @@ export default function Username() {
               Select Weight
             </option>
             <option value="all">All</option>
-            {[...new Set(products.map((product) => product.weight))].map(
-              (weight, index) => (
+            {[...new Set(products.map((product) => product.weight))]
+              .sort((a, b) => parseFloat(a) - parseFloat(b)) // Sort the weights in ascending order
+              .map((weight, index) => (
                 <option key={index} value={weight}>
                   {weight}
                 </option>
-              )
-            )}
+              ))}
           </select>
           </div>
         </div>
