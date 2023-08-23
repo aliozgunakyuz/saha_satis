@@ -60,34 +60,44 @@ export default function Username() {
         <div className='flex flex-row justify-center menu-container'>
           <div className='text-center mb-10'>
           <label for="client-dropdown text-custom-blue">Category:</label>
-            <select
+          <select
             id="category-dropdown"
             className="product-dropdown"
-            onChange={(e) => setSelectedCategory(e.target.value)}>
-              <option value="" disabled>
-                Select a Category
-              </option>
-              <option value='all'>All</option>
-            {products.map((product) => (
-              <option value={product.category}>{product.category}</option>
-              ))}
-            </select>
+            onChange={(e) => setSelectedCategory(e.target.value)}
+          >
+            <option value="" disabled>
+              Select a Category
+            </option>
+            <option value="all">All</option>
+            {[...new Set(products.map((product) => product.category))].map(
+              (category, index) => (
+                <option key={index} value={category}>
+                  {category}
+                </option>
+              )
+            )}
+          </select>
           </div>
           
           <div className='text-center mb-10'>
           <label for="weight-dropdown text-custom-blue">Weight:</label>
-            <select
+          <select
             id="weight-dropdown"
             className="product-dropdown"
-            onChange={(e) => setSelectedWeight(e.target.value)}>
-              <option value="" disabled>
-                Select Weight
-              </option>
-              <option value='all'>All</option>
-            {products.map((product) => (
-              <option value={product.weight}>{product.weight}</option>
-              ))}
-            </select>
+            onChange={(e) => setSelectedWeight(e.target.value)}
+          >
+            <option value="" disabled>
+              Select Weight
+            </option>
+            <option value="all">All</option>
+            {[...new Set(products.map((product) => product.weight))].map(
+              (weight, index) => (
+                <option key={index} value={weight}>
+                  {weight}
+                </option>
+              )
+            )}
+          </select>
           </div>
         </div>
         <div className='flex flex-wrap justify-center space-x-4'>
@@ -100,7 +110,7 @@ export default function Username() {
             
             <div
               key={product.id}
-              className='p-6 rounded-lg'
+              className='p-6 rounded-lg flex flex-col items-center'
               style={{
                 backgroundImage: 'linear-gradient(to bottom, #164663, transparent)',
               }}
@@ -113,8 +123,10 @@ export default function Username() {
                 height={120}
               />
               <h2 className='text-white font-semibold mb-1'>{product.productname}</h2>
-              <p className='text-white mb-1'>Price: {product.price}₺</p>
-              <p className='text-white mb-1'>Category: {product.category}</p>
+              <p className='text-white mb-1'>{product.category}</p>
+              <p className='text-white mb-1'>{product.weight}gr</p>
+              <p className='text-white mb-1'>{product.price}₺</p>
+              
               <div className='flex justify-center'>
                 <button className='bg-custom-blue text-white font-semibold py-1 px-3 rounded hover:bg-white hover:text-blue-950' onClick={() => addToCart(product._id)}>
                   Add to cart
