@@ -11,6 +11,7 @@ export default function Username() {
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('all');
+  const [selectedWeight, setSelectedWeight] = useState('all');
 
   const addToCart = async (productId) => {
     try {
@@ -40,6 +41,10 @@ export default function Username() {
   ? products
   : products.filter(product => product.category === selectedCategory);
 
+  const filteredProductsByWeight = selectedWeight === 'all'
+  ? products
+  : products.filter(product => product.weight.toString() === selectedWeight.toString());
+
   return (
     <>
       <Layout>
@@ -62,9 +67,9 @@ export default function Username() {
               <option value="" disabled>
                 Select a Category
               </option>
-              <option>All</option>
+              <option value='all'>All</option>
             {products.map((product) => (
-              <option value='all'>{product.category}</option>
+              <option value={product.category}>{product.category}</option>
               ))}
             </select>
           </div>
@@ -73,19 +78,26 @@ export default function Username() {
           <label for="weight-dropdown text-custom-blue">Weight:</label>
             <select
             id="weight-dropdown"
-            className="product-dropdown">
+            className="product-dropdown"
+            onChange={(e) => setSelectedWeight(e.target.value)}>
               <option value="" disabled>
-                        Select Weight
+                Select Weight
               </option>
-              <option>All</option>
+              <option value='all'>All</option>
             {products.map((product) => (
-              <option value='all'>{product.weight}gr</option>
+              <option value={product.weight}>{product.weight}</option>
               ))}
             </select>
           </div>
         </div>
         <div className='flex flex-wrap justify-center space-x-4'>
-          {filteredProducts.map((product) => (
+        {filteredProducts
+          .filter(product => 
+            filteredProductsByWeight.includes(product) || 
+            (selectedWeight === 'all') // Include if "All" weight is selected
+          )
+          .map((product) => (
+            
             <div
               key={product.id}
               className='p-6 rounded-lg'
