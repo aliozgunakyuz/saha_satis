@@ -54,3 +54,15 @@
   .yellow {
     color: #e0d216;
   }
+
+  .sale-dropdown{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    margin-bottom: 10px;
+    border-radius: 5px;
+  }

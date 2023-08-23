@@ -4,7 +4,6 @@ import toast, { Toaster } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import '../styles/landingpage.css'
 
-import mainscreencheese from '../assets/mainscreencheese.png';
 import Layout from './Layout';
 export default function Username() {
   const navigate = useNavigate();

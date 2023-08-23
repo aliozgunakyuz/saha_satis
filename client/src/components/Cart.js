@@ -64,7 +64,7 @@ function Cart() {
                     productPrice: product.price,
                     productWeight: product.weight,
                 })),
-                discountCode: isValidDiscount ? document.getElementById('discount-code').value : '',
+                discountCode: isValidDiscount ? document.getElementById('discount-code').value : 'No Discount',
                 discountPercent: isValidDiscount ? discountPercent : 0,
                 totalPrice: cart.carttotal,
                 discountedPrice: isValidDiscount ? cart.carttotal - (cart.carttotal * discountPercent / 100) : '',

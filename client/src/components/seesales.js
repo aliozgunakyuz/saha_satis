@@ -82,8 +82,15 @@ function Row(props) {
           <TableCell align="right">{sale.clientname}</TableCell>
           <TableCell align="right">{sale.discountCode}</TableCell>
           <TableCell align="right">{sale.discountPercent}</TableCell>
-          <TableCell align="right">{sale.totalPrice}</TableCell>
-          <TableCell align="right">{sale.discountedPrice}</TableCell>
+          <TableCell align="right">
+            {typeof sale.totalPrice === 'number'
+              ? sale.totalPrice.toFixed(2)
+              : 'N/A'}</TableCell>
+          <TableCell align="right">
+            {typeof sale.discountedPrice === 'number'
+              ? sale.discountedPrice.toFixed(2)
+              : 'No Discount Used'}
+          </TableCell>
           <TableCell align="right">
           <span
             className={`sale-status ${sale.status === 'Accepted' ? 'green' : sale.status === 'Declined' ? 'red' : 'yellow'}`}
@@ -201,7 +208,7 @@ function Row(props) {
                         <TableCell align="right">{product.productWeight}</TableCell>
                         <TableCell align="right">{product.productQuantity}</TableCell>
                         <TableCell align="right">{product.productPrice}</TableCell>
-                        <TableCell align="right">{(product.productPrice*product.productQuantity)}</TableCell>
+                        <TableCell align="right">{(product.productPrice*product.productQuantity).toFixed(2)}</TableCell>
                       </TableRow>
                     ))}
                   </TableBody>
@@ -219,7 +226,11 @@ export default function Seesales({ userType }) {
     const mail = useAuthStore((state) => state.auth.mail);
     const [{ isLoading, apiData, serverError }, setData] = useFetch(mail);
     const [sortColumn, setSortColumn] = useState(null);
-    const [sortOrder, setSortOrder] = useState('asc'); // 'asc' or 'desc'
+    const [sortOrder, setSortOrder] = useState('asc');
+    const [selectedSalesman, setSelectedSalesman] = useState('all');
+    const [selectedClient, setSelectedClient] = useState('all');
+    const [selectedDiscount, setSelectedDiscount] = useState('all');
+    const [selectedStatus, setSelectedStatus] = useState('all');
 
     const handleSort = (columnName) => {
       if (sortColumn === columnName) {
@@ -259,15 +270,117 @@ export default function Seesales({ userType }) {
         });
     }, []);
 
-    const filteredSales = apiData.userType === 'admin'
+        const filteredSales = apiData.userType === 'admin'
         ? finalSales
         : finalSales.filter(sale => sale.usermail === apiData.mail);
 
+        const filteredSalesBySalesman = selectedSalesman === 'all'
+        ? filteredSales
+        : filteredSales.filter(sale => sale.username === selectedSalesman);
+    
+        const filteredSalesByDiscount = selectedDiscount === 'all'
+        ? filteredSales
+        : filteredSales.filter(sale => sale.discountCode === selectedDiscount);
+
+        const filteredSalesByClient = selectedClient === 'all'
+        ? filteredSales
+        : filteredSales.filter(sale => sale.clientname === selectedClient);
+
+        const filteredSalesByStatus = selectedStatus === 'all'
+        ? filteredSales
+        : filteredSales.filter(sale => sale.status === selectedStatus);
+      
+        
         return (
             <Layout>
               <div className='paper-container'>
                 
                 <TableContainer component={Paper}>
+                <div className='flex flex-row justify-center menu-container'>
+                <div className='text-center mb-10'>
+                <label for="sale-dropdown text-custom-blue">Salesman Name:</label>
+                <select
+                  id="salesman-dropdown"
+                  className="sale-dropdown"
+                  onChange={(e) => setSelectedSalesman(e.target.value)}
+                >
+                  <option value="" disabled>
+                    Select a Salesman
+                  </option>
+                  <option value="all">All</option>
+                  {[...new Set(finalSales.map((sale) => sale.username))].map(
+                    (username, index) => (
+                      <option key={index} value={username}>
+                        {username}
+                      </option>
+                    )
+                  )}
+                </select>
+                </div>
+                
+                <div className='text-center mb-10'>
+                <label for="sale-dropdown text-custom-blue">Client Name:</label>
+                <select
+                  id="client-dropdown"
+                  className="sale-dropdown"
+                  onChange={(e) => setSelectedClient(e.target.value)}
+                >
+                  <option value="" disabled>
+                    Select Client
+                  </option>
+                  <option value="all">All</option>
+                  {[...new Set(finalSales.map((sale) => sale.clientname))].map(
+                    (clientname, index) => (
+                      <option key={index} value={clientname}>
+                        {clientname}
+                      </option>
+                    )
+                  )}
+                </select>
+                </div>
+
+                <div className='text-center mb-10'>
+                <label for="discount-dropdown text-custom-blue">Discount Code:</label>
+                <select
+                  id="discount-dropdown"
+                  className="sale-dropdown"
+                  onChange={(e) => setSelectedDiscount(e.target.value)}
+                >
+                  <option value="" disabled>
+                    Select Discount Code
+                  </option>
+                  <option value="all">All</option>
+                  {[...new Set(finalSales.map((sale) => sale.discountCode))].map(
+                    (discountcode, index) => (
+                      <option key={index} value={discountcode}>
+                        {discountcode}
+                      </option>
+                    )
+                  )}
+                </select>
+                </div>
+
+                <div className='text-center mb-10'>
+                <label for="status-dropdown text-custom-blue">Status:</label>
+                <select
+                  id="status-dropdown"
+                  className="sale-dropdown"
+                  onChange={(e) => setSelectedStatus(e.target.value)}
+                >
+                  <option value="" disabled>
+                    Select Status
+                  </option>
+                  <option value="all">All</option>
+                  {[...new Set(finalSales.map((sale) => sale.status))].map(
+                    (status, index) => (
+                      <option key={index} value={status}>
+                        {status}
+                      </option>
+                    )
+                  )}
+                </select>
+                </div>
+                </div>
                 <Box textAlign="center">
                   <b className='text-black'>You can sort by pressing table heads</b>
                 </Box>
@@ -286,7 +399,11 @@ export default function Seesales({ userType }) {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                    {filteredSales
+                    {filteredSalesByStatus
+                      .filter(sale => selectedSalesman === 'all' || sale.username === selectedSalesman)
+                      .filter(sale => selectedDiscount === 'all' || sale.discountCode === selectedDiscount)
+                      .filter(sale => selectedClient === 'all' || sale.clientname === selectedClient)
+                      .filter(sale => selectedStatus === 'all' || sale.status === selectedStatus)
                       .sort((a, b) => {
                         if (sortColumn) {
                           const aValue = a[sortColumn];
