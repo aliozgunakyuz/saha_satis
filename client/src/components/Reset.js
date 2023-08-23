@@ -46,7 +46,7 @@ export default function Reset() {
         <Toaster position='top-center' reverseOrder={false}></Toaster>
         <div className=' flex justify-center items-center h-screen'>
             <div className={styles.glass} style ={{width : "50%"}}>
-                <div className='title flex flex-col items-center text-gray-50' >
+                <div className='title flex flex-col items-center text-[#145728]' >
                     <h4 className='text-5xl font-bold'> Reset Password </h4>
                     <span className='py-4 text-xl w-2/3 text-center text-grey-500'>
                         Enter new password.

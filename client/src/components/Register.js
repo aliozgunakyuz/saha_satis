@@ -41,8 +41,8 @@ export default function Register() {
         <Toaster position='top-center' reverseOrder={false}></Toaster>
         <div className=' flex justify-center items-center h-screen'>
             <div className={styles.glass} style={{ width: '60%'}} >
-                <div className='title flex flex-col items-center text-blue-950 gap-10' >
-                    <h4 className='text-5xl font-bold py-2 text-blue-950'> Register </h4>
+                <div className='title flex flex-col items-center text-[#145728] gap-10' >
+                    <h4 className='text-5xl font-bold py-2 text-[#145728]'> Register </h4>
                     <h4></h4>
                 </div>
                 <form className='py-1' onSubmit={formik.handleSubmit}>
@@ -64,7 +64,7 @@ export default function Register() {
                         <span className='text-gray-900'>
                             Already registered?
                             <a>  </a>
-                            <Link className="text-blue-950" to="/">Login</Link>
+                            <Link className="text-[#145728]" to="/">Login</Link>
                         </span>
                     </div>
 

@@ -51,7 +51,7 @@ export default function Recovery() {
         <Toaster position='top-center' reverseOrder={false}></Toaster>
         <div className=' flex justify-center items-center h-screen'>
             <div className={styles.glass}>
-                <div className='title flex flex-col items-center text-blue-950' >
+                <div className='title flex flex-col items-center text-[#145728]' >
                     <h4 className='text-5xl font-bold'> Recover Password </h4>
                     <span className='py-4 text-xl w-2/3 text-center'>
                         Enter OTP to recover password.
@@ -71,7 +71,7 @@ export default function Recovery() {
                 <div className='text-center py-4'>
                     <span className='text-gray-900'>
                         Can't get OTP?
-                        <button className="text-blue-950" onClick={reOTP}>Resend</button>
+                        <button className="text-[#145728]" onClick={reOTP}>Resend</button>
                     </span>
                 </div>
             </div>

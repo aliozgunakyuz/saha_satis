@@ -7,8 +7,8 @@
 	font-family: "Titillium Web", sans-serif;
 }
 :root {
-	--mainColor: #d20314;
-	--mainColorLight: #ff0015;
+	--mainColor: #145728;
+	--mainColorLight: #178b3a;
 	--secondaryColor: #ffffff8a;
 	--textColor: #145728;
 }
@@ -29,7 +29,7 @@ header {
   }
   
   .nav-link {
-    color: var(--textColor);
+    color: #145728;
     text-decoration: none;
     display: flex; /* Display flex to align items in a row */
     align-items: center; /* Align items vertically */
@@ -46,7 +46,7 @@ header {
 
 nav button {
 	margin: 0 ;
-	color: var(--textColor);
+	color: #145728;
 	text-decoration: none;
 }
 
@@ -59,7 +59,7 @@ header .nav-btn {
 	background: transparent;
 	border: none;
 	outline: none;
-	color: var(--textColor);
+	color: #145728;
 	visibility: hidden;
 	opacity: 0;
 	font-size: 1.8rem;
@@ -75,6 +75,7 @@ nav {
 	header .nav-btn {
 		visibility: visible;
 		opacity: 1;
+		color:#145728
 	}
 
 	header nav {
@@ -88,7 +89,8 @@ nav {
 		align-items: center;
 		justify-content: center;
 		gap: 1.5rem;
-		background-color: var(--mainColor);
+		background-color: rgb(201, 203, 205);
+		color: #145728;
 		transition: 1s;
 	}
 
@@ -103,5 +105,6 @@ nav {
 
 	nav button {
 		font-size: 1.5rem;
+		color: #eee;
 	}
 }
