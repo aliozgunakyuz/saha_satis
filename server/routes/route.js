@@ -32,7 +32,7 @@ router.get('/getproductbyID/:productId', p_controller.getproductbyID);
 router.put('/products/:productId', p_controller.updateProduct);
 router.route('/addproduct').post(p_controller.addproduct);
 router.delete('/products/:productId', p_controller.deleteProduct);
-
+router.put('/stockupdate/:productId',cart_controller.stockUpdate);
 
 //CLIENT
 router.get('/getclients', c_controller.getclients);
@@ -52,6 +52,8 @@ router.route('/addtocart').post(Auth, cart_controller.addItem2Cart);
 router.route('/cart').get(Auth, cart_controller.getCart);
 router.route('/cart/:productId').delete(Auth, cart_controller.deleteItemFromCart);
 router.put('/quantityincrease/:productId', Auth, cart_controller.increaseQuantity);
+router.put('/quantitydecrease/:productId', Auth, cart_controller.decreaseQuantity);
+
 router.delete('/cleancart', Auth, cart_controller.deleteAllItemsFromCart);
 
 //SALE

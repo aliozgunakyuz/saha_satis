@@ -102,29 +102,76 @@ export async function increaseQuantity(req, res){
         return res.status(401).json({ error: 'You must be logged in' });
     }
 
-    let cart = await cart_model.findOne({ userId: user._id }).populate('products.productId');
+    let cart = await cart_model.findOne({ userId: user._id });
     
 
     if (!cart) {
         return res.status(404).json({ error: 'Cart not found' });
     }
 
-    const productIndex = cart.products.findIndex(product => product.productId.toString() === productId.toString());
+    const existingProductIndex = cart.products.findIndex(product => product.productId.toString() === productId);
 
 
-    console.log('ProductID:', productId);
-    console.log('Cart:', cart);
-    console.log('Cart products:', cart.products);
-
-
-    if (productIndex !== -1) {
-        cart.products[productIndex].quantity++;
-        cart.calculateTotal();
-        await cart.save(); 
-
-        res.json(cart);
+    if (existingProductIndex !== -1) {
+        cart.products[existingProductIndex].quantity++;
     } else {
         return res.status(404).json({ error: 'Product not found in cart' });
     }
+
+    cart.calculateTotal();
+    await cart.save();
+
+    return res.json(cart);
     
+}
+
+export async function decreaseQuantity(req, res){
+    const user = req.user;
+    const productId = req.params.productId;
+
+    if (!user) {
+        return res.status(401).json({ error: 'You must be logged in' });
+    }
+
+    let cart = await cart_model.findOne({ userId: user._id });
+    
+
+    if (!cart) {
+        return res.status(404).json({ error: 'Cart not found' });
+    }
+
+    const existingProductIndex = cart.products.findIndex(product => product.productId.toString() === productId);
+
+
+    if (existingProductIndex !== -1) {
+        cart.products[existingProductIndex].quantity--;
+    } else {
+        return res.status(404).json({ error: 'Product not found in cart' });
+    }
+
+    cart.calculateTotal();
+    await cart.save();
+
+    return res.json(cart);
+    
+}
+export async function stockUpdate(req, res) {
+    const productId = req.params.productId;
+    const { stock } = req.body;
+
+    try {
+        const product = await product_model.findById(productId);
+
+        if (!product) {
+            return res.status(404).json({ message: 'Product not found' });
+        }
+
+        product.stock = stock;
+        await product.save();
+
+        res.status(200).json({ message: 'Product stock updated successfully' });
+    } catch (error) {
+        console.error('Error updating product stock:', error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
 }

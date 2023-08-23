@@ -30,7 +30,15 @@ function Cart() {
         }
     };
 
-  
+    const updateProductStock = async (productId, newStock) => {
+        try {
+            await axios.put(`/api/stockupdate/${productId}`, {
+                stock: newStock
+            });
+        } catch (error) {
+            console.error(`Error updating stock for product ${productId}:`, error);
+        }
+    };
 
     const handleCheckout = async () => {
         if (cart.products.length === 0) {
@@ -82,6 +90,11 @@ function Cart() {
                 };
             
                 try {
+                    for (const product of cart.products) {
+                        const updatedStock = product.productId.stock - product.quantity;
+                        await updateProductStock(product.productId._id, updatedStock);
+                    }
+
                     await axios.post('/api/save-final-sale', finalSaleData , {
                         headers: {
                         Authorization: `Bearer ${localStorage.getItem('token')}`,
@@ -156,6 +169,15 @@ function Cart() {
         }
       };
 
+      const decreaseQuantity = async (productId) => {
+        try {
+          await service.put(`/api/quantitydecrease/${productId}`);;
+          fetchCart();
+        } catch (error) {
+          console.error("An error occurred:", error);
+        }
+      };
+
     return (
         <Layout>
             <div className="cart-container">
@@ -174,11 +196,11 @@ function Cart() {
                             </div>
                             <div className="product-name">{product.productId.productname}</div>
                             <div className="product-quantity">{product.weight}gr</div>
-                            <button onClick={() => increaseQuantity(product.productId)}><b>-</b></button>
+                            <button onClick={() => decreaseQuantity(product.productId._id)}><b>-</b></button>
                             <div className="product-quantity">{product.quantity}</div>
                            
                             <button onClick={() => increaseQuantity(product.productId._id)}><b>+</b></button>
-                            <div className="product-quantity">{product.price}₺</div>
+                            <div className="product-quantity">{product.price*product.quantity}₺</div>
                             <button className="remove-button" onClick={() => removeFromCart2(product.productId._id,product.productId.productname,product.weight,product.quantity)}>
                                 Remove
                             </button>
