@@ -1,16 +1,16 @@
 
 
 .bg-custom-blue {
-    background-color: #164663;
+    background-color: #145728;
   }
   
 
   .text-custom-blue {
-    color: #164663;
+    color: #145728;
   }
 
   .btncrement{
-    background-color: #c71c1c;
+    background-color: #145728;
     font-size: 12px; 
     padding: 4px 8px; 
     @apply  w-3/4 py-4 rounded-lg text-gray-50 text-xl shadow-sm text-center;

@@ -25,7 +25,7 @@ export default function Navbar() {
 
   return (
     <header className="header">
-      <a className="logo" onClick={() => { navigate('/homepage') }}>BHCVN</a>
+      <a className="logo" onClick={() => { navigate('/homepage') }}>Bahçivan - Saha Satış Uygulaması</a>
       <nav ref={navRef} className="nav-links">
         <button className="nav-btn nav-close-btn" onClick={showNavbar}>
           <FaTimes />

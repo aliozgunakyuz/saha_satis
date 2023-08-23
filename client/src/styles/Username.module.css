@@ -1,19 +1,19 @@
 
 
 .profile_img{
-    border-color: #164663;
+    border-color: #145728;
     @apply border-4 w-[135px] rounded-full shadow-lg cursor-pointer;
     @apply hover:border-gray-200;
 }
 
 .product_img {
-    border-color: #164663;
+    border-color: #145728;
     @apply border-4 w-[335px] h-[335px] shadow-lg cursor-pointer;
     @apply hover:border-gray-200;
   }
 
 .little_product_img {
-  border-color: #164663;
+  border-color: #145728;
   @apply border-4 w-[80px] h-[80px] shadow-lg cursor-pointer;
   @apply hover:border-gray-200;
 }
@@ -24,13 +24,13 @@
 }
 
 .btn{
-    background-color: #164663;
+    background-color: #145728;
     @apply  w-3/4 py-4 rounded-lg text-gray-50 text-xl shadow-sm text-center;
 }
 
 .btn:hover{
     background-color: #ffffff;
-    color:#164663;
+    color:#145728;
 }
 
 

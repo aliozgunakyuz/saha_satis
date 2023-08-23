@@ -61,15 +61,15 @@ export default function Profile() {
     <Layout>
       <div className='container mx-auto'>
       <Toaster position='top-center' reverseOrder={false}></Toaster>
-      <div className='flex justify-center items-center h-screen'>
+      <div className='flex justify-center items-center '>
         <div className={styles.glass} style={{ width: '50%' }}>
-          <div className='title flex flex-col items-center text-gray-50'>
+          <div className='title flex flex-col items-center text-[#145728]'>
             <h4 className='text-5xl font-bold'> Update Profile </h4>
           </div>
           <form className='py-1' onSubmit={formik.handleSubmit}>
             <div className='textbox flex flex-col items-center gap-6'>
-              <span className='text-gray-50 text-sm text-left'>Update your profile.</span>
-              <div className='name flex w-3/4 gap-10'>
+              <span className='text-[#145728] text-sm text-left'>Update your profile.</span>
+              <div className='name flex w-3/ gap-10'>
                 <input {...formik.getFieldProps('name')} type='text' className={styles.textbox} placeholder='Name' />
                 <input
                   {...formik.getFieldProps('surname')}
@@ -81,10 +81,10 @@ export default function Profile() {
               <input {...formik.getFieldProps('mail')} type='text' className={styles.textbox} placeholder='Mail' />
               <input {...formik.getFieldProps('phone')} type='text' className={styles.textbox} placeholder='Phone' />
               <div className='name flex w-3/4 gap-10'>
-                <button className='btn' onClick={() => navigate('/homepage')}>
+                <button className={styles.btn} onClick={() => navigate('/homepage')}>
                   Back
                 </button>
-                <button className='btn' type='submit'>
+                <button className={styles.btn} type='submit'>
                   Update
                 </button>
               </div>

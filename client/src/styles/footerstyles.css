@@ -1,7 +1,7 @@
 
 .footer {
-    background-color: #164663;
-    position: fixed;
+    background-color: transparent;
+    position: bottom;
     bottom: 0;
     width: 100%;
     padding: 20px 0;
@@ -14,7 +14,7 @@
     margin: 0 auto;
   }
     .footer p {
-    color: #ffffff;
+    color: #145728;
     font-size: 14px;
   }
   

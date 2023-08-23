@@ -102,10 +102,10 @@ const Clients = () => {
                 <td>{client.clientmail}</td>
                 <td>{client.clientaddress}</td>
                 <td>
-                  <button className="btn2" onClick={() => handleUpdate(client._id)} > Update </button>
+                  <button className="text-[#143228]" onClick={() => handleUpdate(client._id)} > Update </button>
                 </td>
                 <td>
-                  <button  className="btn2" onClick={() => handleDelete(client._id, client.clientname)} > Delete </button>
+                  <button  className="text-[#143228]" onClick={() => handleDelete(client._id, client.clientname)} > Delete </button>
                 </td>
               </tr>
             ))}

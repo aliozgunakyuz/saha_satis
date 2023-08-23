@@ -36,8 +36,8 @@ export default function Username() {
         <div className=' flex justify-center items-center h-screen'>
             <div className={styles.glass}>
                 <div className='title flex flex-col items-center indigo' >
-                    <h4 className='text-5xl text-blue-950 font-bold'> Hello </h4>
-                    <span className='py-4 text-xl w-2/3 text-center text-blue-950' >
+                    <h4 className='text-5xl text-[#d20314] font-bold'> Hello </h4>
+                    <span className='py-4 text-xl w-2/3 text-center text-[#d20314]' >
                         Please Log In
                     </span>
                 </div>
@@ -52,10 +52,10 @@ export default function Username() {
                     </div>
 
                     <div className='text-center py-4'>
-                        <span className='text-gray-900'>
+                        <span className='text-black'>
                             Not a Member?
                             <a>  </a>
-                            <Link className="text-blue-950" to="/register">Register</Link>
+                            <Link className="text-[#d20314]" to="/register">Register</Link>
                         </span>
                     </div>
 

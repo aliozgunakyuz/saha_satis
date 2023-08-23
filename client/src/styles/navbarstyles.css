@@ -6,12 +6,11 @@
 	box-sizing: border-box;
 	font-family: "Titillium Web", sans-serif;
 }
-
 :root {
-	--mainColor: #164663;
-	--mainColorLight: #085f94;
+	--mainColor: #d20314;
+	--mainColorLight: #ff0015;
 	--secondaryColor: #ffffff8a;
-	--textColor: #ffffff;
+	--textColor: #145728;
 }
 
 header {
@@ -19,7 +18,7 @@ header {
     justify-content: space-between;
     align-items: center;
     padding: 20px;
-    background-color: var(--mainColor);
+    background-color: transparent;
     color: var(--textColor);
   }
   

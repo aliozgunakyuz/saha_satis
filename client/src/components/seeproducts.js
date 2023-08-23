@@ -111,8 +111,8 @@ const Products = () => {
                 <td>{product.price}₺</td>
                 <td>{product.weight}gr</td>
                 <td>{product.category}</td>
-                <td><button className="btn2" onClick={() => handleUpdate(product._id)}>Update</button></td>
-                <td><button className="btn2" onClick={() => handleDelete(product._id, product.productname)}>Delete</button></td>
+                <td><button className="text-[#143228]" onClick={() => handleUpdate(product._id)}>Update</button></td>
+                <td><button className="text-[#143228]" onClick={() => handleDelete(product._id, product.productname)}>Delete</button></td>
               </tr>
             ))}
           </tbody>

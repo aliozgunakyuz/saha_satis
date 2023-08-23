@@ -109,7 +109,7 @@ export default function Username() {
               key={product.id}
               className='p-6 rounded-lg flex flex-col items-center'
               style={{
-                backgroundImage: 'linear-gradient(to bottom, #164663, transparent)',
+                backgroundImage: 'linear-gradient(to bottom, #145728, transparent)',
               }}
             >
               <img
@@ -126,7 +126,7 @@ export default function Username() {
               <p className='text-white mb-1'>{product.price}₺</p>
               
               <div className='flex justify-center'>
-                <button className='bg-custom-blue text-white font-semibold py-1 px-3 rounded hover:bg-white hover:text-blue-950' onClick={() => addToCart(product._id)}>
+                <button className='bg-custom-blue text-white font-semibold py-1 px-3 rounded hover:bg-white hover:text-[#145728]' onClick={() => addToCart(product._id)}>
                   Add to cart
                 </button>
               </div>

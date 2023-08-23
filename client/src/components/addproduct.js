@@ -53,7 +53,7 @@ export default function AddProduct() {
         <Toaster position='top-center' reverseOrder={false}></Toaster>
         <div className=' flex justify-center items-center h-screen'>
             <div className={styles.glass} style={{ width: '60%'}} >
-                <div className='title flex flex-col items-center text-blue-950 gap-5' >
+                <div className='title flex flex-col items-center text-[#145728] gap-5' >
                     <h4 className='text-5xl font-bold p '> Add Product </h4>
                     <h4></h4>
                 </div>
@@ -61,7 +61,7 @@ export default function AddProduct() {
                     <div className='profile flex justify-center py-4'>
                       <label htmlFor="productimage">
                         <img src={file || def_prod_img} className={styles.product_img} alt="click here to add image" />
-                        <b className='text-blue-900'>Click above to add image</b>
+                        <b className='text-[#145728]'>Click above to add image</b>
                       </label>
                       <input onChange={onUpload} type="file" id='productimage' name='productimage' />
                     </div>

@@ -9,14 +9,14 @@
     font-size: 50px;
     font-weight: bold;
     margin-bottom: 10px;
-    color: #164663;
+    color: #145728;
     text-align: center; /* Center the heading text horizontally */
   }
 
   .table-info-text{
     font-size: 20px;
     margin-bottom: 10px;
-    color: #164663;
+    color: #145728;
     text-align: center; /* Center the heading text horizontally */
   }
   
@@ -33,24 +33,24 @@
     border: 1px solid var(--color-purple-500);
     text-align: left;
     padding: 8px;
-    color: #164663;
+    color: #145728;
   }
   
 
   :root {
-    --color-purple-500: #164663;
+    --color-purple-500: #145728;
   }
   
   .btn{
     margin-top: 10px;
     max-width: 400px;
-    background-color: #164663;
+    background-color: #145728;
     @apply w-3/4 py-4 rounded-lg text-gray-50 text-xl shadow-sm text-center;
   }
 
   .btn:hover{
     background-color: #ffffff;
-    color: #164663
+    color: #145728
   }
 
   .btn2{

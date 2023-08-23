@@ -47,7 +47,7 @@ export default function Password() {
         <Toaster position='top-center' reverseOrder={false}></Toaster>
         <div className=' flex justify-center items-center h-screen'>
             <div className={styles.glass}>
-                <div className='title flex flex-col items-center text-blue-950' >
+                <div className='title flex flex-col items-center text-[#d20314]' >
                     <h4 className='text-5xl font-bold'> Hello {apiData?.name} {apiData?.surname} </h4>
                     <span className='py-4 text-xl w-2/3 text-center text-grey-500'>
                         Please Enter Your Password
@@ -64,10 +64,10 @@ export default function Password() {
                     </div>
 
                     <div className='text-center py-4'>
-                        <span className='text-gray-900'>
+                        <span className='text-black'>
                             Forgot Password?
                             <a>  </a>
-                            <Link className="text-blue-950" to="/recovery">Recover from here</Link>
+                            <Link className="text-[#d20314]" to="/recovery">Recover from here</Link>
                         </span>
                     </div>
 
