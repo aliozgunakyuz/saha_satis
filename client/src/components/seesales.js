@@ -195,7 +195,7 @@ function Row(props) {
                       <TableCell align="right"><b>Weight</b> </TableCell>
                       <TableCell align="right"><b>Quantity</b></TableCell>
                       <TableCell align="right"><b>Price</b></TableCell>
-                      <TableCell align="right"><b>Total Price</b></TableCell>
+                      <TableCell align="right"><b>Total Price of Product</b></TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
@@ -205,10 +205,10 @@ function Row(props) {
                           {product.productName}
                         </TableCell>
                         <TableCell>{product.productCategory}</TableCell>
-                        <TableCell align="right">{product.productWeight}</TableCell>
+                        <TableCell align="right">{product.productWeight}gr</TableCell>
                         <TableCell align="right">{product.productQuantity}</TableCell>
-                        <TableCell align="right">{product.productPrice}</TableCell>
-                        <TableCell align="right">{(product.productPrice*product.productQuantity).toFixed(2)}</TableCell>
+                        <TableCell align="right">{product.productPrice}₺</TableCell>
+                        <TableCell align="right">{(product.productPrice*product.productQuantity).toFixed(2)}₺</TableCell>
                       </TableRow>
                     ))}
                   </TableBody>

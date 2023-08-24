@@ -3,6 +3,7 @@ import cors from 'cors';
 import morgan from 'morgan';
 import connect from './database/connection.js';
 import router from './routes/route.js';
+import bodyParser from 'body-parser'
 
 const app = express();
 
@@ -21,7 +22,15 @@ app.get('/', (req, res) => {
 
 //routes for APİ
 app.use('/api', router)
-app.use(express.json());
+app.use(bodyParser.json({limit: '350mb'}));
+
+app.use(
+  bodyParser.urlencoded({
+    extended: true,
+    limit: '350mb',
+    parameterLimit: 50000,
+  }),
+);
 
 
 connect().then(()=> {
