@@ -7,7 +7,7 @@ import Layout from './Layout';
 import '../styles/landingpage.css'
 import useFetch from '../hoooks/hookk.js';
 import { useAuthStore } from '../store/store.js';
-
+import defimg from '../assets/deafult_product_img.jpg'
 
 
 function Cart() {
@@ -192,7 +192,7 @@ function Cart() {
                             <div className="product-info bg-custom-blue rounded-lg">
                                 <div>
                                     <label htmlFor="productimage">
-                                        <img src={product.productId.productimage}
+                                        <img src={product.productId.productimage || defimg}
                                             alt={product.productId.productname}
                                             className="product-image" />
                                     </label>
